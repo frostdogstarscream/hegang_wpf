@@ -21,12 +21,6 @@ namespace Hegang.APP
             this.nodeName = nodeName;
         }
 
-        public Node(string nodeName, ObservableCollection<Node> childList)
-        {
-            this.nodeName = nodeName;
-            this.childList = childList;
-        }
-
         public Node(string nodeName, Node parentNode)
         {
             this.nodeName = nodeName;
