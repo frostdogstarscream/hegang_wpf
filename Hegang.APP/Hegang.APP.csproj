@@ -130,10 +130,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\close.png" />
+    <Resource Include="images\minimize.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\minimize.png" />
+    <Resource Include="images\close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
