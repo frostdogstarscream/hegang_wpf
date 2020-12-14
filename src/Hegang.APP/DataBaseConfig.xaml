@@ -6,15 +6,14 @@
         xmlns:local="clr-namespace:Hegang.APP"
         mc:Ignorable="d"
         Title="数据库配置" Height="375" Width="350" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"  CornerRadius="0" ResizeBorderThickness="0"/>
     </WindowChrome.WindowChrome>
+    
     <Border BorderBrush="black" BorderThickness="0.3">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="minimize_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30"  Click="minimize_btn_Click">
-                    <Image Source="./images/minimize.png" Width="20" Height="20"></Image>
-                </Button>
                 <Button Name="close_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click">
                     <Image Source="./images/close.png" Width="20" Height="20"></Image>
                 </Button>

@@ -3,19 +3,10 @@ using OPCAutomation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hegang.APP
 {
@@ -32,18 +23,27 @@ namespace Hegang.APP
             InitializeComponent();
             da = new KEPWareDataAdapter();
             this.btn_stop.IsEnabled = false;
-            //this.chk_treeview.ItemsSource = Node.test();
-            //this.listView.ItemsSource = listView_itemsSource;
         }
 
+        /// <summary>
+        /// 鼠标左键按住可以移动窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
 
+        /// <summary>
+        /// 加载并连接OPC
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_connect_Click(object sender, RoutedEventArgs e)
         {
             this.btn_connect.IsEnabled = false;
+
             object serverList = da.GetLocalServer();
             List<string> serverListToString = new List<string>();
             foreach (string turn in (Array)serverList)
@@ -54,10 +54,16 @@ namespace Hegang.APP
             da.InitialConnection(cmb_server_list.Text);
 
             this.tree = get_tree(da.GetPLCDevices());
-
             chk_treeview.ItemsSource = this.tree;
+
+            this.color_bar_text.Text = "OPC已连接";
         }
 
+        /// <summary>
+        /// 将 da.GetPLCDevices() 的返回值转换为TreeView的ItemsSource
+        /// </summary>
+        /// <param name="channel_device_list"></param>
+        /// <returns></returns>
         private ObservableCollection<Node> get_tree(List<string> channel_device_list)
         {
             //将 通道.设备List 转为 通道.设备Dictionary
@@ -128,20 +134,40 @@ namespace Hegang.APP
             }
             #endregion
 
+            #region 数据展示
             for (int i = 1; i <= NumItems; i++)
             {
                 if (this.listView.Items.Count >= 200)
                 {
                     this.listView.Items.RemoveAt(0);
                 }
-                this.listView.Items.Add(new Listview_bean(itemName[i - 1], itemValues.GetValue(i).ToString(), ((int)clientHandles.GetValue(i) - 1).ToString(), time));
+                this.listView.Items.Add(new ListViewItem(itemName[i - 1], itemValues.GetValue(i).ToString(), ((int)clientHandles.GetValue(i) - 1).ToString(), time));
             }
             this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count-1]);
+            #endregion
         }
 
+        /// <summary>
+        /// 设置窗体底端颜色条
+        /// </summary>
+        /// <param name="color_str"></param>
+        /// <param name="text"></param>
+        private void set_color_bar(string color_str,string text)
+        {
+            Color color = (Color)ColorConverter.ConvertFromString(color_str);
+            this.color_bar.Background = new SolidColorBrush(color);
+            this.color_bar_text.Text = text;
+        }
+
+        /// <summary>
+        /// 读取PLC数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
-            this.btn_read.IsEnabled = false;
+            set_color_bar("#F36838", "监测服务已启动");
+
             List<string> channel_device_list = new List<string>();
             foreach(Node parent_node in this.tree)
             {
@@ -157,10 +183,15 @@ namespace Hegang.APP
 
             if (channel_device_list.Count == 0)
             {
-                MessageBox.Show("请选择至少一个PLC设备！", "提示");
+                Tip tip = new Tip("请选择至少一个PLC设备！");
+                tip.Owner = this;
+                tip.ShowDialog();
                 return;
             }
 
+            this.btn_read.IsEnabled = false;
+            this.btn_stop.IsEnabled = true;
+            
             // 新建一个线程，保证加载PLC过程中窗体不会假死。
             new Thread(o => {
                 da.CreateGroup(channel_device_list);
@@ -175,16 +206,31 @@ namespace Hegang.APP
             }.Start();
         }
 
+        /// <summary>
+        /// 窗体最小化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void minimize_btn_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
+        /// <summary>
+        /// 关闭整个程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void close_btn_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// 显示数据库配置窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_DBConfig_Click(object sender, RoutedEventArgs e)
         {
             DataBaseConfig dataBaseConfig = new DataBaseConfig();
@@ -192,6 +238,11 @@ namespace Hegang.APP
             dataBaseConfig.ShowDialog();
         }
 
+        /// <summary>
+        /// 停止读取PLC数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_stop_Click(object sender, RoutedEventArgs e)
         {
 

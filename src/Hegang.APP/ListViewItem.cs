@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Hegang.APP
 {
-    class Listview_bean : INotifyPropertyChanged
+    class ListViewItem : INotifyPropertyChanged
     {
         private string item_name;
         private string item_value;
         private string item_handle;
         private string item_timestamp;
 
-        public Listview_bean(string item_name,string item_value,string item_handle,string item_timestamp)
+        public ListViewItem(string item_name,string item_value,string item_handle,string item_timestamp)
         {
             this.item_name = item_name;
             this.item_value = item_value;
@@ -67,11 +67,11 @@ namespace Hegang.APP
             }
         }
 
-        public static List<Listview_bean> test()
+        public static List<ListViewItem> test()
         {
-            List<Listview_bean> list = new List<Listview_bean>();
-            list.Add(new Listview_bean("温度", "23", "2", "2020/12/13 13:22"));
-            list.Add(new Listview_bean("高度", "850", "4", "2020/12/13 13:23"));
+            List<ListViewItem> list = new List<ListViewItem>();
+            list.Add(new ListViewItem("温度", "23", "2", "2020/12/13 13:22"));
+            list.Add(new ListViewItem("高度", "850", "4", "2020/12/13 13:23"));
             return list;
         }
 

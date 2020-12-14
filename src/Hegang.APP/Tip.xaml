@@ -1,0 +1,33 @@
+﻿<Window x:Class="Hegang.APP.Tip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hegang.APP"
+        mc:Ignorable="d"
+        Title="提示" Height="150" Width="250" WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"  CornerRadius="0" ResizeBorderThickness="0"/>
+    </WindowChrome.WindowChrome>
+    
+    <Border BorderBrush="black" BorderThickness="0.3">
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">提示</TextBlock>
+                <Button Name="close_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click" HorizontalAlignment="Right">
+                    <Image Source="./images/close.png" Width="20" Height="20"></Image>
+                </Button>
+            </DockPanel>
+            
+            <StackPanel DockPanel.Dock="Top" Height="80"  Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock DockPanel.Dock="Top" x:Name="tip_textBlock"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btn_OK" Content="确定" Background="White" Width="50" Height="25" Margin="0,0,10,0" Click="btn_OK_Click"/>
+            </StackPanel>
+        </DockPanel>
+    </Border>
+</Window>

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml;
 
 namespace Hegang.APP
@@ -26,20 +15,30 @@ namespace Hegang.APP
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 鼠标左键按住可以移动窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
-        private void minimize_btn_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
 
+        /// <summary>
+        /// 关闭窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void close_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 获取db_config.xml的相对路径
+        /// </summary>
+        /// <returns></returns>
         private string get_db_config_path()
         {
             string path = System.AppDomain.CurrentDomain.BaseDirectory;
@@ -51,6 +50,11 @@ namespace Hegang.APP
             return path + @"/conf/db_config.xml";
         }
 
+        /// <summary>
+        /// 为窗体中的每一个TextBlock赋值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             XmlDocument doc = new XmlDocument();
@@ -72,6 +76,11 @@ namespace Hegang.APP
             this.database.Text = element.GetAttribute("value");
         }
 
+        /// <summary>
+        /// 将改动保存到db_config.xml
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_apply_Click(object sender, RoutedEventArgs e)
         {
             string path = this.get_db_config_path();
@@ -96,6 +105,11 @@ namespace Hegang.APP
             doc.Save(path);
         }
 
+        /// <summary>
+        /// 关闭窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

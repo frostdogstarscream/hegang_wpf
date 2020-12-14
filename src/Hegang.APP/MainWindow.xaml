@@ -1,8 +1,8 @@
 ﻿<!--
     参考：
-        https://blog.csdn.net/thy38/article/details/5888918
-        https://blog.csdn.net/mpegfour/article/details/78862165
-        https://www.cnblogs.com/king10086/p/11905494.html
+        1.设置TreeView选中项背景色：https://blog.csdn.net/thy38/article/details/5888918
+        2.设置ComboBox样式：https://blog.csdn.net/mpegfour/article/details/78862165
+        3.设置GridView样式：https://www.cnblogs.com/king10086/p/11905494.html
 -->
 <Window x:Class="Hegang.APP.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -11,9 +11,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hegang.APP"
         mc:Ignorable="d"
-        Title="鸟山矿PLC监测服务程序" Height="450" Width="650" Icon="./images/icon.png" WindowStyle="None" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
-    
+        Title="鸟山矿PLC监测服务程序" Height="450" Width="650" Icon="./images/icon.png" MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStyle="None" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
+
+    <!-- 在 WindowStyle="None" ResizeMode="CanResize" 的前提下，将窗体设置为 
+        1.鼠标拖动窗体边缘不能改变大小
+        2.窗体边缘有阴影效果
+    -->
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"  CornerRadius="0" ResizeBorderThickness="0"/>
     </WindowChrome.WindowChrome>
@@ -33,7 +37,7 @@
                 <Setter.Value>
                     <ControlTemplate>
                         <!--下拉按钮内部背景色-->
-                        <Border x:Name="Back" Background="White" BorderThickness="1">
+                        <Border x:Name="Back" Background="White" >
                             <!--下拉按钮内边框-->
                             <Path Name="PathFill" Fill="Black"  Width="10" Height="6" Data="M5,0 L10,10 L0,10 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
                                 <Path.RenderTransform>
@@ -60,12 +64,14 @@
                 </Grid.ColumnDefinitions>
                 
                 <!--文字区域背景和边线样式-->
-                <TextBox Background="White" VerticalAlignment="Center"  Grid.Column="0" Foreground="Black" BorderBrush="Black" BorderThickness="0" IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}"></TextBox>
-                <Border  Grid.Column="0" BorderThickness="0.5,0.5,0,0.5" BorderBrush="Black"/>
+                
+                <Border  Grid.Column="0" BorderThickness="0.5,0.5,0,0.5" BorderBrush="Black">
+                    <TextBox Background="White" VerticalContentAlignment="Center" Padding="3,0,0,0" Grid.Column="0" Foreground="Black" BorderThickness="0" IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}"></TextBox>
+                </Border>
 
                 <!--右侧下拉button设置-->
                 <Border Grid.Column="1" BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black">
-                    <ToggleButton BorderThickness="3" BorderBrush="Black" Style="{StaticResource ComboxStyleBtn}" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>
+                    <ToggleButton Style="{StaticResource ComboxStyleBtn}" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>
                 </Border>
                 
                 <!--弹出popup整体设置-->
@@ -82,6 +88,7 @@
             </Grid>
         </ControlTemplate>
 
+        <!-- GridViewColumnHeader样式 -->
         <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="OverridesDefaultStyle" Value="False" />
             <Setter Property="Template">
@@ -97,7 +104,6 @@
                                 <Setter TargetName="bd" Property="BorderBrush" Value="#8CC7B5"/>
                                 <Setter TargetName="bd" Property="BorderThickness" Value="1"/>
                             </Trigger>
-
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -106,17 +112,30 @@
     </Window.Resources>
     
     <Border BorderBrush="black" BorderThickness="0.3">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" >
-                <Button Name="minimize_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30"  Click="minimize_btn_Click">
-                    <Image Source="./images/minimize.png" Width="20" Height="20"></Image>
-                </Button>
-                <Button Name="close_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click">
-                    <Image Source="./images/close.png" Width="20" Height="20"></Image>
-                </Button>
-            </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"></RowDefinition>
+                <RowDefinition Height="1.5*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <Grid DockPanel.Dock="Top" Margin="10,5,10,0" Height="25">
+            <DockPanel Grid.Row="0" Background="#F0F2F5">
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <Image Source="./images/icon.ico" Height="20" UseLayoutRounding="True"/>
+                    <TextBlock Text="鸟山矿PLC监测服务程序" VerticalAlignment="Center" Margin="3,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="minimize_btn" Background="Transparent" BorderBrush="{x:Null}" Width="40" Height="30"  Click="minimize_btn_Click">
+                        <Image Source="./images/minimize.png" Width="20" Height="20"></Image>
+                    </Button>
+                    <Button Name="close_btn" Background="Transparent" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click">
+                        <Image Source="./images/close.png" Width="20" Height="20"></Image>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+
+            <Grid Grid.Row="1" Margin="10,0,10,0" Height="25">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"></ColumnDefinition>
                     <ColumnDefinition Width="8*"></ColumnDefinition>
@@ -125,15 +144,15 @@
                     <ColumnDefinition Width="2.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Name="btn_connect" Grid.Column="0" Background="White" Content="加载并连接OPC"  Click="btn_connect_Click" />
-                <ComboBox Name="cmb_server_list" Grid.Column="1"  SelectedIndex="0" Margin="5,0,0,0" Template="{StaticResource ComboBox_template}"/>
+                <ComboBox Name="cmb_server_list" Grid.Column="1" SelectedIndex="0" Margin="5,0,0,0" Template="{StaticResource ComboBox_template}"/>
                 <Button Grid.Column="2" Background="White" Content="读取数据" Name="btn_read" Click="btn_read_Click" Margin="5,0,0,0"/>
                 <Button Grid.Column="3" Background="White" Content="停止" Margin="5,0,0,0" Name="btn_stop" Click="btn_stop_Click"/>
                 <Button Grid.Column="4" Background="White" Content="数据库配置" Margin="5,0,0,0" Name="btn_DBConfig" Click="btn_DBConfig_Click"></Button>
             </Grid>
-            <Grid Margin="10,10,10,10">
+            
+            <Grid Margin="10,10,10,10" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TreeView Grid.Column="0" Name="chk_treeview" IsTextSearchCaseSensitive="True">
@@ -182,11 +201,18 @@
                         </ListView.View>
                     </ListView>
                 </Grid>
-
             </Grid>
-        </DockPanel>
+
+            <!-- 
+                不执行 #4C8DAE
+                执行 #F36838 
+            -->
+            <Border Name="color_bar" Background="#4C8DAE" Grid.Row="3">
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <Image Source="./images/ready.ico" Height="15"></Image>
+                    <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Border>    
-        
-    
-    
 </Window>

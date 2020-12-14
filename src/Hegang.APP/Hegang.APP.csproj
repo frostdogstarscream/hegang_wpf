@@ -61,7 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.OPCAutomation">
-      <HintPath>..\dll\Interop.OPCAutomation.dll</HintPath>
+      <HintPath>..\..\lib\Interop.OPCAutomation.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Tip.xaml.cs">
+      <DependentUpon>Tip.xaml</DependentUpon>
+    </Compile>
     <Page Include="DataBaseConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,11 +103,15 @@
       <DependentUpon>DataBaseConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="KEPWareDataAdapter.cs" />
-    <Compile Include="Listview_bean.cs" />
+    <Compile Include="ListViewItem.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Tip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Node.cs" />
@@ -144,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ready.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ready.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
