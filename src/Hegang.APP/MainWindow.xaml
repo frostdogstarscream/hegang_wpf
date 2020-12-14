@@ -127,7 +127,7 @@
                 <Button Name="btn_connect" Grid.Column="0" Background="White" Content="加载并连接OPC"  Click="btn_connect_Click" />
                 <ComboBox Name="cmb_server_list" Grid.Column="1"  SelectedIndex="0" Margin="5,0,0,0" Template="{StaticResource ComboBox_template}"/>
                 <Button Grid.Column="2" Background="White" Content="读取数据" Name="btn_read" Click="btn_read_Click" Margin="5,0,0,0"/>
-                <Button Grid.Column="3" Background="White" Content="停止" Margin="5,0,0,0"/>
+                <Button Grid.Column="3" Background="White" Content="停止" Margin="5,0,0,0" Name="btn_stop" Click="btn_stop_Click"/>
                 <Button Grid.Column="4" Background="White" Content="数据库配置" Margin="5,0,0,0" Name="btn_DBConfig" Click="btn_DBConfig_Click"></Button>
             </Grid>
             <Grid Margin="10,10,10,10">
@@ -159,8 +159,8 @@
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition Width="0.9*"/>
                             <ColumnDefinition Width="1.5*"/>
                             <ColumnDefinition Width=".3*"/>
                         </Grid.ColumnDefinitions>

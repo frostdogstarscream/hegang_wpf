@@ -31,7 +31,7 @@ namespace Hegang.APP
         {
             InitializeComponent();
             da = new KEPWareDataAdapter();
-
+            this.btn_stop.IsEnabled = false;
             //this.chk_treeview.ItemsSource = Node.test();
             //this.listView.ItemsSource = listView_itemsSource;
         }
@@ -141,6 +141,7 @@ namespace Hegang.APP
 
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
+            this.btn_read.IsEnabled = false;
             List<string> channel_device_list = new List<string>();
             foreach(Node parent_node in this.tree)
             {
@@ -189,6 +190,11 @@ namespace Hegang.APP
             DataBaseConfig dataBaseConfig = new DataBaseConfig();
             dataBaseConfig.Owner = this;
             dataBaseConfig.ShowDialog();
+        }
+
+        private void btn_stop_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
