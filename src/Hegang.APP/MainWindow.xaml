@@ -226,10 +226,18 @@
                 执行 #F36838 
             -->
             <Border Name="color_bar" Background="#177CB0" Grid.Row="3">
-                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                    <Image Source="./images/tip.ico" Height="15"></Image>
-                    <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
-                </StackPanel>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <Image Source="./images/tip.ico" Height="15"></Image>
+                        <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <Image Source="./images/time.ico" Height="15"></Image>
+                        <TextBlock Name="time_TextBlock" VerticalAlignment="Center" Foreground="White" Margin="5,0,10,0"></TextBlock>
+                    </StackPanel>
+                    
+                </DockPanel>
+                
             </Border>
         </Grid>
     </Border>    

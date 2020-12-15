@@ -159,7 +159,7 @@
     <Resource Include="images\choose.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\down.ico" />
+    <Resource Include="images\time.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

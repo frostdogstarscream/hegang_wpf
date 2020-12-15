@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Hegang.APP
 {
@@ -24,7 +25,23 @@ namespace Hegang.APP
             da = new KEPWareDataAdapter();
             this.btn_stop.IsEnabled = false;
             this.btn_read.IsEnabled = false;
+
+            //设置显示时间
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += timer_Tick;
+            timer.IsEnabled = true;
         }
+
+        /// <summary>
+        /// 为 time_TextBlock 绑定时间
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void timer_Tick(object sender, EventArgs e)
+        {
+            this.time_TextBlock.Text = DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss");
+        }
+
 
         /// <summary>
         /// 鼠标左键按住可以移动窗体
