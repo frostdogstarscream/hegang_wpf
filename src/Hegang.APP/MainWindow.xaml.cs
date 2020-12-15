@@ -23,6 +23,7 @@ namespace Hegang.APP
             InitializeComponent();
             da = new KEPWareDataAdapter();
             this.btn_stop.IsEnabled = false;
+            this.btn_read.IsEnabled = false;
         }
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace Hegang.APP
             chk_treeview.ItemsSource = this.tree;
 
             this.color_bar_text.Text = "OPC已连接";
+            this.btn_read.IsEnabled = true;
         }
 
         /// <summary>

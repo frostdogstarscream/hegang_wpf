@@ -36,20 +36,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <!--下拉按钮内部背景色-->
-                        <Border x:Name="Back" Background="White" >
-                            <!--下拉按钮内边框-->
-                            <Path Name="PathFill" Fill="Black"  Width="10" Height="6" Data="M5,0 L10,10 L0,10 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="180"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </Border>
+                        <Button BorderThickness="0" Background="Transparent">
+                            <Image Source="./images/down.ico" Height="10"></Image>
+                        </Button>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -57,7 +46,7 @@
         
         <!-- ComboBox模板 -->
         <ControlTemplate x:Key="ComboBox_template" TargetType="{x:Type ComboBox}">
-            <Border BorderBrush="Black" BorderThickness="0.5">
+            <Border BorderBrush="Black" BorderThickness="0.5" Padding="1" Background="White">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7*"/>
@@ -65,11 +54,11 @@
                     </Grid.ColumnDefinitions>
 
                     <!--文字区域背景和边线样式-->
-                    <TextBox Grid.Column="0" Background="White" VerticalContentAlignment="Center" Padding="3,0,0,0" Foreground="Black" BorderThickness="0" IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}"></TextBox>
-                    
+                    <TextBox Grid.Column="0" Background="White" VerticalContentAlignment="Center" Padding="3,0,0,0" Foreground="Black"  BorderThickness="0" IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}"></TextBox>
+
                     <!--右侧下拉button设置-->
-                    <ToggleButton Grid.Column="1" Style="{StaticResource ComboxStyleBtn}" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>
-                    
+                    <ToggleButton Grid.Column="1" Style="{StaticResource ComboxStyleBtn}" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press" Background="Transparent"></ToggleButton>
+
 
                     <!--弹出popup整体设置-->
                     <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" >
@@ -85,6 +74,8 @@
                 </Grid>
             </Border>
             
+
+
         </ControlTemplate>
 
         <!-- GridViewColumnHeader样式 -->
@@ -134,7 +125,7 @@
                 </StackPanel>
             </DockPanel>
 
-            <Grid Grid.Row="1" Margin="10,0,10,0" Height="25">
+            <Grid Grid.Row="1" Margin="10,0,10,0" Height="27">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"></ColumnDefinition>
                     <ColumnDefinition Width="9*"></ColumnDefinition>
