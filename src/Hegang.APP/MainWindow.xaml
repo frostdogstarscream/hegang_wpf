@@ -36,9 +36,25 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Button BorderThickness="0" Background="Transparent">
-                            <Image Source="./images/down.ico" Height="10"></Image>
-                        </Button>
+                        <!--下拉按钮内边框-->
+
+                        <Path Name="PathFill" Fill="#13227a"  Width="10" Height="6" StrokeThickness="0" Data="M5,0 L10,10 L0,10 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PathFill" Property="Fill" Value="#b35c44"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -46,7 +62,7 @@
         
         <!-- ComboBox模板 -->
         <ControlTemplate x:Key="ComboBox_template" TargetType="{x:Type ComboBox}">
-            <Border BorderBrush="Black" BorderThickness="0.5" Padding="1" Background="White">
+            <Border BorderBrush="Black" BorderThickness="0.5" Padding="2" Background="White">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7*"/>
