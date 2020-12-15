@@ -168,7 +168,7 @@ namespace Hegang.APP
         /// <param name="e"></param>
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
-            set_color_bar("#F36838", "监测服务已启动");
+            set_color_bar("#CA6924", "监测服务已启动");
 
             List<string> channel_device_list = new List<string>();
             foreach(Node parent_node in this.tree)
