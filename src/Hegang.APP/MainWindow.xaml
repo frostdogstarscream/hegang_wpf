@@ -11,7 +11,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hegang.APP"
         mc:Ignorable="d"
-        Title="鸟山矿PLC监测服务程序" Height="450" Width="650" Icon="./images/icon.png" MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="鸟山矿PLC监测服务程序" Height="450" Width="650" Icon="./images/icon.ico" MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStyle="None" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
 
     <!-- 在 WindowStyle="None" ResizeMode="CanResize" 的前提下，将窗体设置为 
@@ -57,35 +57,34 @@
         
         <!-- ComboBox模板 -->
         <ControlTemplate x:Key="ComboBox_template" TargetType="{x:Type ComboBox}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <!--文字区域背景和边线样式-->
-                
-                <Border  Grid.Column="0" BorderThickness="0.5,0.5,0,0.5" BorderBrush="Black">
-                    <TextBox Background="White" VerticalContentAlignment="Center" Padding="3,0,0,0" Grid.Column="0" Foreground="Black" BorderThickness="0" IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}"></TextBox>
-                </Border>
+            <Border BorderBrush="Black" BorderThickness="0.5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <!--右侧下拉button设置-->
-                <Border Grid.Column="1" BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black">
-                    <ToggleButton Style="{StaticResource ComboxStyleBtn}" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>
-                </Border>
-                
-                <!--弹出popup整体设置-->
-                <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" >
-                    <!--弹出popup边框-->
-                    <Border CornerRadius="1" BorderBrush="Black" BorderThickness="0.5,0,0.5,0.5" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
-                        <!--下拉幕布边界背景设置 MaxHeight="{TemplateBinding MaxDropDownHeight}"-->
-                        <ScrollViewer Margin="0,0,0,0"   SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderBrush="Black" BorderThickness="2" >
-                            <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
-                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" Background="White" />
-                        </ScrollViewer>
-                    </Border>
-                </Popup>
-            </Grid>
+                    <!--文字区域背景和边线样式-->
+                    <TextBox Grid.Column="0" Background="White" VerticalContentAlignment="Center" Padding="3,0,0,0" Foreground="Black" BorderThickness="0" IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}"></TextBox>
+                    
+                    <!--右侧下拉button设置-->
+                    <ToggleButton Grid.Column="1" Style="{StaticResource ComboxStyleBtn}" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>
+                    
+
+                    <!--弹出popup整体设置-->
+                    <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" >
+                        <!--弹出popup边框-->
+                        <Border CornerRadius="1" BorderBrush="Black" BorderThickness="0.5,0,0.5,0.5" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
+                            <!--下拉幕布边界背景设置 MaxHeight="{TemplateBinding MaxDropDownHeight}"-->
+                            <ScrollViewer Margin="0,0,0,0"   SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderBrush="Black" BorderThickness="2" >
+                                <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
+                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" Background="White" />
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </Border>
+            
         </ControlTemplate>
 
         <!-- GridViewColumnHeader样式 -->
@@ -110,8 +109,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
-    <Border BorderBrush="black" BorderThickness="0.3">
+
+    <Border BorderBrush="black" BorderThickness="0.3" Background="#F0F2F5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"></RowDefinition>
@@ -120,7 +119,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <DockPanel Grid.Row="0" Background="#F0F2F5">
+            <DockPanel Grid.Row="0">
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                     <Image Source="./images/icon.ico" Height="20" UseLayoutRounding="True"/>
                     <TextBlock Text="鸟山矿PLC监测服务程序" VerticalAlignment="Center" Margin="3,0,0,0"/>
@@ -138,9 +137,9 @@
             <Grid Grid.Row="1" Margin="10,0,10,0" Height="25">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"></ColumnDefinition>
-                    <ColumnDefinition Width="8*"></ColumnDefinition>
-                    <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="9*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
                     <ColumnDefinition Width="2.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Name="btn_connect" Grid.Column="0" Background="White" Content="加载并连接OPC"  Click="btn_connect_Click" />
@@ -155,20 +154,32 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TreeView Grid.Column="0" Name="chk_treeview" IsTextSearchCaseSensitive="True">
-                    <TreeView.ItemContainerStyle>
-                        <Style TargetType="TreeViewItem">
-                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"></Setter>
-                        </Style>
-                    </TreeView.ItemContainerStyle>
-                    <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Path =ChildList}">
-                            <CheckBox Name="checkbox" IsChecked="{Binding Path = IsChecked, Mode=TwoWay }">
-                                <ContentPresenter Content="{Binding Path = NodeName}"/>
-                            </CheckBox>
-                        </HierarchicalDataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
+                <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0.5" Background="WhiteSmoke">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5,5,0,0">
+                            <StackPanel.ToolTip>
+                                <TextBlock Text="请点击加载并连接OPC"></TextBlock>
+                            </StackPanel.ToolTip>
+                            <Image Source="./images/choose.ico" Height="15"/>
+                            <TextBlock Text="选择待监测PLC" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        
+                        <TreeView  Name="chk_treeview" IsTextSearchCaseSensitive="True" BorderThickness="0" Margin="5" Background="Transparent">
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="TreeViewItem">
+                                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"></Setter>
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Path =ChildList}">
+                                    <CheckBox Name="checkbox" IsChecked="{Binding Path = IsChecked, Mode=TwoWay }">
+                                        <ContentPresenter Content="{Binding Path = NodeName}"/>
+                                    </CheckBox>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </DockPanel>
+                </Border>
 
                 <Grid Grid.Column="2" Margin="5,0,0,0">
                     <Grid.RowDefinitions>
@@ -188,7 +199,7 @@
                         <Grid Grid.Column="2" x:Name="col3"/>
                         <Grid Grid.Column="3" x:Name="col4"/>
                     </Grid>
-                    <ListView Name="listView" Grid.Row="1">
+                    <ListView Name="listView" Grid.Row="1" BorderBrush="Gray" BorderThickness="0.5">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource HeadStyle}">
                                 <GridView.Columns>
@@ -207,9 +218,9 @@
                 不执行 #4C8DAE
                 执行 #F36838 
             -->
-            <Border Name="color_bar" Background="#4C8DAE" Grid.Row="3">
+            <Border Name="color_bar" Background="#1296db" Grid.Row="3">
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                    <Image Source="./images/ready.ico" Height="15"></Image>
+                    <Image Source="./images/tip.ico" Height="15"></Image>
                     <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
                 </StackPanel>
             </Border>

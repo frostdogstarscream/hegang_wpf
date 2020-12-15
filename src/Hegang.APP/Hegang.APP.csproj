@@ -150,16 +150,13 @@
     <Resource Include="images\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ready.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ready.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tip.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\choose.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
