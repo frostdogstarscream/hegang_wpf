@@ -20,6 +20,13 @@ namespace Hegang.APP
         private KEPWareDataAdapter da;
         private ObservableCollection<Node> tree;
         private Dictionary<string, string> dic;
+        private TimeJudgeItemList timeJudgeItemList;
+        /**
+         * 用来寄存临时变量
+         * 0--主井勾数
+         * 1--副井勾数
+         */
+        private string[] gs_tmpBuf = new string[2] { "-1", "-1" };
 
         public MainWindow()
         {
@@ -28,6 +35,12 @@ namespace Hegang.APP
             this.btn_stop.IsEnabled = false;
             this.btn_read.IsEnabled = false;
             dic = new Dictionary<string, string>();
+            timeJudgeItemList = new TimeJudgeItemList();
+
+            //设置定时任务
+            FixedTimeTaskModule.setTaskAtFixedTime_day();
+            FixedTimeTaskModule.setTaskAtFixedTime_hour();
+            FixedTimeTaskModule.setTaskAtFixedTime_minute();
         }
 
         /// <summary>
@@ -153,10 +166,19 @@ namespace Hegang.APP
             #endregion
 
             #region 数据存储
+            timeJudgeItemList.resetFlags();
+
             for(int i = 0; i < NumItems; i++)
             {
                 set_data_to_dic(channel[i], device[i],itemName[i], itemValues.GetValue(i+1).ToString());
+                // 将故障信息存入数据库
+                if (channel[i] == "故障" && itemValues.GetValue(i+1).ToString() == "True")
+                    DataSaveModule.save_gz(device[i], itemName[i]);
             }
+
+            timeJudgeItemList.resetTimeList();
+            DataSaveModule.savePLCData(ref dic, ref timeJudgeItemList,ref gs_tmpBuf);
+
             #endregion
         }
 
@@ -200,7 +222,7 @@ namespace Hegang.APP
                             channel_device_list.Add(parent_node.NodeName + "." + child_node.NodeName);
                             
                             //初始化dic
-                            List<string> itemList = Utils.read_csv_file(child_node.NodeName);
+                            List<string> itemList = CSVUtils.read_csv_file(child_node.NodeName);
                             foreach (string item in itemList)
                             {
                                 string key = parent_node.NodeName + "." + child_node.NodeName + "." + item;
@@ -209,6 +231,11 @@ namespace Hegang.APP
                         }
                     }
                 }
+            }
+
+            foreach (string k in dic.Keys)
+            {
+                Console.WriteLine(k);
             }
 
             if (channel_device_list.Count == 0)

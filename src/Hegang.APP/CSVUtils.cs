@@ -1,30 +1,17 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Hegang.APP
 {
-    class Utils
+    class CSVUtils
     {
-        /// <summary>
-        /// 获取db_config.xml的相对路径
-        /// </summary>
-        /// <returns></returns>
-        public static string get_db_config_path()
-        {
-            string path = System.AppDomain.CurrentDomain.BaseDirectory;
-            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
-            path = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
-            path = Directory.GetCurrentDirectory();
-
-            return path + @"/conf/db_config.xml";
-        }
-
         /// <summary>
         /// 获取plc_items_table.csv的相对路径
         /// </summary>
@@ -46,7 +33,7 @@ namespace Hegang.APP
         /// <returns></returns>
         public static List<string> read_csv_file(string file_name)
         {
-            StreamReader streamReader = new StreamReader(get_csv_path()+file_name, System.Text.Encoding.UTF8);
+            StreamReader streamReader = new StreamReader(get_csv_path()+file_name+".csv", System.Text.Encoding.UTF8);
             string line = null;
             String[] array = null;
             List<string> dataItems = new List<string>();
@@ -57,6 +44,8 @@ namespace Hegang.APP
                 if (flag)
                 {
                     array = line.Split(new char[] { ',' });
+                    //去掉 ""
+                    array[0]=array[0].Substring(1, array[0].Length - 2);
                     dataItems.Add(array[0]);
                 }
                 flag=true;

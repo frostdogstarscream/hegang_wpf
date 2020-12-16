@@ -1,8 +1,10 @@
 ﻿Tag Name,Address,Data Type,Respect Data Type,Client Access,Scan Rate,Scaling,Raw Low,Raw High,Scaled Low,Scaled High,Scaled Data Type,Clamp Low,Clamp High,Eng Units,Description,Negate Value
-"高度","MD112",Float,1,R/W,100,,,,,,,,,,"提升高度",
+"安全回路","DB10.D12.0",Boolean,1,R/W,100,,,,,,,,,,"",
+"高度","MD112",Float,1,R/W,100,,,,,,,,,,"",
 "勾数","MW220",Word,1,RO,100,,,,,,,,,,"",
 "检修方式","E5.2",Boolean,1,RO,100,,,,,,,,,,"",
 "紧急开车方式","E5.3",Boolean,1,RO,100,,,,,,,,,,"",
+"紧停","DB10.D13.5",Boolean,1,R/W,100,,,,,,,,,,"",
 "开车信号","A1.2",Boolean,1,R/W,100,,,,,,,,,,"",
 "速度","DB1.DD268",Float,1,RO,100,,,,,,,,,,"",
 "提煤方式","E5.0",Boolean,1,RO,100,,,,,,,,,,"",

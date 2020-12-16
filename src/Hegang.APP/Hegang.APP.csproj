@@ -64,6 +64,10 @@
       <HintPath>..\..\lib\Interop.OPCAutomation.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="MySql.Data, Version=8.0.17.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -84,11 +88,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataItem.cs" />
+    <Compile Include="DataSaveModule.cs" />
+    <Compile Include="DBUtils.cs" />
+    <Compile Include="FixedTimeTaskModule.cs" />
+    <Compile Include="TimeJudgeItem.cs" />
+    <Compile Include="TimeJudgeItemList.cs" />
     <Compile Include="Tip.xaml.cs">
       <DependentUpon>Tip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
+    <Compile Include="CSVUtils.cs" />
     <Page Include="DataBaseConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
