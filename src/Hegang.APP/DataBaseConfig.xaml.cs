@@ -36,21 +36,6 @@ namespace Hegang.APP
         }
 
         /// <summary>
-        /// 获取db_config.xml的相对路径
-        /// </summary>
-        /// <returns></returns>
-        private string get_db_config_path()
-        {
-            string path = System.AppDomain.CurrentDomain.BaseDirectory;
-            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
-            path = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
-            path = Directory.GetCurrentDirectory();
-
-            return path + @"/conf/db_config.xml";
-        }
-
-        /// <summary>
         /// 为窗体中的每一个TextBlock赋值
         /// </summary>
         /// <param name="sender"></param>
@@ -58,7 +43,7 @@ namespace Hegang.APP
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(this.get_db_config_path());
+            doc.Load(Utils.get_db_config_path());
 
             XmlElement element = (XmlElement)doc.SelectSingleNode("property/server");
             this.server.Text = element.GetAttribute("value");
@@ -83,7 +68,7 @@ namespace Hegang.APP
         /// <param name="e"></param>
         private void btn_apply_Click(object sender, RoutedEventArgs e)
         {
-            string path = this.get_db_config_path();
+            string path = Utils.get_db_config_path();
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
 

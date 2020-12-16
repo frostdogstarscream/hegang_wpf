@@ -1,0 +1,14 @@
+﻿Tag Name,Address,Data Type,Respect Data Type,Client Access,Scan Rate,Scaling,Raw Low,Raw High,Scaled Low,Scaled High,Scaled Data Type,Clamp Low,Clamp High,Eng Units,Description,Negate Value
+"副井安全回路","DB10.D12.0",Boolean,1,RO,100,,,,,,,,,,"",
+"副井高度","MD264",Float,1,R/W,100,线性,0.000000,1000.000000,0.000000,1000.000000,Double,0,0,"","提升高度",1
+"副井勾数","MW300",Word,1,R/W,100,,,,,,,,,,"",
+"副井检修方式","E5.2",Boolean,1,RO,100,,,,,,,,,,"",
+"副井紧急开车方式","E5.3",Boolean,1,RO,100,,,,,,,,,,"",
+"副井紧停","DB10.D13.5",Boolean,1,R/W,100,,,,,,,,,,"",
+"副井速度","DB1.DD268",Float,1,RO,100,,,,,,,,,,"",
+"副井油压","MD272",Float,1,RO,1000,,,,,,,,,,"",
+"开车条件","M0.3",Boolean,1,R/W,100,,,,,,,,,,"",
+"开车信号1","DB10.DBX17.2",Boolean,1,RO,100,,,,,,,,,,"",
+"开车信号2","DB10.D17.2",Boolean,1,RO,100,,,,,,,,,,"",
+"提人方式","E5.0",Boolean,1,RO,100,,,,,,,,,,"",
+"提物方式","E5.1",Boolean,1,RO,100,,,,,,,,,,"",

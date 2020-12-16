@@ -3,6 +3,7 @@ using OPCAutomation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace Hegang.APP
     {
         private KEPWareDataAdapter da;
         private ObservableCollection<Node> tree;
+        private Dictionary<string, string> dic;
 
         public MainWindow()
         {
@@ -25,23 +27,8 @@ namespace Hegang.APP
             da = new KEPWareDataAdapter();
             this.btn_stop.IsEnabled = false;
             this.btn_read.IsEnabled = false;
-
-            //设置显示时间
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += timer_Tick;
-            timer.IsEnabled = true;
+            dic = new Dictionary<string, string>();
         }
-
-        /// <summary>
-        /// 为 time_TextBlock 绑定时间
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void timer_Tick(object sender, EventArgs e)
-        {
-            this.time_TextBlock.Text = DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss");
-        }
-
 
         /// <summary>
         /// 鼠标左键按住可以移动窗体
@@ -143,12 +130,12 @@ namespace Hegang.APP
             */
             string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string[] channel = new string[NumItems];
-            string[] deviceName = new string[NumItems];
+            string[] device = new string[NumItems];
             string[] itemName = new string[NumItems];
             for (int i = 1; i <= NumItems; i++)
             {
                 channel[i - 1] = (da.htOpcItems[(int)clientHandles.GetValue(i) - 1] + "").Split(new char[] { '.' })[0];
-                deviceName[i - 1] = (da.htOpcItems[(int)clientHandles.GetValue(i) - 1] + "").Split(new char[] { '.' })[1];
+                device[i - 1] = (da.htOpcItems[(int)clientHandles.GetValue(i) - 1] + "").Split(new char[] { '.' })[1];
                 itemName[i - 1] = (da.htOpcItems[(int)clientHandles.GetValue(i) - 1] + "").Split(new char[] { '.' })[2];
             }
             #endregion
@@ -164,6 +151,20 @@ namespace Hegang.APP
             }
             this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count-1]);
             #endregion
+
+            #region 数据存储
+            for(int i = 0; i < NumItems; i++)
+            {
+                set_data_to_dic(channel[i], device[i],itemName[i], itemValues.GetValue(i+1).ToString());
+            }
+            #endregion
+        }
+
+        public void set_data_to_dic(string channel,string device,string itemName,string itemValue)
+        {
+            string key = channel + "." + device + "." + itemName;
+            if (dic.ContainsKey(key))
+                dic[key] = itemValue;
         }
 
         /// <summary>
@@ -195,7 +196,17 @@ namespace Hegang.APP
                     foreach(Node child_node in parent_node.ChildList)
                     {
                         if (child_node.IsChecked == true)
+                        {
                             channel_device_list.Add(parent_node.NodeName + "." + child_node.NodeName);
+                            
+                            //初始化dic
+                            List<string> itemList = Utils.read_csv_file(child_node.NodeName);
+                            foreach (string item in itemList)
+                            {
+                                string key = parent_node.NodeName + "." + child_node.NodeName + "." + item;
+                                this.dic.Add(key, "0");
+                            }
+                        }
                     }
                 }
             }

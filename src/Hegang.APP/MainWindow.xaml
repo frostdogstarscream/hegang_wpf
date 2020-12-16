@@ -123,7 +123,7 @@
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="1.5*"></RowDefinition>
                 <RowDefinition Height="15*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0">
@@ -232,8 +232,7 @@
                         <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <Image Source="./images/time.ico" Height="15"></Image>
-                        <TextBlock Name="time_TextBlock" VerticalAlignment="Center" Foreground="White" Margin="5,0,10,0"></TextBlock>
+                        
                     </StackPanel>
                     
                 </DockPanel>
