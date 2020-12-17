@@ -160,7 +160,7 @@ namespace Hegang.APP
                 {
                     this.listView.Items.RemoveAt(0);
                 }
-                this.listView.Items.Add(new ListViewItem(itemName[i - 1], itemValues.GetValue(i).ToString(), ((int)clientHandles.GetValue(i) - 1).ToString(), time));
+                this.listView.Items.Add(new ListViewItem(channel[i - 1]+"."+ device[i - 1] +"."+ itemName[i - 1], itemValues.GetValue(i).ToString(), ((int)clientHandles.GetValue(i) - 1).ToString(), time));
             }
             this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count-1]);
             #endregion
