@@ -208,7 +208,7 @@ namespace Hegang.APP
         /// <param name="e"></param>
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
-            set_color_bar("#CA6924", "监测服务已启动");
+            
 
             List<string> channel_device_list = new List<string>();
             foreach(Node parent_node in this.tree)
@@ -246,6 +246,8 @@ namespace Hegang.APP
                 return;
             }
 
+            //#CA6924
+            set_color_bar("#9C5333", "监测服务已启动");
             this.btn_read.IsEnabled = false;
             this.btn_stop.IsEnabled = true;
             
