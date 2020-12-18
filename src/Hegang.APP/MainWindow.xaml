@@ -116,15 +116,15 @@
 
 
         </ControlTemplate>
-
         <!-- GridViewColumnHeader样式 -->
         <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="OverridesDefaultStyle" Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                         <Grid Name="g" Background="White">
-                            <Border Name="bd" Padding="{TemplateBinding Padding}" BorderBrush="White" BorderThickness="1">
+                            <Border Name="bd" Padding="{TemplateBinding Padding}" BorderBrush="Gray" BorderThickness="0.3,0,0,0">
                                 <ContentPresenter Margin="0,3,0,3" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
                             </Border>
                         </Grid>
@@ -257,7 +257,6 @@
                             <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="130"/>
-                            <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" x:Name="col1"/>
                         <Grid Grid.Column="1" x:Name="col2"/>
@@ -267,6 +266,7 @@
                     <ListView Name="listView" Grid.Row="1" BorderBrush="Gray" BorderThickness="0.5">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource HeadStyle}">
+                                
                                 <GridView.Columns>
                                     <GridViewColumn  Header="测点名称" DisplayMemberBinding="{Binding Path = Item_name}" Width="{Binding ElementName=col1,Path=ActualWidth}"/>
                                     <GridViewColumn  Header="测点值" DisplayMemberBinding="{Binding Path = Item_value}" Width="{Binding ElementName=col2,Path=ActualWidth}"/>
