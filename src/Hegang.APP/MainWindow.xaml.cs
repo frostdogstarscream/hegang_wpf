@@ -114,9 +114,19 @@ namespace Hegang.APP
                 foreach (string device_name in deviceList)
                 {
                     device_node_col.Add(new Node(device_name, channel_node));
+                    //初始化dic
+                    List<string> itemList = CSVUtils.read_csv_file(device_name);
+                    foreach (string item in itemList)
+                    {
+                        string k = key + "." + device_name + "." + item;
+                        this.dic.Add(k, "0");
+                    }
                 }
                 channel_node.ChildList = device_node_col;
                 tree.Add(channel_node);
+
+                
+
             }
             return tree;
         }
@@ -182,6 +192,13 @@ namespace Hegang.APP
             #endregion
         }
 
+        /// <summary>
+        /// 将PLC数据设置到字典中
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="device"></param>
+        /// <param name="itemName"></param>
+        /// <param name="itemValue"></param>
         public void set_data_to_dic(string channel,string device,string itemName,string itemValue)
         {
             string key = channel + "." + device + "." + itemName;
@@ -221,13 +238,7 @@ namespace Hegang.APP
                         {
                             channel_device_list.Add(parent_node.NodeName + "." + child_node.NodeName);
                             
-                            //初始化dic
-                            List<string> itemList = CSVUtils.read_csv_file(child_node.NodeName);
-                            foreach (string item in itemList)
-                            {
-                                string key = parent_node.NodeName + "." + child_node.NodeName + "." + item;
-                                this.dic.Add(key, "0");
-                            }
+                            
                         }
                     }
                 }

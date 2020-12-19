@@ -38,12 +38,14 @@ namespace Hegang.APP
             // 保存副井温度信息
             if (timeJudgeItemList.FList[2].Flag)
                 save_fwd(conn, dic);
+
             // 保存主井振动信息
             if (timeJudgeItemList.MList[3].Flag)
                 save_mzd(conn, dic);
             // 保存副井振动信息
             if (timeJudgeItemList.FList[3].Flag)
                 save_fzd(conn, dic);
+
             // 保存主井油压信息
             if (timeJudgeItemList.MList[4].Flag)
                 save_mzzyl(conn, dic);
