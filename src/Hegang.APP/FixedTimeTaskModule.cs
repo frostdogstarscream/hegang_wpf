@@ -495,10 +495,23 @@ namespace Hegang.APP
             MySqlConnection conn = DBUtils.getDBConnection();
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
-            string str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM fwd;";
+
+            string str = "SELECT COUNT(id) FROM fwd;";
             comm.CommandText = str;
             MySqlDataReader reader = comm.ExecuteReader();
+            reader.Read();
+            int count = int.Parse(reader[0].ToString());
+            Console.WriteLine(count);
+            reader.Close();
 
+            if (count <= 10)
+                str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM fwd;";
+            else
+                //在MySQL中要给子查询添加别名，否则会报错；在Oracle中不需要
+                str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM (SELECT * FROM fwd ORDER BY TIMESTAMP DESC LIMIT 10) a;";
+
+            comm.CommandText = str;
+            reader = comm.ExecuteReader();
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (reader.Read())
@@ -513,7 +526,6 @@ namespace Hegang.APP
             {
                 reader.Close();
             }
-
             conn.Close();
         }
 
@@ -525,10 +537,23 @@ namespace Hegang.APP
             MySqlConnection conn = DBUtils.getDBConnection();
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
-            string str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM mwd;";
+
+            string str = "SELECT COUNT(id) FROM mwd;";
             comm.CommandText = str;
             MySqlDataReader reader = comm.ExecuteReader();
+            reader.Read();
+            int count = int.Parse(reader[0].ToString());
+            Console.WriteLine(count);
+            reader.Close();
 
+            if (count <= 10)
+                str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM mwd;";
+            else
+                //在MySQL中要给子查询添加别名，否则会报错；在Oracle中不需要
+                str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM (SELECT * FROM mwd ORDER BY TIMESTAMP DESC LIMIT 10) a;";
+
+            comm.CommandText = str;
+            reader = comm.ExecuteReader();
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (reader.Read())
@@ -543,7 +568,6 @@ namespace Hegang.APP
             {
                 reader.Close();
             }
-
             conn.Close();
         }
 
@@ -555,10 +579,23 @@ namespace Hegang.APP
             MySqlConnection conn = DBUtils.getDBConnection();
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
-            string str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM fzd;";
+
+            string str = "SELECT COUNT(id) FROM fzd;";
             comm.CommandText = str;
             MySqlDataReader reader = comm.ExecuteReader();
+            reader.Read();
+            int count = int.Parse(reader[0].ToString());
+            Console.WriteLine(count);
+            reader.Close();
 
+            if (count <= 10)
+                str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM fzd;";
+            else
+                //在MySQL中要给子查询添加别名，否则会报错；在Oracle中不需要
+                str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM (SELECT * FROM fzd ORDER BY TIMESTAMP DESC LIMIT 10) a;";
+
+            comm.CommandText = str;
+            reader = comm.ExecuteReader();
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (reader.Read())
@@ -573,7 +610,6 @@ namespace Hegang.APP
             {
                 reader.Close();
             }
-
             conn.Close();
         }
 
@@ -609,10 +645,23 @@ namespace Hegang.APP
             MySqlConnection conn = DBUtils.getDBConnection();
             conn.Open();
             MySqlCommand comm = conn.CreateCommand();
-            string str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM mzd;";
+
+            string str = "SELECT COUNT(id) FROM mzd;";
             comm.CommandText = str;
             MySqlDataReader reader = comm.ExecuteReader();
+            reader.Read();
+            int count = int.Parse(reader[0].ToString());
+            Console.WriteLine(count);
+            reader.Close();
 
+            if (count <= 10)
+                str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM mzd;";
+            else
+                //在MySQL中要给子查询添加别名，否则会报错；在Oracle中不需要
+                str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM (SELECT * FROM mzd ORDER BY TIMESTAMP DESC LIMIT 10) a;";
+
+            comm.CommandText = str;
+            reader = comm.ExecuteReader();
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (reader.Read())
@@ -627,7 +676,6 @@ namespace Hegang.APP
             {
                 reader.Close();
             }
-
             conn.Close();
         }
     }
