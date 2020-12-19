@@ -258,7 +258,8 @@ namespace Hegang.APP
             
             // 新建一个线程，保证加载PLC过程中窗体不会假死。
             new Thread(o => {
-                da.CreateGroup(channel_device_list);
+                if(null==da.MyGroups)
+                    da.CreateGroup(channel_device_list);
 
                 for (int i = 0; i < channel_device_list.Count; i++)
                 {
@@ -313,6 +314,8 @@ namespace Hegang.APP
             {
                 da.MyGroups[i].DataChange -= new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
             }
+            this.btn_stop.IsEnabled = false;
+            this.btn_read.IsEnabled = true;
         }
     }
 }
