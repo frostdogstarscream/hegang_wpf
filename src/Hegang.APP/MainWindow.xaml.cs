@@ -21,6 +21,8 @@ namespace Hegang.APP
         private ObservableCollection<Node> tree;
         private Dictionary<string, string> dic;
         private TimeJudgeItemList timeJudgeItemList;
+        private List<string> channel_device_list;
+
         /**
          * 用来寄存临时变量
          * 0--主井勾数
@@ -124,9 +126,6 @@ namespace Hegang.APP
                 }
                 channel_node.ChildList = device_node_col;
                 tree.Add(channel_node);
-
-                
-
             }
             return tree;
         }
@@ -225,9 +224,8 @@ namespace Hegang.APP
         /// <param name="e"></param>
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
-            
+            channel_device_list = new List<string>();
 
-            List<string> channel_device_list = new List<string>();
             foreach(Node parent_node in this.tree)
             {
                 if (parent_node.IsChecked == true)
@@ -235,11 +233,7 @@ namespace Hegang.APP
                     foreach(Node child_node in parent_node.ChildList)
                     {
                         if (child_node.IsChecked == true)
-                        {
                             channel_device_list.Add(parent_node.NodeName + "." + child_node.NodeName);
-                            
-                            
-                        }
                     }
                 }
             }
@@ -315,7 +309,10 @@ namespace Hegang.APP
         /// <param name="e"></param>
         private void btn_stop_Click(object sender, RoutedEventArgs e)
         {
-
+            for (int i = 0; i < channel_device_list.Count; i++)
+            {
+                da.MyGroups[i].DataChange -= new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
+            }
         }
     }
 }
