@@ -146,7 +146,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="375"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="25"></RowDefinition>
@@ -265,7 +265,7 @@
                         <Grid Grid.Column="2" x:Name="col3"/>
                         <Grid Grid.Column="3" x:Name="col4"/>
                     </Grid>
-                    <ListView Name="listView" Grid.Row="1" BorderBrush="Gray" BorderThickness="0.5" ItemsSource="{Binding ListViewItemList, Mode=TwoWay}">
+                    <ListView Name="listView" Grid.Row="1" BorderBrush="Gray" BorderThickness="0.5" ItemsSource="{Binding ListViewItemList, Mode=TwoWay}" ScrollViewer.ScrollChanged="listView_ScrollChanged">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource HeadStyle}">
                                 
@@ -281,7 +281,20 @@
                 </Grid>
             </Grid>
             <GridSplitter Grid.Row="3" Height="7" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent"></GridSplitter>
-            <TextBox Grid.Row="4" Margin="10,0,10,5" Text="{Binding ConsoleText}"></TextBox>
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="Transparent" Height="25" BorderBrush="gray" BorderThickness="0,0.3,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../images/menu.ico" Height="15"></Image>
+                        <TextBlock VerticalAlignment="Center" Padding="5,0,0,0">输出信息</TextBlock>
+                    </StackPanel>
+                </Border>
+                <TextBox Grid.Row="1" Text="{Binding ConsoleText}" Padding="3,0,3,0" VerticalScrollBarVisibility="Visible"></TextBox>
+            </Grid>
+            
             <!-- 
                 不执行 #4C8DAE #177CB0 #065279
                 执行 #F36838 

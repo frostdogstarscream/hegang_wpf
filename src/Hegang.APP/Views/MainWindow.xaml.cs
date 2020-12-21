@@ -23,7 +23,7 @@ namespace Hegang.APP
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
 
-            this.listViewScroll();
+            //this.listViewScroll();
 
             //设置定时任务
             /*FixedTimeTaskModule.setTaskAtFixedTime_day();
@@ -100,6 +100,10 @@ namespace Hegang.APP
             listViewScroll();
         }
 
-
+        private void listView_ScrollChanged(object sender, System.Windows.Controls.ScrollChangedEventArgs e)
+        {
+            /*if (this.listView.Items.Count != 0)
+                this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);*/
+        }
     }
 }
