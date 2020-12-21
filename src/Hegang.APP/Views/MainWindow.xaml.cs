@@ -23,6 +23,8 @@ namespace Hegang.APP
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
 
+            this.listViewScroll();
+
             //设置定时任务
             /*FixedTimeTaskModule.setTaskAtFixedTime_day();
             FixedTimeTaskModule.setTaskAtFixedTime_hour();
@@ -70,5 +72,34 @@ namespace Hegang.APP
             dataBaseConfig.Owner = this;
             dataBaseConfig.ShowDialog();
         }
+
+        public void listViewScroll(){
+            DateTime now = DateTime.Now;
+            //设置任务启动时间  
+            double hour = Convert.ToDouble(DateTime.Now.Hour);
+            double minute = Convert.ToDouble(DateTime.Now.Minute);
+            double second = Convert.ToDouble(DateTime.Now.Second);
+            double millSecond= Convert.ToDouble(DateTime.Now.Millisecond+250);
+
+
+
+            DateTime startTime = DateTime.Today.AddHours(hour).AddMinutes(minute).AddSeconds(second).AddMilliseconds(millSecond);
+
+            int delay = (int)((startTime - now).TotalMilliseconds);
+            var t = new System.Threading.Timer(handle_event);
+            //设置线程参数 任务delay毫秒后启动
+            t.Change(delay, Timeout.Infinite);
+        }
+
+        private void handle_event(object state)
+        {
+            // 执行任务
+            if(this.listView.Items.Count!=0)
+                this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);
+            // 再次设定任务执行时间
+            listViewScroll();
+        }
+
+
     }
 }

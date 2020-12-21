@@ -47,15 +47,9 @@ C:\Users\Administrator\Desktop\hegang-wpf\bin\Hegang.APP.exe.config
 C:\Users\Administrator\Desktop\hegang-wpf\bin\Hegang.APP.exe
 C:\Users\Administrator\Desktop\hegang-wpf\bin\Hegang.APP.pdb
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csprojAssemblyReference.cache
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\DataBaseConfig.g.cs
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\MainWindow.g.cs
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Tip.g.cs
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\App.g.cs
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP_MarkupCompile.cache
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP_MarkupCompile.lref
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\DataBaseConfig.baml
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\MainWindow.baml
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Tip.baml
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.g.resources
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.Properties.Resources.resources
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csproj.GenerateResource.cache
@@ -72,3 +66,11 @@ C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Tip.g.cs
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\DataBaseConfig.baml
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\MainWindow.baml
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Tip.baml
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\DataBaseConfig.g.cs
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\MainWindow.g.cs
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Tip.g.cs
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\test.g.cs
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\DataBaseConfig.baml
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\MainWindow.baml
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Tip.baml
+C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\test.baml

@@ -281,7 +281,7 @@
                 </Grid>
             </Grid>
             <GridSplitter Grid.Row="3" Height="7" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent"></GridSplitter>
-            <TextBox Grid.Row="4" Margin="10,0,10,5"></TextBox>
+            <TextBox Grid.Row="4" Margin="10,0,10,5" Text="{Binding ConsoleText}"></TextBox>
             <!-- 
                 不执行 #4C8DAE #177CB0 #065279
                 执行 #F36838 

@@ -35,6 +35,7 @@ namespace Hegang.APP.ViewModels
         private bool btn_stop_isEnabled;
         private string colorBar_text;
         private string colorBar_color;
+        private string consoleText;
         #endregion
 
         #region 命令属性
@@ -45,12 +46,15 @@ namespace Hegang.APP.ViewModels
 
         public MainWindowViewModel()
         {
+            this.ConsoleText = "";
             da = new KEPWareDataAdapter();
+            this.ConsoleText += "KEPWareDataAdapter对象已完成初始化。\n";
             this.ListViewItemList = new ObservableCollection<ListViewItem>();
             timeJudgeItemList = new TimeJudgeItemList();
             dataSaveModule = new DataSaveService();
             this.ColorBar_color = "#065279";
             this.ColorBar_text = "就绪";
+            dic = new Dictionary<string, string>();
 
             this.Btn_connect_isEnabled = true;
             this.Btn_read_isEnabled = false;
@@ -156,10 +160,21 @@ namespace Hegang.APP.ViewModels
             }
         }
 
+        public string ConsoleText
+        {
+            get { return consoleText; }
+            set
+            {
+                consoleText = value;
+                this.OnPropertyChanged("ConsoleText");
+            }
+        }
+
         private void ConnectCommandExecute(object parameter)
         {
             this.Btn_connect_isEnabled = false;
             object serverList = da.GetLocalServer();
+            this.ConsoleText += "本地OPC服务器获取完成。\n";
             List<String> tmpList = new List<string>();
             foreach (string turn in (Array)serverList)
             {
@@ -168,6 +183,7 @@ namespace Hegang.APP.ViewModels
             this.ServerListToString = tmpList;
 
             da.InitialConnection(this.selectedServer);
+            this.ConsoleText += "已连接本地OPC服务器。\n";
 
             this.Tree = get_tree(da.GetPLCDevices());
             this.Btn_read_isEnabled = true;
@@ -176,29 +192,37 @@ namespace Hegang.APP.ViewModels
 
         private void ReadCommandExecute(object parameter)
         {
+            this.ColorBar_color = "#9C5333";
+            this.ColorBar_text = "监测服务已启动";
+            
             this.Btn_read_isEnabled = false;
-            channel_device_list = new List<string>();
-
-            foreach (Node parent_node in this.tree)
-            {
-                if (parent_node.IsChecked == true)
-                {
-                    foreach (Node child_node in parent_node.ChildList)
-                    {
-                        if (child_node.IsChecked == true)
-                            channel_device_list.Add(parent_node.NodeName + "." + child_node.NodeName);
-                    }
-                }
-            }
 
             if (null == da.MyGroups)
+            {
+                this.initialDic();
+                this.ConsoleText += "PLC点表初始化完成。\n";
+
+                channel_device_list = new List<string>();
+
+                foreach (Node parent_node in this.tree)
+                {
+                    if (parent_node.IsChecked == true)
+                    {
+                        foreach (Node child_node in parent_node.ChildList)
+                        {
+                            if (child_node.IsChecked == true)
+                                channel_device_list.Add(parent_node.NodeName + "." + child_node.NodeName);
+                        }
+                    }
+                }
                 da.CreateGroup(channel_device_list);
+            }
 
             for (int i = 0; i < channel_device_list.Count; i++)
             {
                 da.MyGroups[i].DataChange += new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
             }
-
+            this.ConsoleText += "开始读取数据。\n";
             this.Btn_stop_isEnabled = true;
 
             // 新建一个线程，保证加载PLC过程中窗体不会假死。
@@ -214,17 +238,17 @@ namespace Hegang.APP.ViewModels
             {
                 IsBackground = true
             }.Start();*/
-
-            this.ColorBar_color = "#9C5333";
-            this.ColorBar_text = "监测服务已启动";
         }
 
         private void StopCommandExecute(object parameter)
         {
+            this.Btn_stop_isEnabled = true;
             for (int i = 0; i < channel_device_list.Count; i++)
             {
                 da.MyGroups[i].DataChange -= new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
             }
+            this.ConsoleText += "数据数据读取已停止。\n";
+            this.Btn_read_isEnabled = true;
         }
 
         /// <summary>
@@ -329,7 +353,7 @@ namespace Hegang.APP.ViewModels
             #region 数据展示
             for (int i = 1; i <= NumItems; i++)
             {
-                if (this.ListViewItemList.Count >= 10)
+                if (this.ListViewItemList.Count >= 100)
                 {
                     //Console.WriteLine("Hello world!");
                     this.ListViewItemList.RemoveAt(0);
