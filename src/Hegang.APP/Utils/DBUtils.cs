@@ -12,6 +12,7 @@ namespace Hegang.APP
 {
     class DBUtils
     {
+        // 静态变量在类被第一次使用时，就存在于内存当中,直到它所在类的程序运行结束时才消亡；
         private static string server;
         private static string port;
         private static string user;
@@ -19,20 +20,21 @@ namespace Hegang.APP
         private static string database;
 
         /// <summary>
-        /// 静态构造函数，只在初始化时执行一次
+        /// 静态构造函数，只在初始化时执行一次，保证只读取一次xml文件
         /// </summary>
         static DBUtils()
         {
+            Console.WriteLine("解析数据库配置文件。");
             getDBConfig();
         }
 
         /// <summary>
-        /// 获取数据库配置信息
+        /// 解析xml文件，获取数据库配置信息
         /// </summary>
         private static void getDBConfig()
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(get_db_config_path());
+            doc.Load(@"../conf/db_config.xml");
 
             XmlElement element = (XmlElement)doc.SelectSingleNode("property/server");
             server = element.GetAttribute("value");

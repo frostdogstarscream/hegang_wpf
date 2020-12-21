@@ -91,20 +91,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataSaveModule.cs" />
-    <Compile Include="DBUtils.cs" />
-    <Compile Include="FixedTimeTaskModule.cs" />
-    <Compile Include="TimeJudgeItem.cs" />
-    <Compile Include="TimeJudgeItemList.cs" />
-    <Compile Include="Tip.xaml.cs">
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Services\DataSaveService.cs" />
+    <Compile Include="Utils\DBUtils.cs" />
+    <Compile Include="Services\FixedTimeTaskService.cs" />
+    <Compile Include="Models\TimeJudgeItem.cs" />
+    <Compile Include="Models\TimeJudgeItemList.cs" />
+    <Compile Include="Views\Tip.xaml.cs">
       <DependentUpon>Tip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CSVUtils.cs" />
-    <Page Include="DataBaseConfig.xaml">
+    <Compile Include="Utils\CSVUtils.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\NotificationObject.cs" />
+    <Compile Include="ViewModels\TestModel.cs" />
+    <Compile Include="Views\test.xaml.cs">
+      <DependentUpon>test.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\DataBaseConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -112,25 +119,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataBaseConfig.xaml.cs">
+    <Compile Include="Views\DataBaseConfig.xaml.cs">
       <DependentUpon>DataBaseConfig.xaml</DependentUpon>
     </Compile>
-    <Compile Include="KEPWareDataAdapter.cs" />
-    <Compile Include="ListViewItem.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Models\KEPWareDataAdapter.cs" />
+    <Compile Include="Models\ListViewItem.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Tip.xaml">
+    <Page Include="Views\Tip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Node.cs" />
-    <Compile Include="PLCDataList.cs" />
-    <Compile Include="PLCDataPack.cs" />
-    <Compile Include="PLCItem.cs" />
+    <Compile Include="Models\Node.cs" />
+    <Compile Include="Models\PLCDataList.cs" />
+    <Compile Include="Models\PLCDataPack.cs" />
+    <Compile Include="Models\PLCItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -175,9 +186,6 @@
     <Resource Include="images\time.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\miximize.png" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\App.xaml
-3395831088
+41545459162
 
-19-2140537923
+24-506988933
 15-1426370849
-DataBaseConfig.xaml;MainWindow.xaml;Tip.xaml;
+Views\DataBaseConfig.xaml;Views\MainWindow.xaml;Views\Tip.xaml;Views\test.xaml;
 
 False
 

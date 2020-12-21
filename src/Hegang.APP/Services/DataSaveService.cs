@@ -7,12 +7,33 @@ using System.Threading.Tasks;
 
 namespace Hegang.APP
 {
-    class DataSaveModule
+    class DataSaveService
     {
-        public static void savePLCData(ref Dictionary<string,string> dic,ref TimeJudgeItemList timeJudgeItemList, ref string[] gs_tmpBuf)
-        {
-            MySqlConnection conn = DBUtils.getDBConnection();
+        private string save_mwd;
+        private string save_fwd;
+        private string save_mzd;
+        private string save_fzd;
+        private string save_mzzyl;
+        private string save_fzzyl;
+        private MySqlConnection conn;
 
+        public DataSaveService()
+        {
+            conn = DBUtils.getDBConnection();
+        }
+
+        public void setSql(Dictionary<string, string> dic)
+        {
+            this.save_mwd = string.Format("INSERT INTO `mwd` (`wd1`,`wd2`,`wd3`,`wd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["主井测试.S7200Smart.温度1"], dic["主井测试.S7200Smart.温度2"], dic["主井测试.S7200Smart.温度3"], dic["主井测试.S7200Smart.温度4"], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            this.save_fwd = string.Format("INSERT INTO `fwd` (`wd1`,`wd2`,`wd3`,`wd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["副井测试.S7200Smart.温度1"], dic["副井测试.S7200Smart.温度2"], dic["副井测试.S7200Smart.温度3"], dic["副井测试.S7200Smart.温度4"], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            this.save_mzd = string.Format("INSERT INTO `mzd` (`zd1`,`zd2`,`zd3`,`zd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["主井测试.S7200Smart.振动1"], dic["主井测试.S7200Smart.振动2"], dic["主井测试.S7200Smart.振动3"], dic["主井测试.S7200Smart.振动4"], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            this.save_fzd = string.Format("INSERT INTO `fzd` (`zd1`,`zd2`,`zd3`,`zd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["副井测试.S7200Smart.振动1"], dic["副井测试.S7200Smart.振动2"], dic["副井测试.S7200Smart.振动3"], dic["副井测试.S7200Smart.振动4"], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            this.save_mzzyl = string.Format("INSERT INTO mzzyl (yl,timestamp) VALUES('{0}','{1}')", dic["主井测试.主提升电控.油压"], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            this.save_fzzyl = string.Format("INSERT INTO fzzyl (yl,timestamp) VALUES('{0}','{1}')", dic["副井测试.副提升电控.油压"], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        }
+
+        public void savePLCData(ref Dictionary<string,string> dic,ref TimeJudgeItemList timeJudgeItemList, ref string[] gs_tmpBuf)
+        {
             // 保存主井提升机状态信息
             save_mtsjzt_live(conn, ref dic);
             // 保存副井提升机状态信息
@@ -34,123 +55,24 @@ namespace Hegang.APP
 
             // 保存主井温度信息
             if (timeJudgeItemList.MList[2].Flag)
-                save_mwd(conn, dic);
+                save_data(conn, this.save_mwd);
             // 保存副井温度信息
             if (timeJudgeItemList.FList[2].Flag)
-                save_fwd(conn, dic);
+                save_data(conn, this.save_fwd); 
 
             // 保存主井振动信息
             if (timeJudgeItemList.MList[3].Flag)
-                save_mzd(conn, dic);
+                save_data(conn, this.save_mzd);
             // 保存副井振动信息
             if (timeJudgeItemList.FList[3].Flag)
-                save_fzd(conn, dic);
+                save_data(conn, this.save_fzd);
 
             // 保存主井油压信息
             if (timeJudgeItemList.MList[4].Flag)
-                save_mzzyl(conn, dic);
+                save_data(conn, this.save_mzzyl);
             // 保存副井油压信息
             if (timeJudgeItemList.FList[4].Flag)
-                save_fzzyl(conn, dic);
-
-        }
-
-        /// <summary>
-        /// 保存主井温度
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="dic"></param>
-        public static void save_mwd(MySqlConnection conn,Dictionary<string,string> dic)
-        {
-            conn.Open();
-            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            string str = string.Format("INSERT INTO `mwd` (`wd1`,`wd2`,`wd3`,`wd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["主井测试.S7200Smart.温度1"], dic["主井测试.S7200Smart.温度2"], dic["主井测试.S7200Smart.温度3"], dic["主井测试.S7200Smart.温度4"], time);
-            MySqlCommand cmd = new MySqlCommand(str, conn);
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
-        }
-
-        /// <summary>
-        /// 保存副井温度
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="dic"></param>
-        public static void save_fwd(MySqlConnection conn, Dictionary<string, string> dic)
-        {
-            conn.Open();
-            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            string str = string.Format("INSERT INTO `fwd` (`wd1`,`wd2`,`wd3`,`wd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["副井测试.S7200Smart.温度1"], dic["副井测试.S7200Smart.温度2"], dic["副井测试.S7200Smart.温度3"], dic["副井测试.S7200Smart.温度4"], time);
-            MySqlCommand cmd = new MySqlCommand(str, conn);
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
-        }
-
-        /// <summary>
-        /// 保存主井振动
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="dic"></param>
-        public static void save_mzd(MySqlConnection conn, Dictionary<string, string> dic)
-        {
-            conn.Open();
-            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            string str = string.Format("INSERT INTO `mzd` (`zd1`,`zd2`,`zd3`,`zd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["主井测试.S7200Smart.振动1"], dic["主井测试.S7200Smart.振动2"], dic["主井测试.S7200Smart.振动3"], dic["主井测试.S7200Smart.振动4"], time);
-            MySqlCommand cmd = new MySqlCommand(str, conn);
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
-        }
-
-        /// <summary>
-        /// 保存副井振动
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="dic"></param>
-        public static void save_fzd(MySqlConnection conn, Dictionary<string, string> dic)
-        {
-            conn.Open();
-            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            string str = string.Format("INSERT INTO `fzd` (`zd1`,`zd2`,`zd3`,`zd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')", dic["副井测试.S7200Smart.振动1"], dic["副井测试.S7200Smart.振动2"], dic["副井测试.S7200Smart.振动3"], dic["副井测试.S7200Smart.振动4"], time);
-            MySqlCommand cmd = new MySqlCommand(str, conn);
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
-        }
-
-        /// <summary>
-        /// 保存主井油压
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="dic"></param>
-        private static void save_mzzyl(MySqlConnection conn, Dictionary<string, string> dic)
-        {
-            conn.Open();
-            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string sqlStr = string.Format("INSERT INTO mzzyl (yl,timestamp) VALUES('{0}','{1}')", dic["主井测试.主提升电控.油压"], time);
-            MySqlCommand mycmd = new MySqlCommand(sqlStr, conn);
-            mycmd.ExecuteNonQuery();
-            conn.Close();
-        }
-
-        /// <summary>
-        /// 保存副井油压
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="dic"></param>
-        private static void save_fzzyl(MySqlConnection conn, Dictionary<string, string> dic)
-        {
-            conn.Open();
-            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string sqlStr = string.Format("INSERT INTO fzzyl (yl,timestamp) VALUES('{0}','{1}')", dic["副井测试.副提升电控.油压"], time);
-            MySqlCommand mycmd = new MySqlCommand(sqlStr, conn);
-            mycmd.ExecuteNonQuery();
-            conn.Close();
+                save_data(conn, this.save_fzzyl);
         }
 
         /// <summary>
@@ -158,7 +80,7 @@ namespace Hegang.APP
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="dic"></param>
-        private static void save_mtsjzt_live(MySqlConnection conn, ref Dictionary<string, string> dic)
+        private void save_mtsjzt_live(MySqlConnection conn, ref Dictionary<string, string> dic)
         {
             // 主井提升机的状态位：TM,YS,JX,JJKC,XZ,GZ,RWTZ,状态位变化标记
             int[] m_flags = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -208,16 +130,12 @@ namespace Hegang.APP
             if (m_flags[7] == 1)
             {
                 // 存入数据表 `mtsjzt_live`
-                conn.Open();
-                string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string str = string.Format("" +
                 "INSERT INTO " +
                     "`mtsjzt_live` (TM,YS,JX,JJKC,XZ,GZ,RWTZ,TimeStamp) " +
                 "VALUES ( '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');",
-                m_flags[0], m_flags[1], m_flags[2], m_flags[3], m_flags[4], m_flags[5], m_flags[6], time);
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                m_flags[0], m_flags[1], m_flags[2], m_flags[3], m_flags[4], m_flags[5], m_flags[6], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                save_data(conn, str);
 
                 // 清空数据
                 dic["主井测试.主提升电控.开车信号"] = "0";
@@ -236,7 +154,7 @@ namespace Hegang.APP
         /// <param name="conn"></param>
         /// <param name="dataBean"></param>
         /// <returns></returns>
-        private static void save_ftsjzt_live(MySqlConnection conn, ref Dictionary<string, string> dic)
+        private void save_ftsjzt_live(MySqlConnection conn, ref Dictionary<string, string> dic)
         {
             // 副井提升机的状态位： TR,TW,JX,JJKC,XZ,GZ,RWTZ,状态位变化标记
             int[] f_flags = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -286,16 +204,12 @@ namespace Hegang.APP
             if (f_flags[7] == 1)
             {
                 // 存入数据表 `ftsjzt_live`
-                conn.Open();
-                string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string str = string.Format("" +
                 "INSERT INTO " +
                     "`ftsjzt_live` (TR,TW,JX,JJKC,XZ,GZ,RWTZ,TimeStamp) " +
                 "VALUES ( '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');",
-                f_flags[0], f_flags[1], f_flags[2], f_flags[3], f_flags[4], f_flags[5], f_flags[6], time);
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                f_flags[0], f_flags[1], f_flags[2], f_flags[3], f_flags[4], f_flags[5], f_flags[6], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                this.save_data(conn, str);
 
                 // 清空数据
                 dic["副井测试.副提升电控.提人方式"] = "0";
@@ -313,7 +227,7 @@ namespace Hegang.APP
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="dataBean"></param>
-        private static void save_ftsjsggy_live(MySqlConnection conn, Dictionary<string, string> dic)
+        private void save_ftsjsggy_live(MySqlConnection conn, Dictionary<string, string> dic)
         {
             conn.Open();
             string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -355,7 +269,7 @@ namespace Hegang.APP
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="dataBean"></param>
-        private static void save_mtsjsggy_live(MySqlConnection conn, Dictionary<string, string> dic)
+        private void save_mtsjsggy_live(MySqlConnection conn, Dictionary<string, string> dic)
         {
             conn.Open();
             string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -399,17 +313,14 @@ namespace Hegang.APP
         /// <param name="dic"></param>
         /// <param name="gs_tmpBuf"></param>
         /// <returns></returns>
-        public static void save_mtsjgd_live_s(MySqlConnection conn, Dictionary<string, string> dic, ref string[] gs_tmpBuf)
+        public void save_mtsjgd_live_s(MySqlConnection conn, Dictionary<string, string> dic, ref string[] gs_tmpBuf)
         {
             if (gs_tmpBuf[0] != "-1")
             {
-                conn.Open();
                 string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string GS = (int.Parse(dic["主井测试.主提升电控.勾数"]) - int.Parse(gs_tmpBuf[0])).ToString();
                 String str = string.Format("INSERT INTO `mtsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", GS, dic["主井测试.S7200Smart.电度"], time);
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                this.save_data(conn,str);
             }
             gs_tmpBuf[0] = dic["主井测试.主提升电控.勾数"];
         }
@@ -421,17 +332,14 @@ namespace Hegang.APP
         /// <param name="dic"></param>
         /// <param name="gs_tmpBuf"></param>
         /// <returns></returns>
-        private static void save_ftsjgd_live_s(MySqlConnection conn, Dictionary<string, string> dic, ref string[] gs_tmpBuf)
+        private void save_ftsjgd_live_s(MySqlConnection conn, Dictionary<string, string> dic, ref string[] gs_tmpBuf)
         {
             if (gs_tmpBuf[1] != "-1")
             {
-                conn.Open();
                 string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string GS = (int.Parse(dic["副井测试.副提升电控.勾数"]) - int.Parse(gs_tmpBuf[1])).ToString();
                 String str = string.Format("INSERT INTO `ftsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", GS, dic["副井测试.S7200Smart.电度"], time);
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                this.save_data(conn, str);
             }
             gs_tmpBuf[1] = dic["副井测试.副提升电控.勾数"];
         }
@@ -441,14 +349,17 @@ namespace Hegang.APP
         /// </summary>
         /// <param name="deviceName">设备名称</param>
         /// <param name="ItemName">PLC数据点名称</param>
-        public static void save_gz(string deviceName, string ItemName)
+        public void save_gz(string deviceName, string ItemName)
         {
-            MySqlConnection conn = DBUtils.getDBConnection();
-            conn.Open();
             string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string sqlStr = string.Format("INSERT INTO gz (channel,gzname,timestamp) VALUES('{0}','{1}','{2}')", deviceName, ItemName, time);
-            MySqlCommand mycmd = new MySqlCommand(sqlStr, conn);
-            mycmd.ExecuteNonQuery();
+            save_data(conn, sqlStr);
+        }
+
+        public void save_data(MySqlConnection conn,string sql){
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
             conn.Close();
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hegang.APP
 {
-    class FixedTimeTaskModule
+    class FixedTimeTaskService
     {
         /// <summary>
         /// 设置每天 00:00 对数据表 mtsjzt_live、ftsjzt_live、mtsjgd_live、ftsjgd_live 进行统计

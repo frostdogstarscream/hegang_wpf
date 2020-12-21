@@ -1,0 +1,36 @@
+﻿<Window x:Class="Hegang.APP.Views.test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hegang.APP.Views"
+        mc:Ignorable="d"
+        Title="test" Height="400" Width="500">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="col0"/>
+            <Grid Grid.Column="1" x:Name="col1"/>
+            <Grid Grid.Column="2" x:Name="col2"/>
+            <Grid Grid.Column="3" x:Name="col3"/>
+        </Grid>
+        <ListView Height="300" ItemsSource="{Binding ListViewItems, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn  Header="测点名称" DisplayMemberBinding="{Binding Path = Item_name}" Width="{Binding ElementName=col0,Path=ActualWidth}"/>
+                        <GridViewColumn  Header="测点值" DisplayMemberBinding="{Binding Path = Item_value}" Width="{Binding ElementName=col1,Path=ActualWidth}"/>
+                        <GridViewColumn  Header="测点句柄" DisplayMemberBinding="{Binding Path = Item_handle}" Width="{Binding ElementName=col2,Path=ActualWidth}"/>
+                        <GridViewColumn  Header="时间戳" DisplayMemberBinding="{Binding Path = Item_timestamp}" Width="{Binding ElementName=col3,Path=ActualWidth}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button HorizontalAlignment="Center" Width="200" Height="25" Margin="0,10,0,0" Command="{Binding ModifyCommand}">更改</Button>
+    </StackPanel>
+</Window>
