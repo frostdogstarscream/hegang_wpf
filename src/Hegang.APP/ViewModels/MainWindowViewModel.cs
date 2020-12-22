@@ -353,7 +353,7 @@ namespace Hegang.APP.ViewModels
             #region 数据展示
             for (int i = 1; i <= NumItems; i++)
             {
-                if (this.ListViewItemList.Count >= 10000)
+                if (this.ListViewItemList.Count >= 100)
                 {
                     //Console.WriteLine("Hello world!");
                     this.ListViewItemList.RemoveAt(0);
