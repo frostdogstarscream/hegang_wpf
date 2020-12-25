@@ -15,7 +15,7 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Name="close_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click">
-                    <Image Source="./images/close.png" Width="20" Height="20"></Image>
+                    <Image Source="../images/close.png" Width="20" Height="20"></Image>
                 </Button>
             </StackPanel>
             <Grid DockPanel.Dock="Top" Margin="10,5,10,5">

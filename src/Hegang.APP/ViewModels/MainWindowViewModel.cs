@@ -1,4 +1,6 @@
 ﻿using Hegang.APP.Commands;
+using Hegang.APP.Models;
+using Hegang.APP.Services.DbService;
 using HFD.KEPWare;
 using OPCAutomation;
 using System;
@@ -14,10 +16,12 @@ namespace Hegang.APP.ViewModels
     class MainWindowViewModel : NotificationObject
     {
         private KEPWareDataAdapter da;
-        private Dictionary<string, string> dic;
+        private DbServiceInput input;
+        private DataSaveService dataSaveService;
         private List<string> channel_device_list;
         private TimeJudgeItemList timeJudgeItemList;
         private DataSaveService dataSaveModule;
+        private List<DbServiceObject> dbServiceObjects;
         /**
          * 用来寄存临时变量
          * 0--主井勾数
@@ -54,12 +58,13 @@ namespace Hegang.APP.ViewModels
             dataSaveModule = new DataSaveService();
             this.ColorBar_color = "#065279";
             this.ColorBar_text = "就绪";
-            dic = new Dictionary<string, string>();
+            dataSaveService = new DataSaveService();
 
             this.Btn_connect_isEnabled = true;
             this.Btn_read_isEnabled = false;
             this.Btn_stop_isEnabled = false;
 
+            #region 命令属性初始化
             this.ConnectCommand = new DelegateCommand();
             this.ConnectCommand.ExcuteAction = new Action<object>(this.ConnectCommandExecute);
 
@@ -68,6 +73,7 @@ namespace Hegang.APP.ViewModels
 
             this.StopCommand = new DelegateCommand();
             this.StopCommand.ExcuteAction = new Action<object>(this.StopCommandExecute);
+            #endregion
         }
 
         public List<string> ServerListToString
@@ -219,9 +225,8 @@ namespace Hegang.APP.ViewModels
             }
 
             for (int i = 0; i < channel_device_list.Count; i++)
-            {
                 da.MyGroups[i].DataChange += new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
-            }
+            
             this.ConsoleText += "开始读取数据。\n";
             this.Btn_stop_isEnabled = true;
 
@@ -243,10 +248,10 @@ namespace Hegang.APP.ViewModels
         private void StopCommandExecute(object parameter)
         {
             this.Btn_stop_isEnabled = true;
+
             for (int i = 0; i < channel_device_list.Count; i++)
-            {
                 da.MyGroups[i].DataChange -= new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
-            }
+            
             this.ConsoleText += "数据数据读取已停止。\n";
             this.Btn_read_isEnabled = true;
         }
@@ -284,17 +289,10 @@ namespace Hegang.APP.ViewModels
                 List<string> deviceList = channel_device_dic[key];
 
                 ObservableCollection<Node> device_node_col = new ObservableCollection<Node>();
+                
                 foreach (string device_name in deviceList)
-                {
                     device_node_col.Add(new Node(device_name, channel_node));
-                    //初始化dic
-                    /*List<string> itemList = CSVUtils.read_csv_file(device_name);
-                    foreach (string item in itemList)
-                    {
-                        string k = key + "." + device_name + "." + item;
-                        this.dic.Add(k, "0");
-                    }*/
-                }
+                
                 channel_node.ChildList = device_node_col;
                 tree.Add(channel_node);
             }
@@ -313,7 +311,7 @@ namespace Hegang.APP.ViewModels
                 {
                     List<string> itemList = CSVUtils.read_csv_file(device.NodeName);
                     foreach (string itemName in itemList)
-                        dic.Add(channel.NodeName+"."+ device.NodeName+"."+itemName, "0");
+                        input.Dic.Add(channel.NodeName+"."+ device.NodeName+"."+itemName, "0");
                 }
             }
         }
@@ -330,9 +328,12 @@ namespace Hegang.APP.ViewModels
         void GroupDataChange(int TransactionID, int NumItems, ref Array ClientHandles, ref Array ItemValues, ref Array Qualities, ref Array TimeStamps)
         {
             #region 初始化参数
+            ///////////////////////////////////////////////////////
             Array clientHandles = ClientHandles;
             Array itemValues = ItemValues;
-            /*  获取相应信息
+            ///////////////////////////////////////////////////////
+
+            /*  存储相应信息
             * time         时间戳
             * channel      通道名称
             * devicename   设备名称
@@ -354,16 +355,15 @@ namespace Hegang.APP.ViewModels
             for (int i = 1; i <= NumItems; i++)
             {
                 if (this.ListViewItemList.Count >= 100)
-                {
-                    //Console.WriteLine("Hello world!");
                     this.ListViewItemList.RemoveAt(0);
-                }
+
                 this.ListViewItemList.Add(new ListViewItem(channel[i - 1] + "." + device[i - 1] + "." + itemName[i - 1], itemValues.GetValue(i).ToString(), ((int)clientHandles.GetValue(i) - 1).ToString(), time));
             }
             //this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);
             #endregion
 
             #region 数据存储
+            //重置时间判断列表每一项的标志位
             timeJudgeItemList.resetFlags();
 
             for (int i = 0; i < NumItems; i++)
@@ -371,13 +371,14 @@ namespace Hegang.APP.ViewModels
                 set_data_to_dic(channel[i], device[i], itemName[i], itemValues.GetValue(i + 1).ToString());
                 // 将故障信息存入数据库
                 if (channel[i] == "故障测试" && itemValues.GetValue(i + 1).ToString() == "True")
-                    dataSaveModule.save_gz(device[i], itemName[i]);
+                    Gz.save(dataSaveService.O,device[i], itemName[i]);
             }
 
-            timeJudgeItemList.resetTimeList();
+            //将出故障外的PLC数据存储到数据库
+            dataSaveService.savePLCData(ref input, timeJudgeItemList);
 
-            dataSaveModule.setSql(dic);
-            dataSaveModule.savePLCData(ref dic, ref timeJudgeItemList, ref gs_tmpBuf);
+            //重置时间判断列表每一项的时间信息
+            timeJudgeItemList.resetTimeList();
             #endregion
         }
 
@@ -391,8 +392,8 @@ namespace Hegang.APP.ViewModels
         public void set_data_to_dic(string channel, string device, string itemName, string itemValue)
         {
             string key = channel + "." + device + "." + itemName;
-            if (dic.ContainsKey(key))
-                dic[key] = itemValue;
+            if (input.Dic.ContainsKey(key))
+                input.Dic[key] = itemValue;
         }
     }
 }

@@ -175,10 +175,22 @@
 
 
             <Border Grid.Row="0" Padding="0,3,0,3">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../images/menu.ico" Height="15"></Image>
-                    <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0" Name="btn_DBConfig" Click="btn_DBConfig_Click">数据库配置(D)</Button>
-                    <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0">帮助(H)</Button>
+                    <!--<Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0" Name="btn_DBConfig" Click="btn_DBConfig_Click">数据库配置(D)</Button>
+                    <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0">帮助(H)</Button>-->
+                    <Menu>
+                        <MenuItem Header="数据库选项(D)">
+                            <MenuItem Header="数据库配置"></MenuItem>
+                            <MenuItem Header="数据库备份"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="用户管理(U)">
+                            <MenuItem Header="添加用户"></MenuItem>
+                            <MenuItem Header="用户信息修改"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="视图(V)"></MenuItem>
+                        <MenuItem Header="帮助(H)"></MenuItem>
+                    </Menu>
                 </StackPanel>
             </Border>
 

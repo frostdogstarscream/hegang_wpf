@@ -17,7 +17,7 @@
             <DockPanel DockPanel.Dock="Top">
                 <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">提示</TextBlock>
                 <Button Name="close_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click" HorizontalAlignment="Right">
-                    <Image Source="./images/close.png" Width="20" Height="20"></Image>
+                    <Image Source="../images/close.png" Width="20" Height="20"></Image>
                 </Button>
             </DockPanel>
             

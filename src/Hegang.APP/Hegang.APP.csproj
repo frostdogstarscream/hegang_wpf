@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{22EFA109-56D1-4C1C-A540-C824F90CAE9C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Hegang.APP</RootNamespace>
     <AssemblyName>Hegang.APP</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -72,6 +72,7 @@
       <HintPath>..\..\lib\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,11 +93,31 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Models\DataBase\DbObject.cs" />
+    <Compile Include="Models\DataBase\impl\MySqlObject.cs" />
+    <Compile Include="Models\DbServiceInput.cs" />
     <Compile Include="Services\DataSaveService.cs" />
+    <Compile Include="Services\DbService\DbServiceObject.cs" />
+    <Compile Include="Services\DbService\Gz.cs" />
+    <Compile Include="Services\DbService\Impl\Ftsjgd_live.cs" />
+    <Compile Include="Services\DbService\Impl\Ftsjsggy_live.cs" />
+    <Compile Include="Services\DbService\Impl\Ftsjzt_live.cs" />
+    <Compile Include="Services\DbService\Impl\Fwd.cs" />
+    <Compile Include="Services\DbService\Impl\Fzd.cs" />
+    <Compile Include="Services\DbService\Impl\Fzzyl.cs" />
+    <Compile Include="Services\DbService\Impl\Mtsjgd_live.cs" />
+    <Compile Include="Services\DbService\Impl\Mtsjsggy_live.cs" />
+    <Compile Include="Services\DbService\Impl\Mtsjzt_live.cs" />
+    <Compile Include="Services\DbService\Impl\Mwd.cs" />
+    <Compile Include="Services\DbService\Impl\Mzd.cs" />
+    <Compile Include="Services\DbService\Impl\Mzzyl.cs" />
     <Compile Include="Utils\DBUtils.cs" />
     <Compile Include="Services\FixedTimeTaskService.cs" />
     <Compile Include="Models\TimeJudgeItem.cs" />
     <Compile Include="Models\TimeJudgeItemList.cs" />
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tip.xaml.cs">
       <DependentUpon>Tip.xaml</DependentUpon>
     </Compile>
@@ -108,6 +129,10 @@
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\DataBaseConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +233,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\user.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pwd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
