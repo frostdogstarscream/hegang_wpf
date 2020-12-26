@@ -21,13 +21,8 @@ namespace Hegang.APP.ViewModels
         private List<string> channel_device_list;
         private TimeJudgeItemList timeJudgeItemList;
         private DataSaveService dataSaveModule;
-        private List<DbServiceObject> dbServiceObjects;
-        /**
-         * 用来寄存临时变量
-         * 0--主井勾数
-         * 1--副井勾数
-         */
-        private string[] gs_tmpBuf = new string[2] { "-1", "-1" };
+        private FixedTimeTaskService fixedTimeTaskService;
+        
 
         #region 数据属性
         private List<string> serverListToString;
@@ -58,7 +53,13 @@ namespace Hegang.APP.ViewModels
             dataSaveModule = new DataSaveService();
             this.ColorBar_color = "#065279";
             this.ColorBar_text = "就绪";
+            input = new DbServiceInput();
             dataSaveService = new DataSaveService();
+            fixedTimeTaskService = new FixedTimeTaskService();
+
+            fixedTimeTaskService.setTaskAtZero();
+            fixedTimeTaskService.setTaskPerHour();
+            fixedTimeTaskService.setTaskPerMinute();
 
             this.Btn_connect_isEnabled = true;
             this.Btn_read_isEnabled = false;
@@ -374,11 +375,11 @@ namespace Hegang.APP.ViewModels
                     Gz.save(dataSaveService.O,device[i], itemName[i]);
             }
 
-            //将出故障外的PLC数据存储到数据库
-            dataSaveService.savePLCData(ref input, timeJudgeItemList);
-
             //重置时间判断列表每一项的时间信息
             timeJudgeItemList.resetTimeList();
+
+            //将出故障外的PLC数据存储到数据库
+            dataSaveService.savePLCData(ref input, timeJudgeItemList);
             #endregion
         }
 

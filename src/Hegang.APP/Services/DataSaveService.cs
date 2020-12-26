@@ -20,12 +20,13 @@ namespace Hegang.APP
         public DataSaveService()
         {
             string db_str = ConfigurationManager.AppSettings["DB"];
-            DbObject o = (DbObject)Assembly.Load("Hegang.APP").CreateInstance(db_str);
+            o = (DbObject)Assembly.Load("Hegang.APP").CreateInstance(db_str);
 
             list = new List<DbServiceObject>();
             for(int i = 0; i < 12; i++)
             {
-                string str = ConfigurationManager.AppSettings["Dbservice_" + i.ToString()];
+                string str = ConfigurationManager.AppSettings["DbService_" + i.ToString()];
+                Console.WriteLine(str);
                 list.Add((DbServiceObject)Assembly.Load("Hegang.APP").CreateInstance(str));
             }
         }
@@ -34,45 +35,51 @@ namespace Hegang.APP
 
         public void savePLCData(ref DbServiceInput input,TimeJudgeItemList timeJudgeItemList)
         {
+            if (null == o)
+                Console.WriteLine("o为null");
+            if (null == input)
+                Console.WriteLine("input为null");
+            if (null == list[8])
+                Console.WriteLine("list[8]为null");
             // 保存主井提升机状态信息
-            list[8].save(O, ref input);
+            list[8].save(o, ref input);
             // 保存副井提升机状态信息
-            list[2].save(O, ref input);
+            list[2].save(o, ref input);
 
             // 保存主井勾数和电度信息
             if (timeJudgeItemList.MList[0].Flag)
-                list[6].save(O, ref input);
+                list[6].save(o, ref input);
             // 保存副井勾数和电度信息
             if (timeJudgeItemList.FList[0].Flag)
-                list[0].save(O,ref input);
+                list[0].save(o,ref input);
 
             // 保存主井提升机的速度、高度、功率和功率因素信息
             if (timeJudgeItemList.MList[1].Flag)
-                list[7].save(O, ref input);
+                list[7].save(o, ref input);
             // 保存副井提升机的速度、高度、功率和功率因素信息
             if (timeJudgeItemList.FList[1].Flag)
-                list[1].save(O, ref input);
+                list[1].save(o, ref input);
 
             // 保存主井温度信息
             if (timeJudgeItemList.MList[2].Flag)
-                list[9].save(O, ref input);
+                list[9].save(o, ref input);
             // 保存副井温度信息
             if (timeJudgeItemList.FList[2].Flag)
-                list[3].save(O, ref input);
+                list[3].save(o, ref input);
 
             // 保存主井振动信息
             if (timeJudgeItemList.MList[3].Flag)
-                list[10].save(O, ref input);
+                list[10].save(o, ref input);
             // 保存副井振动信息
             if (timeJudgeItemList.FList[3].Flag)
-                list[4].save(O, ref input);
+                list[4].save(o, ref input);
 
             // 保存主井油压信息
             if (timeJudgeItemList.MList[4].Flag)
-                list[11].save(O, ref input);
+                list[11].save(o, ref input);
             // 保存副井油压信息
             if (timeJudgeItemList.FList[4].Flag)
-                list[5].save(O, ref input);
+                list[5].save(o, ref input);
         }
     }
 }

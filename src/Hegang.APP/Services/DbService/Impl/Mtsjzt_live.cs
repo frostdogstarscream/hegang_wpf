@@ -6,10 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hegang.APP.Services.DbService
+namespace Hegang.APP.Services.DbService.Impl
 {
     class Mtsjzt_live : DbServiceObject
     {
+        public Mtsjzt_live()
+        {
+            Console.WriteLine("Mtsjzt_live构造函数已调用");
+        }
         public void save(DbObject o,ref DbServiceInput input)
         {
             // 主井提升机的状态位：TM,YS,JX,JJKC,XZ,GZ,RWTZ,状态位变化标记
