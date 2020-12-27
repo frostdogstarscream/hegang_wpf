@@ -19,7 +19,6 @@ namespace Hegang.APP.Models.DataBase.impl
 
         public MySqlObject()
         {
-            Console.WriteLine("MySqlObject构造函数已调用");
             getDBConfig();
         }
 

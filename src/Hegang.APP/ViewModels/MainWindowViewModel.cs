@@ -15,14 +15,14 @@ namespace Hegang.APP.ViewModels
 {
     class MainWindowViewModel : NotificationObject
     {
+        #region 普通私有成员变量
         private KEPWareDataAdapter da;
         private DbServiceInput input;
         private DataSaveService dataSaveService;
         private List<string> channel_device_list;
         private TimeJudgeItemList timeJudgeItemList;
-        private DataSaveService dataSaveModule;
         private FixedTimeTaskService fixedTimeTaskService;
-        
+        #endregion
 
         #region 数据属性
         private List<string> serverListToString;
@@ -45,25 +45,12 @@ namespace Hegang.APP.ViewModels
 
         public MainWindowViewModel()
         {
+            #region 数据属性初始化
             this.ConsoleText = "";
-            da = new KEPWareDataAdapter();
-            this.ConsoleText += "KEPWareDataAdapter对象已完成初始化。\n";
             this.ListViewItemList = new ObservableCollection<ListViewItem>();
-            timeJudgeItemList = new TimeJudgeItemList();
-            dataSaveModule = new DataSaveService();
             this.ColorBar_color = "#065279";
             this.ColorBar_text = "就绪";
-            input = new DbServiceInput();
-            dataSaveService = new DataSaveService();
-            fixedTimeTaskService = new FixedTimeTaskService();
-
-            fixedTimeTaskService.setTaskAtZero();
-            fixedTimeTaskService.setTaskPerHour();
-            fixedTimeTaskService.setTaskPerMinute();
-
-            this.Btn_connect_isEnabled = true;
-            this.Btn_read_isEnabled = false;
-            this.Btn_stop_isEnabled = false;
+            #endregion
 
             #region 命令属性初始化
             this.ConnectCommand = new DelegateCommand();
@@ -74,6 +61,27 @@ namespace Hegang.APP.ViewModels
 
             this.StopCommand = new DelegateCommand();
             this.StopCommand.ExcuteAction = new Action<object>(this.StopCommandExecute);
+            #endregion
+
+            #region 普通私用成员变量初始化
+            da = new KEPWareDataAdapter();
+            this.ConsoleText += "KEPWareDataAdapter对象已完成初始化。\n";
+            timeJudgeItemList = new TimeJudgeItemList();
+            input = new DbServiceInput();
+            dataSaveService = new DataSaveService();
+            fixedTimeTaskService = new FixedTimeTaskService();
+            #endregion
+
+            #region 按钮初始化
+            this.Btn_connect_isEnabled = true;
+            this.Btn_read_isEnabled = false;
+            this.Btn_stop_isEnabled = false;
+            #endregion
+
+            #region 设置定时任务
+            fixedTimeTaskService.setTaskAtZero();
+            fixedTimeTaskService.setTaskPerHour();
+            fixedTimeTaskService.setTaskPerMinute();
             #endregion
         }
 
@@ -227,19 +235,18 @@ namespace Hegang.APP.ViewModels
 
             for (int i = 0; i < channel_device_list.Count; i++)
                 da.MyGroups[i].DataChange += new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
-            
+
             this.ConsoleText += "开始读取数据。\n";
             this.Btn_stop_isEnabled = true;
 
             // 新建一个线程，保证加载PLC过程中窗体不会假死。
-            /*new Thread(o => {
+            /*new Thread(o =>
+            {
                 if (null == da.MyGroups)
                     da.CreateGroup(channel_device_list);
 
                 for (int i = 0; i < channel_device_list.Count; i++)
-                {
                     da.MyGroups[i].DataChange += new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
-                }
             })
             {
                 IsBackground = true

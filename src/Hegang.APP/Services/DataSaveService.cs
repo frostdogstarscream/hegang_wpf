@@ -16,6 +16,7 @@ namespace Hegang.APP
     {
         private List<DbServiceObject> list;
         private DbObject o;
+        
 
         public DataSaveService()
         {
@@ -26,15 +27,28 @@ namespace Hegang.APP
             for(int i = 0; i < 12; i++)
             {
                 string str = ConfigurationManager.AppSettings["DbService_" + i.ToString()];
-                Console.WriteLine(str);
                 list.Add((DbServiceObject)Assembly.Load("Hegang.APP").CreateInstance(str));
             }
         }
 
         internal DbObject O { get => o; set => o = value; }
 
+        private void resetZd_flag(ref DbServiceInput input)
+        {
+            if ("True" == input.Dic["主井测试.主提升电控.开车条件"])
+                input.Zd_flag[0] = true;
+            if ("False" == input.Dic["主井测试.主提升电控.开车条件"])
+                input.Zd_flag[0] = false;
+            if ("True" == input.Dic["副井测试.副提升电控.开车条件"])
+                input.Zd_flag[1] = true;
+            if ("False" == input.Dic["副井测试.副提升电控.开车条件"])
+                input.Zd_flag[1] = false;
+        }
+
         public void savePLCData(ref DbServiceInput input,TimeJudgeItemList timeJudgeItemList)
         {
+            resetZd_flag(ref input);
+            
             if (null == o)
                 Console.WriteLine("o为null");
             if (null == input)

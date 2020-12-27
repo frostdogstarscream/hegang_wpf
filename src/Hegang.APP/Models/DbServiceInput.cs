@@ -10,6 +10,11 @@ namespace Hegang.APP.Models
     {
         Dictionary<string, string> dic;
         private string[] gs_tmpBuf;
+        /**
+         * 1--主井是否开车
+         * 2--副井是否开车
+         */
+        private bool[] zd_flag = new bool[2];
 
         public DbServiceInput()
         {
@@ -24,5 +29,6 @@ namespace Hegang.APP.Models
         
         public Dictionary<string, string> Dic { get => dic; set => dic = value; }
         public string[] Gs_tmpBuf { get => gs_tmpBuf; set => gs_tmpBuf = value; }
+        public bool[] Zd_flag { get => zd_flag; set => zd_flag = value; }
     }
 }

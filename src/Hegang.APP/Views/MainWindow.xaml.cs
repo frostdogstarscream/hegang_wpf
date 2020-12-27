@@ -23,6 +23,10 @@ namespace Hegang.APP
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
 
+            
+                
+
+
             //this.listViewScroll();
 
             //设置定时任务

@@ -174,7 +174,7 @@ namespace Hegang.APP
         /// <summary>
         /// 每天统计主井的勾数
         /// </summary>
-        public void task2()
+        private void task2()
         {
             string str1 = "SELECT SUM(GS) FROM mtsjgd_live";
             DataTable dt=o.GetDataTable(str1);
@@ -196,7 +196,7 @@ namespace Hegang.APP
         /// <summary>
         /// 每天统计副井的勾数
         /// </summary>
-        public void task3()
+        private void task3()
         {
             string str1 = "SELECT SUM(GS) FROM ftsjgd_live";
             DataTable dt = o.GetDataTable(str1);
@@ -218,7 +218,7 @@ namespace Hegang.APP
         /// <summary>
         /// 每小时统计副井每个传感器的平均温度
         /// </summary>
-        public void task4()
+        private void task4()
         {
             string str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM fwd;";
             DataTable dt=o.GetDataTable(str);
@@ -235,7 +235,7 @@ namespace Hegang.APP
         /// <summary>
         /// 每小时统计主井每个传感器的平均温度
         /// </summary>
-        public void task5()
+        private void task5()
         {
             string str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM mwd;";
             DataTable dt = o.GetDataTable(str);
@@ -253,7 +253,7 @@ namespace Hegang.APP
         /// <summary>
         /// 每小时统计主井的平均残压和平均正常压力
         /// </summary>
-        public void task6()
+        private void task6()
         {
             string str = "SELECT AVG(yl) FROM mzzyl WHERE yl < 1;";
             DataTable dt = o.GetDataTable(str);
@@ -279,7 +279,7 @@ namespace Hegang.APP
         /// <summary>
         /// 每小时统计副井的平均残压和平均正常压力
         /// </summary>
-        public void task7()
+        private void task7()
         {
             string str = "SELECT AVG(yl) FROM fzzyl WHERE yl < 1;";
             DataTable dt = o.GetDataTable(str);
@@ -306,7 +306,7 @@ namespace Hegang.APP
         /// <summary>
         /// 统计主井振动
         /// </summary>
-        public void task8()
+        private void task8()
         {
             string str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM mzd;";
             DataTable dt=o.GetDataTable(str);
@@ -322,7 +322,7 @@ namespace Hegang.APP
         /// <summary>
         /// 统计副井振动
         /// </summary>
-        public void task9()
+        private void task9()
         {
             string str = "SELECT AVG(zd1),AVG(zd2),AVG(zd3),AVG(zd4) FROM fzd;";
             DataTable dt = o.GetDataTable(str);
@@ -339,7 +339,7 @@ namespace Hegang.APP
         /// <summary>
         /// 预测副井温度
         /// </summary>
-        public void task10()
+        private void task10()
         {
             string str = "SELECT COUNT(id) FROM fwd;";
             DataTable dt = o.GetDataTable(str);
@@ -365,7 +365,7 @@ namespace Hegang.APP
         /// <summary>
         /// 预测主井温度
         /// </summary>
-        public void task11()
+        private void task11()
         {
             string str = "SELECT COUNT(id) FROM mwd;";
             DataTable dt = o.GetDataTable(str);
@@ -391,7 +391,7 @@ namespace Hegang.APP
         /// <summary>
         /// 预测副井振动
         /// </summary>
-        public void task12()
+        private void task12()
         {
             string str = "SELECT COUNT(id) FROM fzd;";
             DataTable dt = o.GetDataTable(str);
@@ -417,7 +417,7 @@ namespace Hegang.APP
         /// <summary>
         /// 预测主井振动
         /// </summary>
-        public void task13()
+        private void task13()
         {
             #region 利用java代码预测
             /*Dictionary<string, string> dic = new Dictionary<string, string>();

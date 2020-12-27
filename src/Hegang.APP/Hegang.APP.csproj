@@ -148,7 +148,7 @@
       <DependentUpon>DataBaseConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\KEPWareDataAdapter.cs" />
-    <Compile Include="Models\ListViewItem.cs" />
+    <Compile Include="ViewModels\ListViewItem.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -163,7 +163,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Node.cs" />
+    <Compile Include="ViewModels\Node.cs" />
     <Compile Include="Models\PLCDataList.cs" />
     <Compile Include="Models\PLCDataPack.cs" />
     <Compile Include="Models\PLCItem.cs" />
