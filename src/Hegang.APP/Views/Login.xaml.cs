@@ -25,10 +25,14 @@ namespace Hegang.APP.Views
     /// </summary>
     public partial class Login : Window
     {
+        private DbObject o;
         public Login()
         {
             InitializeComponent();
+            string db_str = ConfigurationManager.AppSettings["DB"];
+            o = (DbObject)Assembly.Load("Hegang.APP").CreateInstance(db_str);
             this.DataContext = new LoginViewModel();
+
         }
         /// <summary>
         /// 鼠标左键按住可以移动窗体
@@ -58,6 +62,25 @@ namespace Hegang.APP.Views
         private void close_btn_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void login_btn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            Window window = Window.GetWindow(this);//关闭父窗体
+            window.Close();
+            mainWindow.Show();
+
+            /*string str = string.Format("SELECT COUNT(id) FROM `user` WHERE userName = '{0}' AND pwd = '{1}'",this.userName.Text,this.pwd.Password);
+            DataTable dt = o.GetDataTable(str);
+            if (Convert.ToInt32(dt.Rows[0][0]) == 1)
+            {
+                Console.WriteLine("登陆成功");
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+            }
+            else
+                Console.WriteLine("登陆失败");*/
         }
     }
 }

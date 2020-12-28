@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Hegang.APP.ViewModels
 {
@@ -18,6 +20,9 @@ namespace Hegang.APP.ViewModels
         public DelegateCommand LoginCommand { get; set; }
         public DelegateCommand ForgetPwdCommand { get; set; }
         public DelegateCommand RegisterCommand { get; set; }
+        public Action CloseAction { get; set; }
+        #endregion
+
         public string UserName 
         { 
             get => userName;
@@ -36,7 +41,7 @@ namespace Hegang.APP.ViewModels
                 this.OnPropertyChanged("Pwd");
             }
         }
-        #endregion
+        
 
         public LoginViewModel()
         {
@@ -49,8 +54,9 @@ namespace Hegang.APP.ViewModels
         private void LoginCommandExecute(object parameter)
         {
             Console.WriteLine("登录按钮已点击");
-            Console.WriteLine(this.userName);
-            Console.WriteLine(this.pwd);
+            Window window=(Window)parameter;
+            
+            window.Close();
         }
     }
 }
