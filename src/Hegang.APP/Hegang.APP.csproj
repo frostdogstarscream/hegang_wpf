@@ -115,6 +115,7 @@
     <Compile Include="Services\FixedTimeTaskService.cs" />
     <Compile Include="Models\TimeJudgeItem.cs" />
     <Compile Include="Models\TimeJudgeItemList.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -127,6 +128,9 @@
     <Compile Include="ViewModels\TestModel.cs" />
     <Compile Include="Views\test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserManage.xaml.cs">
+      <DependentUpon>UserManage.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\DataBaseConfig.xaml">
       <SubType>Designer</SubType>
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\login.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\users.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

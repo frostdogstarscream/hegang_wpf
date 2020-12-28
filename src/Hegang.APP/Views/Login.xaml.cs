@@ -16,6 +16,7 @@ using Hegang.APP.Services.DbService;
 using System.Configuration;
 using Hegang.APP.Models.DataBase;
 using System.Data;
+using Hegang.APP.ViewModels;
 
 namespace Hegang.APP.Views
 {
@@ -27,20 +28,7 @@ namespace Hegang.APP.Views
         public Login()
         {
             InitializeComponent();
-
-            string str = ConfigurationManager.AppSettings["DB"];
-            DbObject o = (DbObject)Assembly.Load("Hegang.APP").CreateInstance(str);
-            DataTable dt = o.GetDataTable("SELECT * FROM fzd WHERE zd1 > 1000;");
-            Console.WriteLine(dt.Rows.Count);
-
-            //Console.WriteLine(ConfigurationManager.AppSettings["DB"]);
-
-            /*Dictionary<string, string> dic = new Dictionary<string, string>();
-            DbServiceObject dbServiceObject = (DbServiceObject)Assembly.Load("Hegang.APP").CreateInstance("Hegang.APP.Services.DbService.Mtsjzt_live");
-            DbServiceContext context = new DbServiceContext(dbServiceObject);
-            
-            context.ContextInterface(ref dic);*/
-
+            this.DataContext = new LoginViewModel();
         }
         /// <summary>
         /// 鼠标左键按住可以移动窗体

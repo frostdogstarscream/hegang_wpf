@@ -1,0 +1,38 @@
+﻿<Window x:Class="Hegang.APP.Views.UserManage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hegang.APP.Views"
+        mc:Ignorable="d"
+        Title="用户管理" Height="450" Width="800">
+    <Border BorderBrush="black" BorderThickness="0.3" Background="#F0F2F5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../images/users.png" Margin="10,0,10,0"></Image>
+                    <TextBlock Text="所有用户" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Border>
+            <ListView Grid.Row="1"></ListView>
+            <Border Name="color_bar" Background="#177CB0" Grid.Row="2">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <Image Source="../images/tip.ico" Height="15"></Image>
+                        <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+
+                    </StackPanel>
+
+                </DockPanel>
+
+            </Border>
+        </Grid>
+    </Border>
+</Window>

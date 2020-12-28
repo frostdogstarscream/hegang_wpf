@@ -78,3 +78,5 @@ C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\login.g.cs
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Login.baml
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Login.g.cs
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Login.baml
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\UserManage.g.cs
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\UserManage.baml
