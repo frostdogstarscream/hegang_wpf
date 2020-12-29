@@ -116,8 +116,12 @@
     <Compile Include="Models\TimeJudgeItem.cs" />
     <Compile Include="Models\TimeJudgeItemList.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\User.cs" />
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModifyUser.xaml.cs">
+      <DependentUpon>ModifyUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tip.xaml.cs">
       <DependentUpon>Tip.xaml</DependentUpon>
@@ -157,6 +161,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ModifyUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Tip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -253,6 +261,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\users.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
