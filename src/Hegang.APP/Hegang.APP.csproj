@@ -111,7 +111,7 @@
     <Compile Include="Services\DbService\Impl\Mwd.cs" />
     <Compile Include="Services\DbService\Impl\Mzd.cs" />
     <Compile Include="Services\DbService\Impl\Mzzyl.cs" />
-    <Compile Include="Utils\DBUtils.cs" />
+    <Compile Include="Utils\XMLUtils.cs" />
     <Compile Include="Services\FixedTimeTaskService.cs" />
     <Compile Include="Models\TimeJudgeItem.cs" />
     <Compile Include="Models\TimeJudgeItemList.cs" />

@@ -30,7 +30,7 @@ namespace Hegang.APP.Models.DataBase.impl
             XmlDocument doc = new XmlDocument();
             try
             {
-                doc.Load(DBUtils.get_db_config_path());
+                doc.Load(XMLUtils.get_db_config_path());
 
                 XmlElement element = (XmlElement)doc.SelectSingleNode("property/server");
                 server = element.GetAttribute("value");
