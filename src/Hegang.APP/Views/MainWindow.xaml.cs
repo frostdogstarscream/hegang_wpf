@@ -22,17 +22,7 @@ namespace Hegang.APP
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
-
-            
-                
-
-
             //this.listViewScroll();
-
-            //设置定时任务
-            /*FixedTimeTaskModule.setTaskAtFixedTime_day();
-            FixedTimeTaskModule.setTaskAtFixedTime_hour();
-            FixedTimeTaskModule.setTaskAtFixedTime_minute();*/
         }
 
         /// <summary>

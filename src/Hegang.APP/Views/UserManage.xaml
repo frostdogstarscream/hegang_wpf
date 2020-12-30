@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hegang.APP.Views"
         mc:Ignorable="d"
-        Title="用户管理" Height="450" Width="800">
+        Title="用户管理" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- GridViewColumnHeader样式 -->
         <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">
@@ -48,10 +48,16 @@
                 <RowDefinition Height="25"></RowDefinition>
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="../images/users.ico" Margin="10,0,10,0" Height="23"></Image>
-                    <TextBlock Text="所有用户" VerticalAlignment="Center"></TextBlock>
-                </StackPanel>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Source="../images/users.ico" Margin="10,0,10,0" Height="23"></Image>
+                        <TextBlock Text="所有用户" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="23" Margin="0,0,10,0">
+                        <Button x:Name="add_btn" Content="添加用户" Padding="5,0,5,0" Background="Transparent" Click="add_btn_Click"></Button>
+                    </StackPanel>
+                </DockPanel>
+                
             </Border>
             
             <Grid Grid.Row="1">

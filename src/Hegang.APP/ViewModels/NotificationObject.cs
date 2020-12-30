@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Hegang.APP.ViewModels
 {
     //ViewModel的基类
-    class NotificationObject : INotifyPropertyChanged
+    public class NotificationObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)

@@ -27,7 +27,13 @@ namespace Hegang.APP
         /// <returns></returns>
         public static string get_elec_usage_path()
         {
-            return @"../conf/elec_usage.xml";
+            string path = System.AppDomain.CurrentDomain.BaseDirectory;
+            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
+            path = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
+            path = Directory.GetCurrentDirectory();
+
+            return path + @"/conf/elec_usage.xml";
         }
     }
 }

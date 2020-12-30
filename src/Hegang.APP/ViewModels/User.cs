@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hegang.APP.ViewModels
 {
-    class User:NotificationObject
+    public class User:NotificationObject
     {
         private string id;
         private string userName;

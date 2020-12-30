@@ -14,24 +14,20 @@ namespace Hegang.APP.Services.DbService.Impl
     {
         public void save(DbObject o, ref DbServiceInput input)
         {
-            if (input.Gs_tmpBuf[1] != "-1")
-            {
-                string path = XMLUtils.get_elec_usage_path();
-                XmlDocument doc = new XmlDocument();
-                doc.Load(path);
-                XmlElement element = (XmlElement)doc.SelectSingleNode("property/main_shaft");
-                int DD = Convert.ToInt32(element.GetAttribute("value"));
-                Random r = new Random();
-                DD += r.Next(0, 10);
-                element.SetAttribute("value", DD.ToString());
-                doc.Save(path);
+            string path = XMLUtils.get_elec_usage_path();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+            XmlElement element = (XmlElement)doc.SelectSingleNode("property/main_shaft");
+            int DD = Convert.ToInt32(element.GetAttribute("value"));
+            Random r = new Random();
+            DD += r.Next(0, 10);
+            element.SetAttribute("value", DD.ToString());
+            doc.Save(path);
 
-                string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string GS = (int.Parse(input.Dic["主井测试.主提升电控.勾数"]) - int.Parse(input.Gs_tmpBuf[0])).ToString();
-                string str = string.Format("INSERT INTO `mtsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", GS, DD.ToString(), time);
-                o.cmmdNoReturn(str);
-            }
-            input.Gs_tmpBuf[1] = input.Dic["主井测试.主提升电控.勾数"];
+            string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string str = string.Format("INSERT INTO `mtsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", "0", DD.ToString(), time);
+            o.cmmdNoReturn(str);
+
         }
 
         /*public void save(DbObject o,ref DbServiceInput input)

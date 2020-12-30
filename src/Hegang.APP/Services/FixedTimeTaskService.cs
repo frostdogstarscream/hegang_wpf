@@ -176,43 +176,64 @@ namespace Hegang.APP
         /// </summary>
         private void task2()
         {
-            string str1 = "SELECT SUM(GS) FROM mtsjgd_live";
-            DataTable dt=o.GetDataTable(str1);
+            string str = "SELECT SUM(GS) FROM mtsjgd_live";
+            DataTable dt=o.GetDataTable(str);
             int GS_sum = Convert.ToInt32(dt.Rows[0][0]);
 
+            str = "SELECT DD FROM mtsjgd_live WHERE id = (SELECT MIN(id) FROM mtsjgd_live);";
+            dt = o.GetDataTable(str);
+            int min_DD = Convert.ToInt32(dt.Rows[0][0]);
+
+            str = "SELECT DD FROM mtsjgd_live WHERE id = (SELECT MAX(id) FROM mtsjgd_live);";
+            dt = o.GetDataTable(str);
+            int max_DD = Convert.ToInt32(dt.Rows[0][0]);
+
+            int DD = max_DD - min_DD;
+
             //将统计结果存入数据库
-            string str2 = string.Format("" +
+            str = string.Format("" +
                 "INSERT INTO " +
-                    "mtsjgdtj(GS,TimeStamp) " +
+                    "mtsjgdtj(GS, DD, TimeStamp) " +
                 "VALUES" +
-                    "('{0}','{1}');", GS_sum, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            o.cmmdNoReturn(str2);
+                    "('{0}', '{1}', '{2}');", GS_sum, DD, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            o.cmmdNoReturn(str);
 
             //统计完后，清空mtsjgd_live
-            string str3 = "TRUNCATE mtsjgd_live;";
-            o.cmmdNoReturn(str3);
+            str = "TRUNCATE mtsjgd_live;";
+            o.cmmdNoReturn(str);
         }
 
         /// <summary>
         /// 每天统计副井的勾数
         /// </summary>
-        private void task3()
+        public void task3()
         {
-            string str1 = "SELECT SUM(GS) FROM ftsjgd_live";
-            DataTable dt = o.GetDataTable(str1);
+
+            string str = "SELECT SUM(GS) FROM ftsjgd_live";
+            DataTable dt = o.GetDataTable(str);
             int GS_sum = Convert.ToInt32(dt.Rows[0][0]);
 
+            str = "SELECT DD FROM ftsjgd_live WHERE id = (SELECT MIN(id) FROM ftsjgd_live);";
+            dt = o.GetDataTable(str);
+            int min_DD = Convert.ToInt32(dt.Rows[0][0]);
+
+            str = "SELECT DD FROM ftsjgd_live WHERE id = (SELECT MAX(id) FROM ftsjgd_live);";
+            dt = o.GetDataTable(str);
+            int max_DD = Convert.ToInt32(dt.Rows[0][0]);
+
+            int DD = max_DD - min_DD;
+
             //将统计结果存入数据库
-            string str2 = string.Format("" +
+            str = string.Format("" +
                 "INSERT INTO " +
-                    "ftsjgdtj(GS,TimeStamp) " +
+                    "ftsjgdtj(GS, DD, TimeStamp) " +
                 "VALUES" +
-                    "('{0}','{1}');", GS_sum, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            o.cmmdNoReturn(str2);
+                    "('{0}', '{1}', '{2}');", GS_sum, DD, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            o.cmmdNoReturn(str);
 
             //统计完后，清空ftsjgd_live
-            string str3 = "TRUNCATE ftsjgd_live;";
-            o.cmmdNoReturn(str3);
+            str = "TRUNCATE ftsjgd_live;";
+            o.cmmdNoReturn(str);
         }
 
         /// <summary>
