@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hegang.APP.Views"
         mc:Ignorable="d"
-        Title="欢迎登陆" Height="450" Width="350" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
+        Title="欢迎登陆" Height="500" Width="350" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"  CornerRadius="0" ResizeBorderThickness="0"/>
     </WindowChrome.WindowChrome>
@@ -29,11 +29,13 @@
     <Border BorderBrush="black" BorderThickness="0.3">
         <DockPanel>
             <DockPanel DockPanel.Dock="Top">
+                <!--
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Image Source="../images/login.ico" Width="20" Margin="5,0,5,0"></Image>
                     <TextBlock HorizontalAlignment="Left" Text="欢迎登陆" VerticalAlignment="Center" ></TextBlock>
                 </StackPanel>
-                
+                -->
+
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Name="min_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="min_btn_Click">
                         <Image Source="../images/minimize.png" Width="20" Height="20"></Image>
@@ -46,9 +48,9 @@
 
             <Border BorderBrush="Black" BorderThickness="0" Margin="5" DockPanel.Dock="Top">
                 <StackPanel>
-                    <Image Source="../images/icon.ico" Height="45" Margin="0,15,0,15"></Image>
+                    <Image Source="../images/icon_2.ico" Height="45" Margin="0,15,0,15"></Image>
                     <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="鸟山矿监测服务系统" VerticalAlignment="Center" FontSize="20"  Margin="0,0,0,20"></TextBlock>
-                    <Grid Grid.Row="2" Width="300" Margin="0,5,0,5" >
+                    <Grid Grid.Row="2" Width="300" Margin="0,10,0,5" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -65,7 +67,7 @@
                         <PasswordBox x:Name="pwd" Grid.Row="3"  VerticalContentAlignment="Center" VerticalAlignment="Center" Height="30" />
                     </Grid>
 
-                    <Button x:Name="login_btn" Grid.Row="4" Content="登录"  Height="35" Width="300" Margin="0,10,0,0" FontSize="14" Template="{StaticResource btn_template}" Foreground="White" Click="login_btn_Click"/>
+                    <Button x:Name="login_btn" Grid.Row="4" Content="登录"  Height="35" Width="300" Margin="0,30,0,0" FontSize="14" Template="{StaticResource btn_template}" Foreground="White" Click="login_btn_Click"/>
                     <Border Width="300" BorderBrush="Black" BorderThickness="0.2" CornerRadius="5" Height="50" Margin="0,20,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="第一次使用？" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="13"></TextBlock>
@@ -73,7 +75,7 @@
                         </StackPanel>
                     </Border>
 
-                    
+
                     <!--<StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="登录" Width="100" Height="30" Margin="10" Background="White"></Button>
                         <Button Content="注册" Width="100" Height="30" Margin="10" Background="White"></Button>
@@ -81,44 +83,6 @@
                 </StackPanel>
             </Border>
         </DockPanel>
-        <!--<DockPanel>
-            <DockPanel DockPanel.Dock="Top">
-                <TextBlock HorizontalAlignment="Left" Text="鸟山矿PLC监测服务程序" VerticalAlignment="Center"  Margin="5,0,0,0"></TextBlock>
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Name="min_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="min_btn_Click">
-                        <Image Source="../images/minimize.png" Width="20" Height="20"></Image>
-                    </Button>
-                    <Button Name="close_btn" Background="White" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click">
-                        <Image Source="../images/close.png" Width="20" Height="20"></Image>
-                    </Button>
-                </StackPanel>
-            </DockPanel>
-            <Border>
-                
-            </Border>
-            <TextBlock Text="欢迎登陆" DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="20" Margin="0,10,0,0"></TextBlock>
-            <Grid DockPanel.Dock="Top" Width="300" Margin="0,10,0,5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="3.5*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="手机号：" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
-                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="25"></TextBox>
-                <Label Grid.Row="1" Grid.Column="0" Content="密码：" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
-                <PasswordBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="25"></PasswordBox>
-            </Grid>
-            <StackPanel DockPanel.Dock="Top">
-                <Button Content="找回密码" HorizontalAlignment="Right" Margin="0,0,50,0" BorderThickness="0" Background="Transparent"></Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="登录" Width="75" Height="25" Margin="10" Background="White"></Button>
-                <Button Content="注册" Width="75" Height="25" Margin="10" Background="White"></Button>
-            </StackPanel>
-        </DockPanel>-->
     </Border>
 </Window>
 

@@ -66,21 +66,17 @@ namespace Hegang.APP.Views
 
         private void login_btn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            Window window = Window.GetWindow(this);//关闭父窗体
-            window.Close();
-            mainWindow.Show();
-
-            /*string str = string.Format("SELECT COUNT(id) FROM `user` WHERE userName = '{0}' AND pwd = '{1}'",this.userName.Text,this.pwd.Password);
+            string str = string.Format("SELECT COUNT(id) FROM `user` WHERE userName = '{0}' AND pwd = '{1}'", this.userName.Text, this.pwd.Password);
             DataTable dt = o.GetDataTable(str);
             if (Convert.ToInt32(dt.Rows[0][0]) == 1)
             {
-                Console.WriteLine("登陆成功");
                 MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                Window window = Window.GetWindow(this);//关闭父窗体
+                window.Close();
+                mainWindow.ShowDialog();
             }
             else
-                Console.WriteLine("登陆失败");*/
+                Console.WriteLine("登陆失败");
         }
     }
 }

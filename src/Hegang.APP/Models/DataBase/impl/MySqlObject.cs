@@ -59,12 +59,8 @@ namespace Hegang.APP.Models.DataBase.impl
         /// <returns></returns>
         public MySqlConnection getDBConnection()
         {
-            Console.WriteLine("获取数据库连接对象");
             string str = @"server=" + server + "; port=" + port + ";user=" + user + "; password=" + password + "; database=" + database + ";";
-            Console.WriteLine(str);
             MySqlConnection conn = new MySqlConnection(str);
-            if (null != conn)
-                Console.WriteLine("数据库连接对象获取成功");
             return conn;
         }
 

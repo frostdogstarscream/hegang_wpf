@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/favicon%20(8).ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon.ico")]
 
 
