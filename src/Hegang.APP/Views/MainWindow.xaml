@@ -83,11 +83,10 @@
                         <ColumnDefinition Width="250"/>
                         <ColumnDefinition Width="25"/>
                     </Grid.ColumnDefinitions>
-                
+
                     <!--文字区域背景和边线样式-->
 
                     <TextBlock VerticalAlignment="Center" Padding="3,0,0,0" Foreground="Black" Background="Transparent" Text="{TemplateBinding Text}"></TextBlock>
-
 
                     <!--右侧下拉button设置-->
                     <!--<ToggleButton  Style="{StaticResource ComboxStyleBtn}" BorderThickness="0" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>-->
@@ -95,7 +94,6 @@
                     <ToggleButton Grid.Column="1" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press" Background="Transparent" BorderThickness="0">
                         <Image Source="../images/down.png" Width="10"></Image>
                     </ToggleButton>
-
 
                     <!--弹出popup整体设置-->
                     <Popup IsOpen="{TemplateBinding IsDropDownOpen}" PlacementTarget="{Binding ElementName=comboBox_border}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" >
@@ -108,14 +106,10 @@
                             </ScrollViewer>
                         </Border>
                     </Popup>
-                    
-                    
                 </Grid>
             </Border>
-
-
-
         </ControlTemplate>
+        
         <!-- GridViewColumnHeader样式 -->
         <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -180,15 +174,11 @@
                     <!--<Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0" Name="btn_DBConfig" Click="btn_DBConfig_Click">数据库配置(D)</Button>
                     <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0">帮助(H)</Button>-->
                     <Menu>
-                        <MenuItem Header="数据库选项(D)">
-                            <MenuItem Header="数据库配置"></MenuItem>
-                            <MenuItem Header="数据库备份"></MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="用户管理(U)">
-                            <MenuItem Header="添加用户"></MenuItem>
-                            <MenuItem Header="用户信息修改"></MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="视图(V)"></MenuItem>
+                        <MenuItem Header="数据库配置(D)"></MenuItem>
+                        <MenuItem Header="测点配置(T)"></MenuItem>
+                        <MenuItem Header="存储管理(S)"></MenuItem>
+                        <MenuItem Name="userManage" Header="用户管理(U)"></MenuItem>
+                        <MenuItem Header="个人信息管理(P)"></MenuItem>
                         <MenuItem Header="帮助(H)"></MenuItem>
                     </Menu>
                 </StackPanel>

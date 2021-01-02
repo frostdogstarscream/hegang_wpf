@@ -1,0 +1,86 @@
+﻿<Window x:Class="Hegang.APP.Views.PLCItemConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hegang.APP.Views"
+        mc:Ignorable="d"
+        Title="测点配置" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="选择点表：" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+                    <ComboBox Name="tp_comboBox" Width="200" Template="{DynamicResource ComboBox_template}" Height="20" SelectionChanged="tp_comboBox_SelectionChanged"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                    <Button x:Name="add_pt_btn" Content="添加点表" Background="White" Height="20" Padding="5,0,5,0" Click="add_pt_btn_Click"></Button>
+                    <Button x:Name="del_pt_btn" Content="删除点表" Background="White" Height="20" Margin="10,0,0,0" Padding="5,0,5,0" Click="del_pt_btn_Click"></Button>
+                    <Button x:Name="add_tp_btn" Content="添加测点" Background="White" Height="20" Margin="10,0,10,0" Padding="5,0,5,0" Click="add_tp_btn_Click"></Button>
+                </StackPanel>
+            </DockPanel>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" x:Name="col0" />
+                    <Grid Grid.Column="1" x:Name="col1" />
+                    <Grid Grid.Column="6" x:Name="col2"/>
+                </Grid>
+                <ListView Grid.Row="1" Name="tp_listView" ItemsSource="{Binding TestPoints, Mode=TwoWay}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="序号" Width="{Binding ElementName=col0,Path=ActualWidth}" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="测点名称" Width="{Binding ElementName=col1,Path=ActualWidth}" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                <GridViewColumn Header="地址" Width="{Binding ElementName=col1,Path=ActualWidth}" DisplayMemberBinding="{Binding Address}"></GridViewColumn>
+                                <GridViewColumn Header="数据类型" Width="{Binding ElementName=col1,Path=ActualWidth}" DisplayMemberBinding="{Binding DataType}"></GridViewColumn>
+                                <GridViewColumn Header="客户端访问" Width="{Binding ElementName=col1,Path=ActualWidth}" DisplayMemberBinding="{Binding ClientAccess}"></GridViewColumn>
+                                <GridViewColumn Header="扫描速率" Width="{Binding ElementName=col1,Path=ActualWidth}" DisplayMemberBinding="{Binding ScanRate}"></GridViewColumn>
+                                <GridViewColumn Header="操作选项" Width="{Binding ElementName=col2,Path=ActualWidth}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button x:Name="modify_btn" Background="#a4e2c6" Content="修改" Width="50"  Margin="0,0,10,0" Click="modify_btn_Click"></Button>
+                                                <Button x:Name="delete_btn" Background="#f9906f" Content="删除" Width="50" Click="delete_btn_Click"></Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            
+            <Border Name="color_bar" Background="#177CB0" Grid.Row="2">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <Image Source="../images/tip.ico" Height="15"></Image>
+                        <TextBlock Name="color_bar_text" VerticalAlignment="Center" Text="就绪" Foreground="White" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                    
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

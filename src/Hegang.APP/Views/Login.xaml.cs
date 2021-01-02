@@ -66,17 +66,45 @@ namespace Hegang.APP.Views
 
         private void login_btn_Click(object sender, RoutedEventArgs e)
         {
-            string str = string.Format("SELECT COUNT(id) FROM `user` WHERE userName = '{0}' AND pwd = '{1}'", this.userName.Text, this.pwd.Password);
+            if (this.id.Text == "" || this.pwd.Password == "")
+            {
+                Tip tip = new Tip("信息输入不完整！");
+                tip.ShowDialog();
+                return;
+            }
+            
+            string str;
+            bool flag = true;
+
+            if (this.user_rb.IsChecked==true)
+                str = string.Format("SELECT COUNT(id) FROM `user` WHERE id = '{0}' AND pwd = '{1}'", this.id.Text, this.pwd.Password);
+            else
+            {
+                str = string.Format("SELECT COUNT(id) FROM `admin` WHERE id = '{0}' AND pwd = '{1}'", this.id.Text, this.pwd.Password);
+                flag = false;
+            }
+                
+            
             DataTable dt = o.GetDataTable(str);
             if (Convert.ToInt32(dt.Rows[0][0]) == 1)
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(flag);
                 Window window = Window.GetWindow(this);//关闭父窗体
                 window.Close();
-                mainWindow.ShowDialog();
+                mainWindow.Show();
             }
             else
-                Console.WriteLine("登陆失败");
+            {
+                Tip tip = new Tip("用户名或密码不正确！");
+                tip.ShowDialog();
+            }
+                
+        }
+
+        private void reg_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Register register = new Register();
+            register.ShowDialog();
         }
     }
 }

@@ -18,10 +18,14 @@ namespace Hegang.APP
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(bool flag)
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+            
+            if (flag)
+                this.userManage.Visibility =Visibility.Collapsed;
+            
             //this.listViewScroll();
         }
 

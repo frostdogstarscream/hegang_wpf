@@ -42,7 +42,6 @@ C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.cspro
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csproj.CoreCompileInputs.cache
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.exe
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.pdb
-C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csprojAssemblyReference.cache
 C:\Users\Administrator\Desktop\hegang-wpf\bin\Hegang.APP.exe.config
 C:\Users\Administrator\Desktop\hegang-wpf\bin\Hegang.APP.exe
 C:\Users\Administrator\Desktop\hegang-wpf\bin\Hegang.APP.pdb
@@ -84,3 +83,12 @@ C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Use
 C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\UserManage.baml
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyUser.g.cs
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyUser.baml
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\PLCItemConfig.g.cs
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\APPDictionary.baml
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\PLCItemConfig.baml
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\App.baml
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csprojAssemblyReference.cache
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyTestPoint.g.cs
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyTestPoint.baml
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Register.g.cs
+C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Register.baml

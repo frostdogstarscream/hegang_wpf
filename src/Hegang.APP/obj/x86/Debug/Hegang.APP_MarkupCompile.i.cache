@@ -1,7 +1,7 @@
 ﻿Hegang.APP
 
 
-winexe
+exe
 C#
 .cs
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\
@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\张驰\Desktop\hegang-wpf\src\Hegang.APP\App.xaml
-7-2124722971
+111998938549
 
-471538443442
+511975130262
 161145183604
-Views\DataBaseConfig.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\ModifyUser.xaml;Views\Tip.xaml;Views\test.xaml;Views\UserManage.xaml;
+APPDictionary.xaml;Views\DataBaseConfig.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\ModifyTestPoint.xaml;Views\ModifyUser.xaml;Views\PLCItemConfig.xaml;Views\Register.xaml;Views\Tip.xaml;Views\test.xaml;Views\UserManage.xaml;
 
 True
 

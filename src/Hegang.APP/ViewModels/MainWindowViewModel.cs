@@ -317,7 +317,7 @@ namespace Hegang.APP.ViewModels
             {
                 foreach(Node device in channel.ChildList)
                 {
-                    List<string> itemList = CSVUtils.read_csv_file(device.NodeName);
+                    List<string> itemList = CSVUtils.getTpNames(device.NodeName);
                     foreach (string itemName in itemList)
                         input.Dic.Add(channel.NodeName+"."+ device.NodeName+"."+itemName, "0");
                 }
