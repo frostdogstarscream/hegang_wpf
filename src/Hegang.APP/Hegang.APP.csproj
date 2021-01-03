@@ -127,6 +127,9 @@
     <Compile Include="Views\ModifyUser.xaml.cs">
       <DependentUpon>ModifyUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PerInfoManage.xaml.cs">
+      <DependentUpon>PerInfoManage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PLCItemConfig.xaml.cs">
       <DependentUpon>PLCItemConfig.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModifyUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PerInfoManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

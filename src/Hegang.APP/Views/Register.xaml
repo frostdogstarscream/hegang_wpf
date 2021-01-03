@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hegang.APP.Views"
         mc:Ignorable="d"
-        Title="用户信息修改" Height="425" Width="350" WindowStyle="None" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="用户信息修改" Height="450" Width="350" WindowStyle="None" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"  CornerRadius="0" ResizeBorderThickness="0"/>
     </WindowChrome.WindowChrome>
@@ -17,7 +17,7 @@
                     <Image Source="../images/close.png" Width="20" Height="20"></Image>
                 </Button>
             </StackPanel>
-            <Grid DockPanel.Dock="Top" Margin="10,5,10,5">
+            <Grid DockPanel.Dock="Top" Margin="30,5,30,5">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -47,10 +47,17 @@
                 <TextBox Grid.Row="9" Height="25" VerticalContentAlignment="Center" Name="nation_tb"></TextBox>
                 <TextBox Grid.Row="11" Height="25" VerticalContentAlignment="Center" Name="department_tb"></TextBox>
             </Grid>
+            <StackPanel>
+                <Button Width="290" Height="35" Margin="0,20,0,0" Foreground="White" FontSize="14" Template="{DynamicResource btn_template}" Name="btn_reg" Click="btn_reg_Click">注册</Button>
+            </StackPanel>
+            
+            
+            <!--
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="70" Height="25" Margin="0,0,10,0" Background="White" Name="btn_reg" Click="btn_reg_Click">注册</Button>
                 <Button Width="70" Height="25" Margin="10,0,0,0" Background="White" Name="btn_cancel" Click="close_btn_Click">取消</Button>
             </StackPanel>
+            -->
         </DockPanel>
     </Border>
 </Window>

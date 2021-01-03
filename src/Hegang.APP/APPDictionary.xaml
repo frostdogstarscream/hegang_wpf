@@ -87,4 +87,17 @@
         <Setter Property="BorderBrush" Value="Gray"></Setter>
         <Setter Property="BorderThickness" Value="0,0,0,0.3"></Setter>
     </Style>
+    
+    <!-- 登录、注册按钮样式 -->
+    <ControlTemplate x:Key="btn_template" TargetType="Button">
+        <Border x:Name="btn_border" Background="#1296db" BorderBrush="Black" BorderThickness="0.3" CornerRadius="5">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+            </ContentPresenter>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="btn_border" Property="Background" Value="#1685a9"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>

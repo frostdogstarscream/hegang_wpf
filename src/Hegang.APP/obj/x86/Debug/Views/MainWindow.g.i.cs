@@ -41,7 +41,7 @@ namespace Hegang.APP {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 180 "..\..\..\..\Views\MainWindow.xaml"
+        #line 179 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.MenuItem userManage;
         
@@ -49,7 +49,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 208 "..\..\..\..\Views\MainWindow.xaml"
+        #line 207 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_connect;
         
@@ -57,7 +57,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 209 "..\..\..\..\Views\MainWindow.xaml"
+        #line 208 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cmb_server_list;
         
@@ -65,7 +65,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 211 "..\..\..\..\Views\MainWindow.xaml"
+        #line 210 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_read;
         
@@ -73,7 +73,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 212 "..\..\..\..\Views\MainWindow.xaml"
+        #line 211 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_stop;
         
@@ -81,7 +81,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 234 "..\..\..\..\Views\MainWindow.xaml"
+        #line 233 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TreeView chk_treeview;
         
@@ -89,7 +89,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 265 "..\..\..\..\Views\MainWindow.xaml"
+        #line 264 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid col1;
         
@@ -97,7 +97,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 266 "..\..\..\..\Views\MainWindow.xaml"
+        #line 265 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid col2;
         
@@ -105,7 +105,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 267 "..\..\..\..\Views\MainWindow.xaml"
+        #line 266 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid col3;
         
@@ -113,7 +113,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 268 "..\..\..\..\Views\MainWindow.xaml"
+        #line 267 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid col4;
         
@@ -121,7 +121,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 270 "..\..\..\..\Views\MainWindow.xaml"
+        #line 269 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListView listView;
         
@@ -129,7 +129,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 305 "..\..\..\..\Views\MainWindow.xaml"
+        #line 304 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Border color_bar;
         
@@ -137,7 +137,7 @@ namespace Hegang.APP {
         #line hidden
         
         
-        #line 309 "..\..\..\..\Views\MainWindow.xaml"
+        #line 308 "..\..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock color_bar_text;
         
@@ -215,7 +215,7 @@ namespace Hegang.APP {
             case 12:
             this.listView = ((System.Windows.Controls.ListView)(target));
             
-            #line 270 "..\..\..\..\Views\MainWindow.xaml"
+            #line 269 "..\..\..\..\Views\MainWindow.xaml"
             this.listView.AddHandler(System.Windows.Controls.ScrollViewer.ScrollChangedEvent, new System.Windows.Controls.ScrollChangedEventHandler(this.listView_ScrollChanged));
             
             #line default
