@@ -35,6 +35,7 @@ namespace Hegang.APP.ViewModels
         private string colorBar_text;
         private string colorBar_color;
         private string consoleText;
+        private bool isEnabled;
         #endregion
 
         #region 命令属性
@@ -50,6 +51,7 @@ namespace Hegang.APP.ViewModels
             this.ListViewItemList = new ObservableCollection<ListViewItem>();
             this.ColorBar_color = "#065279";
             this.ColorBar_text = "就绪";
+            this.IsEnabled = true;
             #endregion
 
             #region 命令属性初始化
@@ -83,6 +85,16 @@ namespace Hegang.APP.ViewModels
             fixedTimeTaskService.setTaskPerHour();
             fixedTimeTaskService.setTaskPerMinute();
             #endregion
+        }
+
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            set
+            {
+                isEnabled = value;
+                this.OnPropertyChanged("IsEnabled");
+            }
         }
 
         public List<string> ServerListToString
@@ -207,6 +219,7 @@ namespace Hegang.APP.ViewModels
 
         private void ReadCommandExecute(object parameter)
         {
+            this.IsEnabled = false;
             this.ColorBar_color = "#9C5333";
             this.ColorBar_text = "监测服务已启动";
             
@@ -262,6 +275,7 @@ namespace Hegang.APP.ViewModels
             
             this.ConsoleText += "数据数据读取已停止。\n";
             this.Btn_read_isEnabled = true;
+            this.IsEnabled = true;
         }
 
         /// <summary>

@@ -377,7 +377,7 @@ namespace Hegang.APP
             dt = o.GetDataTable(str);
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string str_save = string.Format("INSERT INTO fwd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
+            string str_save = string.Format("INSERT INTO fwd_forecast(wd1, wd2, wd3, wd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
             dt.Rows[0][0], dt.Rows[0][1], dt.Rows[0][2], dt.Rows[0][3], timestamp);
             string str_count = "SELECT COUNT(id) FROM fwd_forecast";
             string str_del = "DELETE FROM fwd_forecast WHERE id=(SELECT MIN(id) FROM `fwd_forecast`)";
@@ -419,7 +419,7 @@ namespace Hegang.APP
             dt = o.GetDataTable(str);
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string str_save = string.Format("INSERT INTO mwd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
+            string str_save = string.Format("INSERT INTO mwd_forecast(wd1, wd2, wd3, wd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
             dt.Rows[0][0], dt.Rows[0][1], dt.Rows[0][2], dt.Rows[0][3], timestamp);
             string str_count = "SELECT COUNT(id) FROM mwd_forecast";
             string str_del = "DELETE FROM mwd_forecast WHERE id=(SELECT MIN(id) FROM `mwd_forecast`)";

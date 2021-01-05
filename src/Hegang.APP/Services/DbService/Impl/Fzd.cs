@@ -19,7 +19,7 @@ namespace Hegang.APP.Services.DbService.Impl
                 Random r = new Random();
                 double[] simulate_zd = new double[4];
                 for (int i = 0; i < 4; i++)
-                    simulate_zd[i] = r.Next(0, 500) / 1000d;
+                    simulate_zd[i] = r.Next(0, 200) / 1000d;
                     
                 sql = string.Format("INSERT INTO `fzd` (`zd1`,`zd2`,`zd3`,`zd4`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}')",
                     simulate_zd[0].ToString(), simulate_zd[1].ToString(), simulate_zd[2].ToString(), simulate_zd[3].ToString(), System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
