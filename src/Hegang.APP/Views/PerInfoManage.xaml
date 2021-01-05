@@ -23,7 +23,7 @@
                     </Button>
                 </StackPanel>
             </DockPanel>
-            <Grid DockPanel.Dock="Top" Margin="30,5,30,5">
+            <Grid DockPanel.Dock="Top" Margin="20,5,20,5">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -49,8 +49,9 @@
                 <TextBox Grid.Row="7" Height="30" VerticalContentAlignment="Center" Name="nation_tb"></TextBox>
                 <TextBox Grid.Row="9" Height="30" VerticalContentAlignment="Center" Name="department_tb"></TextBox>
             </Grid>
-            <StackPanel>
-                <Button Width="290" Height="35" Margin="0,20,0,0" Foreground="White" FontSize="14" Template="{DynamicResource btn_template}" Name="btn_modify" Click="btn_modify_Click">应用</Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="80" Height="30" FontSize="14" Margin="0,0,10,0" Background="White" Name="btn_modify" Click="btn_modify_Click">确定</Button>
+                <Button Width="80" Height="30" FontSize="14" Margin="10,0,0,0" Background="White" Name="btn_cancel" Click="close_btn_Click">取消</Button>
             </StackPanel>
         </DockPanel>
     </Border>

@@ -22,7 +22,7 @@
             </DockPanel>
             
             <StackPanel DockPanel.Dock="Top" Height="80"  Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock DockPanel.Dock="Top" x:Name="tip_textBlock"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBlock DockPanel.Dock="Top" x:Name="tip_textBlock"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
             </StackPanel>
             
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">

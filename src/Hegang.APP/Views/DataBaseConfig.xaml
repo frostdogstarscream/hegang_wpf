@@ -51,15 +51,17 @@
                 <TextBox Grid.Row="7" Height="30" VerticalContentAlignment="Center" Name="password"></TextBox>
                 <TextBox Grid.Row="9" Height="30" VerticalContentAlignment="Center" Name="database"></TextBox>
             </Grid>
+            <!--
             <StackPanel>
                 <Button Width="290" Height="35" Margin="0,20,0,0" Foreground="White" FontSize="14" Template="{DynamicResource btn_template}" Name="btn_apply" Click="btn_apply_Click">应用</Button>
             </StackPanel>
-            <!--
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="70" Height="25" Margin="0,0,10,0" Background="White" Name="btn_apply" Click="btn_apply_Click">应用</Button>
-                <Button Width="70" Height="25" Margin="10,0,0,0" Background="White" Name="btn_cancel" Click="btn_cancel_Click">取消</Button>
-            </StackPanel>
             -->
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="80" Height="30" FontSize="14" Margin="0,0,10,0" Background="White" Name="btn_apply" Click="btn_apply_Click">应用</Button>
+                <Button Width="80" Height="30" FontSize="14" Margin="10,0,0,0" Background="White" Name="btn_cancel" Click="btn_cancel_Click">取消</Button>
+            </StackPanel>
+            
         </DockPanel>
     </Border>
 </Window>
