@@ -26,13 +26,19 @@ namespace Hegang.APP.Views
     public partial class Login : Window
     {
         private DbObject o;
+
+        #region 窗体成员
+        private Register regWindow;
+        private Tip tipWindow;
+        private MainWindow mainWindow;
+        #endregion
+
         public Login()
         {
             InitializeComponent();
             string db_str = ConfigurationManager.AppSettings["DB"];
             o = (DbObject)Assembly.Load("Hegang.APP").CreateInstance(db_str);
             this.DataContext = new LoginViewModel();
-
         }
         /// <summary>
         /// 鼠标左键按住可以移动窗体
@@ -61,15 +67,16 @@ namespace Hegang.APP.Views
         /// <param name="e"></param>
         private void close_btn_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            this.Close();
         }
 
         private void login_btn_Click(object sender, RoutedEventArgs e)
         {
             if (this.id.Text == "" || this.pwd.Password == "")
             {
-                Tip tip = new Tip("信息输入不完整！");
-                tip.ShowDialog();
+                this.tipWindow = new Tip("信息输入不完整！");
+                this.tipWindow.ShowDialog();
                 return;
             }
             
@@ -77,34 +84,47 @@ namespace Hegang.APP.Views
             bool flag = true;
 
             if (this.user_rb.IsChecked==true)
-                str = string.Format("SELECT COUNT(id) FROM `user` WHERE id = '{0}' AND pwd = '{1}'", this.id.Text, this.pwd.Password);
+                str = string.Format("SELECT userName,age,nation,department FROM `user` WHERE id = '{0}' AND pwd = '{1}'", this.id.Text, this.pwd.Password);
             else
             {
-                str = string.Format("SELECT COUNT(id) FROM `admin` WHERE id = '{0}' AND pwd = '{1}'", this.id.Text, this.pwd.Password);
+                str = string.Format("SELECT userName FROM `admin` WHERE id = '{0}' AND pwd = '{1}'", this.id.Text, this.pwd.Password);
                 flag = false;
             }
                 
             
             DataTable dt = o.GetDataTable(str);
-            if (Convert.ToInt32(dt.Rows[0][0]) == 1)
+            if (dt.Rows.Count == 1)
             {
-                MainWindow mainWindow = new MainWindow(flag);
-                Window window = Window.GetWindow(this);//关闭父窗体
-                window.Close();
-                mainWindow.Show();
+                User user = new User();
+                user.Id = this.id.Text;
+                user.UserName = dt.Rows[0][0].ToString();
+                user.Pwd = this.pwd.Password;
+                if (flag)
+                {
+                    user.Age = dt.Rows[0][1].ToString();
+                    user.Nation = dt.Rows[0][2].ToString();
+                    user.Department = dt.Rows[0][3].ToString();
+                }
+                
+                this.mainWindow = new MainWindow(user,flag);
+                /*Window window = Window.GetWindow(this);//关闭父窗体
+                window.Close();*/
+                this.Close();
+                this.mainWindow.Show();
             }
             else
             {
-                Tip tip = new Tip("用户名或密码不正确！");
-                tip.ShowDialog();
+                this.tipWindow = new Tip("用户名或密码不正确！");
+                this.tipWindow.ShowDialog();
             }
                 
         }
 
         private void reg_btn_Click(object sender, RoutedEventArgs e)
         {
-            Register register = new Register();
-            register.ShowDialog();
+            this.regWindow = new Register();
+            this.Close();
+            this.regWindow.ShowDialog();
         }
     }
 }

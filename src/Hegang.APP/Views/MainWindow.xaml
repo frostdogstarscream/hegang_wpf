@@ -174,11 +174,12 @@
                     <!--<Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0" Name="btn_DBConfig" Click="btn_DBConfig_Click">数据库配置(D)</Button>
                     <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0">帮助(H)</Button>-->
                     <Menu>
-                        <MenuItem Header="数据库配置(D)"></MenuItem>
-                        <MenuItem Header="测点配置(T)"></MenuItem>
-                        <MenuItem Name="userManage" Header="用户管理(U)"></MenuItem>
-                        <MenuItem Header="个人信息管理(P)"></MenuItem>
-                        <MenuItem Header="帮助(H)"></MenuItem>
+                        <MenuItem Name="db_conf" Header="数据库配置(D)" Click="db_conf_Click"></MenuItem>
+                        <MenuItem Name="tp_conf" Header="测点配置(T)" Click="tp_conf_Click"></MenuItem>
+                        <MenuItem Name="u_man" Header="用户管理(U)" Click="u_man_Click"></MenuItem>
+                        <MenuItem Name="pi_man" Header="个人信息管理(P)" Click="pi_man_Click"></MenuItem>
+                        <MenuItem Name="help" Header="帮助(H)" Click="help_Click"></MenuItem>
+                        <MenuItem Name="exit" Header="退出(E)" Click="exit_Click"></MenuItem>
                     </Menu>
                 </StackPanel>
             </Border>

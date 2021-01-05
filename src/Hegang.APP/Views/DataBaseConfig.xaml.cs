@@ -3,13 +3,23 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml;
 
-namespace Hegang.APP
+namespace Hegang.APP.Views
 {
     /// <summary>
     /// DataBaseConfig.xaml 的交互逻辑
     /// </summary>
     public partial class DataBaseConfig : Window
     {
+        private string rtn_msg;
+
+        public string Rtn_msg
+        {
+            get
+            {
+                return rtn_msg;
+            }
+        }
+
         public DataBaseConfig()
         {
             InitializeComponent();
@@ -88,6 +98,9 @@ namespace Hegang.APP
             element.SetAttribute("value", this.database.Text);
 
             doc.Save(path);
+
+            this.rtn_msg = "数据库配置信息修改成功！";
+            this.Close();
         }
 
         /// <summary>

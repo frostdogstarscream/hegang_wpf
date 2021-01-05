@@ -276,18 +276,19 @@ namespace Hegang.APP
         /// </summary>
         private void task6()
         {
+            string residual_pressure = "0";
+            string normal_pressure = "0";
+
             string str = "SELECT AVG(yl) FROM mzzyl WHERE yl < 1;";
             DataTable dt = o.GetDataTable(str);
 
-            string residual_pressure = "0";
-            if (dt.Rows.Count != 0)
+            if (!string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
                 residual_pressure = dt.Rows[0][0].ToString();
 
             str = "SELECT AVG(yl) FROM mzzyl WHERE yl > 11;";
             dt = o.GetDataTable(str);
 
-            string normal_pressure = "0";
-            if (dt.Rows.Count != 0)
+            if (!string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
                 normal_pressure = dt.Rows[0][0].ToString();
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -302,18 +303,19 @@ namespace Hegang.APP
         /// </summary>
         private void task7()
         {
+            string residual_pressure = "0";
+            string normal_pressure = "0";
+
             string str = "SELECT AVG(yl) FROM fzzyl WHERE yl < 1;";
             DataTable dt = o.GetDataTable(str);
 
-            string residual_pressure = "0";
-            if (dt.Rows.Count != 0)
+            if (!string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
                 residual_pressure = dt.Rows[0][0].ToString();
             
             str = "SELECT AVG(yl) FROM fzzyl WHERE yl > 11;";
             dt = o.GetDataTable(str);
 
-            string normal_pressure = "0";
-            if (dt.Rows.Count != 0)
+            if (!string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
                 normal_pressure = dt.Rows[0][0].ToString();
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -373,14 +375,30 @@ namespace Hegang.APP
                 str = "SELECT AVG(wd1),AVG(wd2),AVG(wd3),AVG(wd4) FROM (SELECT * FROM fwd ORDER BY TIMESTAMP DESC LIMIT 10) a;";
 
             dt = o.GetDataTable(str);
-            
+
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            str = string.Format("" +
-            "INSERT INTO fwd_forecast(wd1, wd2, wd3, wd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
+            string str_save = string.Format("INSERT INTO fwd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
             dt.Rows[0][0], dt.Rows[0][1], dt.Rows[0][2], dt.Rows[0][3], timestamp);
+            string str_count = "SELECT COUNT(id) FROM fwd_forecast";
+            string str_del = "DELETE FROM fwd_forecast WHERE id=(SELECT MIN(id) FROM `fwd_forecast`)";
 
-            o.cmmdNoReturn(str);
+            DataTable dt_count = o.GetDataTable(str_count);
+            int row_num = Convert.ToInt32(dt_count.Rows[0][0]);
+
+            if (row_num == 10)
+            {
+                o.cmmdNoReturn(str_del);
+                o.cmmdNoReturn(str_save);
+            }
+            else if (row_num < 10)
+            {
+                o.cmmdNoReturn(str_save);
+            }
+            else
+            {
+                for (int i = 0; i < row_num - 10; i++)
+                    o.cmmdNoReturn(str_del);
+            }
         }
 
         /// <summary>
@@ -401,12 +419,28 @@ namespace Hegang.APP
             dt = o.GetDataTable(str);
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            str = string.Format("" +
-            "INSERT INTO mwd_forecast(wd1, wd2, wd3, wd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
+            string str_save = string.Format("INSERT INTO mwd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
             dt.Rows[0][0], dt.Rows[0][1], dt.Rows[0][2], dt.Rows[0][3], timestamp);
+            string str_count = "SELECT COUNT(id) FROM mwd_forecast";
+            string str_del = "DELETE FROM mwd_forecast WHERE id=(SELECT MIN(id) FROM `mwd_forecast`)";
 
-            o.cmmdNoReturn(str);
+            DataTable dt_count = o.GetDataTable(str_count);
+            int row_num = Convert.ToInt32(dt_count.Rows[0][0]);
+
+            if (row_num == 10)
+            {
+                o.cmmdNoReturn(str_del);
+                o.cmmdNoReturn(str_save);
+            }
+            else if (row_num < 10)
+            {
+                o.cmmdNoReturn(str_save);
+            }
+            else
+            {
+                for (int i = 0; i < row_num - 10; i++)
+                    o.cmmdNoReturn(str_del);
+            }
         }
 
         /// <summary>
@@ -427,12 +461,28 @@ namespace Hegang.APP
             dt = o.GetDataTable(str);
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            str = string.Format("" +
-            "INSERT INTO fzd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
+            string str_save = string.Format("INSERT INTO fzd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
             dt.Rows[0][0], dt.Rows[0][1], dt.Rows[0][2], dt.Rows[0][3], timestamp);
+            string str_count = "SELECT COUNT(id) FROM fzd_forecast";
+            string str_del = "DELETE FROM fzd_forecast WHERE id=(SELECT MIN(id) FROM `fzd_forecast`)";
 
-            o.cmmdNoReturn(str);
+            DataTable dt_count = o.GetDataTable(str_count);
+            int row_num = Convert.ToInt32(dt_count.Rows[0][0]);
+
+            if (row_num == 10)
+            {
+                o.cmmdNoReturn(str_del);
+                o.cmmdNoReturn(str_save);
+            }
+            else if (row_num < 10)
+            {
+                o.cmmdNoReturn(str_save);
+            }
+            else
+            {
+                for (int i = 0; i < row_num - 10; i++)
+                    o.cmmdNoReturn(str_del);
+            }
         }
 
         /// <summary>
@@ -479,12 +529,28 @@ namespace Hegang.APP
             dt = o.GetDataTable(str);
 
             string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            str = string.Format("" +
-            "INSERT INTO mzd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
+            string str_save = string.Format("INSERT INTO mzd_forecast(zd1, zd2, zd3, zd4, timestamp) VALUES('{0}','{1}','{2}','{3}','{4}');",
             dt.Rows[0][0], dt.Rows[0][1], dt.Rows[0][2], dt.Rows[0][3], timestamp);
+            string str_count = "SELECT COUNT(id) FROM mzd_forecast;";
+            string str_del = "DELETE FROM mzd_forecast WHERE id=(SELECT MIN(id) FROM `mzd_forecast`);";
 
-            o.cmmdNoReturn(str);
+            DataTable dt_count = o.GetDataTable(str_count);
+            int row_num = Convert.ToInt32(dt_count.Rows[0][0]);
+
+            if (row_num == 10)
+            {
+                o.cmmdNoReturn(str_del);
+                o.cmmdNoReturn(str_save);
+            }
+            else if (row_num < 10)
+            {
+                o.cmmdNoReturn(str_save);
+            }
+            else
+            {
+                for (int i = 0; i < row_num - 10; i++)
+                    o.cmmdNoReturn(str_del);
+            }
         }
     }
 }

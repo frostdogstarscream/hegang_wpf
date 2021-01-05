@@ -19,7 +19,13 @@ namespace Hegang.APP
         /// <returns></returns>
         public static string get_db_config_path()
         {
-            return @"../conf/db_config.xml";
+            string path = System.AppDomain.CurrentDomain.BaseDirectory;
+            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
+            path = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(Directory.GetParent(path).FullName);
+            path = Directory.GetCurrentDirectory();
+
+            return path+@"/conf/db_config.xml";
         }
         /// <summary>
         /// 获取elec_usage.xml的相对路径

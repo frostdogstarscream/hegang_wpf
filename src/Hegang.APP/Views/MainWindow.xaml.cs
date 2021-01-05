@@ -1,4 +1,5 @@
 ﻿using Hegang.APP.ViewModels;
+using Hegang.APP.Views;
 using HFD.KEPWare;
 using OPCAutomation;
 using System;
@@ -18,15 +19,32 @@ namespace Hegang.APP
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(bool flag)
+        private User user;
+
+        #region 窗体成员
+        private DataBaseConfig dbcWindow;
+        private Login loginWindow;
+        private PLCItemConfig picWindow;
+        private UserManage umWindow;
+        private PerInfoManage piWindow;
+        #endregion
+
+
+        public MainWindow(User _user,bool flag)
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
             
             if (flag)
-                this.userManage.Visibility =Visibility.Collapsed;
-            
+                this.u_man.Visibility =Visibility.Collapsed;
+
             //this.listViewScroll();
+
+            this.user = _user;
+
+            this.Title = string.Format("{0}您好！欢迎使用鸟山矿PLC监测服务程序", user.UserName);
+            
+            
         }
 
         /// <summary>
@@ -102,6 +120,46 @@ namespace Hegang.APP
         {
             /*if (this.listView.Items.Count != 0)
                 this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);*/
+        }
+
+        private void db_conf_Click(object sender, RoutedEventArgs e)
+        {
+            this.dbcWindow = new DataBaseConfig();
+            this.dbcWindow.ShowDialog();
+            if (!string.IsNullOrEmpty(dbcWindow.Rtn_msg))
+                this.color_bar_text.Text = dbcWindow.Rtn_msg;
+        }
+
+        private void tp_conf_Click(object sender, RoutedEventArgs e)
+        {
+            this.picWindow = new PLCItemConfig();
+            this.picWindow.ShowDialog();
+        }
+
+        private void u_man_Click(object sender, RoutedEventArgs e)
+        {
+            this.umWindow = new UserManage();
+            this.umWindow.ShowDialog();
+        }
+
+        private void pi_man_Click(object sender, RoutedEventArgs e)
+        {
+            this.piWindow = new PerInfoManage(user);
+            this.piWindow.ShowDialog();
+            if (!string.IsNullOrEmpty(piWindow.Rtn_msg))
+                this.color_bar_text.Text = piWindow.Rtn_msg;
+        }
+
+        private void help_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.loginWindow = new Login();
+            this.Close();
+            this.loginWindow.ShowDialog();
         }
     }
 }

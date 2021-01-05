@@ -86,5 +86,11 @@ namespace Hegang.APP.Views
             modifyUser.Closed += new EventHandler(modifyUserClosed);
             modifyUser.ShowDialog();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (e.Cancel == true)
+                this.Hide();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hegang.APP.Models.DataBase;
+using Hegang.APP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,6 +26,11 @@ namespace Hegang.APP.Views
     {
         private DbObject o;
 
+        #region 窗体成员
+        private MainWindow mainWindow;
+        private Tip tipWindow;
+        #endregion
+
         public Register()
         {
             InitializeComponent();
@@ -44,7 +50,7 @@ namespace Hegang.APP.Views
         }
 
         /// <summary>
-        /// 关闭窗体
+        /// 关闭整个程序
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -58,8 +64,8 @@ namespace Hegang.APP.Views
             bool flag = this.id_tb.Text == "" || this.userName_tb.Text=="" || this.pwd_tb.Text == "" || this.age_tb.Text == "" || this.nation_tb.Text == "" || this.department_tb.Text == "";
             if (flag)
             {
-                Tip tip = new Tip("信息输入不完整！");
-                tip.ShowDialog();
+                this.tipWindow = new Tip("信息输入不完整！");
+                this.tipWindow.ShowDialog();
                 return;
             }
 
@@ -67,18 +73,29 @@ namespace Hegang.APP.Views
             DataTable dt = o.GetDataTable(str);
             if(Convert.ToInt32(dt.Rows[0][0])!= 0)
             {
-                Tip tip = new Tip("该工号已注册！");
-                tip.ShowDialog();
+                this.tipWindow = new Tip("该工号已注册！");
+                this.tipWindow.ShowDialog();
+                return;
             }
             else
             {
                 str = string.Format("INSERT INTO user(id, userName, pwd, age, nation, department) VALUES('{0}','{1}','{2}','{3}','{4}','{5}');",
                 this.id_tb.Text, this.userName_tb.Text, this.pwd_tb.Text, this.age_tb.Text, this.nation_tb.Text, this.department_tb.Text);
                 o.cmmdNoReturn(str);
-                MainWindow mainWindow = new MainWindow(true);
+                this.tipWindow = new Tip("注册成功！");
+                this.tipWindow.ShowDialog();
+
+                User user = new User();
+                user.Id = this.id_tb.Text;
+                user.UserName = this.userName_tb.Text;
+                user.Pwd = this.pwd_tb.Text;
+                user.Age = this.age_tb.Text;
+                user.Nation = this.nation_tb.Text;
+                user.Department = this.department_tb.Text;
+
+                this.mainWindow = new MainWindow(user,true);
                 this.Close();
-                Tip tip = new Tip("注册成功！");
-                tip.ShowDialog();
+                this.mainWindow.Show();
             }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hegang.APP.Views"
         mc:Ignorable="d"
-        Title="用户管理" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="用户管理" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Window.Resources>
         <!-- GridViewColumnHeader样式 -->
         <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">

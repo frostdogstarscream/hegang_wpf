@@ -14,7 +14,9 @@ namespace Hegang.APP.ViewModels
         private string age;
         private string nation;
         private string department;
-        
+
+        public User() { }
+
         public User(string _id,string _userName,string _pwd,string _age,string _nation,string _department)
         {
             this.Id = _id;

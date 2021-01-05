@@ -25,6 +25,16 @@ namespace Hegang.APP.Views
     {
         private DbObject o;
         private User user;
+        private string rtn_msg;
+
+        public string Rtn_msg
+        {
+            get
+            {
+                return rtn_msg;
+            }
+        }
+
         public PerInfoManage(User _user)
         {
             InitializeComponent();
@@ -33,6 +43,12 @@ namespace Hegang.APP.Views
             o = (DbObject)Assembly.Load("Hegang.APP").CreateInstance(db_str);
 
             this.user = _user;
+
+            this.userName_tb.Text = user.UserName;
+            this.pwd_tb.Text = user.Pwd;
+            this.age_tb.Text = user.Age;
+            this.nation_tb.Text = user.Nation;
+            this.department_tb.Text = user.Department;
         }
 
         /// <summary>
@@ -60,6 +76,8 @@ namespace Hegang.APP.Views
             string str = string.Format("UPDATE user SET userName = '{0}', pwd = '{1}', age='{2}', nation='{3}',department='{4}' WHERE id = '{5}'",
                 this.userName_tb.Text, this.pwd_tb.Text, this.age_tb.Text, this.nation_tb.Text, this.department_tb.Text, user.Id);
             o.cmmdNoReturn(str);
+            this.rtn_msg = "个人信息修改成功！";
+            this.Close();
         }
     }
 }
