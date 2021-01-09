@@ -36,12 +36,18 @@ namespace Hegang.APP.ViewModels
         private string colorBar_color;
         private string consoleText;
         private bool isEnabled;
+        private bool d_save_isChecked;
+        private bool d_stat_isChecked;
+        private bool d_fore_isChecked;
         #endregion
 
         #region 命令属性
         public DelegateCommand ConnectCommand { get; set; }
         public DelegateCommand ReadCommand { get; set; }
         public DelegateCommand StopCommand { get; set; }
+        public DelegateCommand D_saveCommand { get; set; }
+        public DelegateCommand D_statCommand { get; set; }
+        public DelegateCommand D_foreCommand { get; set; }
         #endregion
 
         public MainWindowViewModel()
@@ -63,14 +69,21 @@ namespace Hegang.APP.ViewModels
 
             this.StopCommand = new DelegateCommand();
             this.StopCommand.ExcuteAction = new Action<object>(this.StopCommandExecute);
+
+            this.D_saveCommand = new DelegateCommand();
+            this.D_saveCommand.ExcuteAction = new Action<object>(this.D_saveCommandExecute);
+
+            this.D_statCommand = new DelegateCommand();
+            this.D_statCommand.ExcuteAction = new Action<object>(this.D_statCommandExecute);
+
+            this.D_foreCommand = new DelegateCommand();
+            this.D_foreCommand.ExcuteAction = new Action<object>(this.D_foreCommandExecute);
             #endregion
 
             #region 普通私用成员变量初始化
             da = new KEPWareDataAdapter();
             this.ConsoleText += "KEPWareDataAdapter对象已完成初始化。\n";
-            timeJudgeItemList = new TimeJudgeItemList();
-            input = new DbServiceInput();
-            dataSaveService = new DataSaveService();
+            
             fixedTimeTaskService = new FixedTimeTaskService();
             #endregion
 
@@ -81,12 +94,13 @@ namespace Hegang.APP.ViewModels
             #endregion
 
             #region 设置定时任务
-            fixedTimeTaskService.setTaskAtZero();
+            /*fixedTimeTaskService.setTaskAtZero();
             fixedTimeTaskService.setTaskPerHour();
-            fixedTimeTaskService.setTaskPerMinute();
+            fixedTimeTaskService.setTaskPerMinute();*/
             #endregion
         }
 
+        #region Get-Set方法
         public bool IsEnabled
         {
             get { return isEnabled; }
@@ -94,6 +108,36 @@ namespace Hegang.APP.ViewModels
             {
                 isEnabled = value;
                 this.OnPropertyChanged("IsEnabled");
+            }
+        }
+
+        public bool D_save_isChecked
+        {
+            get { return d_save_isChecked; }
+            set
+            {
+                d_save_isChecked = value;
+                this.OnPropertyChanged("D_save_isChecked");
+            }
+        }
+
+        public bool D_stat_isChecked
+        {
+            get { return d_stat_isChecked; }
+            set
+            {
+                d_stat_isChecked = value;
+                this.OnPropertyChanged("D_stat_isChecked");
+            }
+        }
+
+        public bool D_fore_isChecked
+        {
+            get { return d_fore_isChecked; }
+            set
+            {
+                d_fore_isChecked = value;
+                this.OnPropertyChanged("D_fore_isChecked");
             }
         }
 
@@ -196,7 +240,9 @@ namespace Hegang.APP.ViewModels
                 this.OnPropertyChanged("ConsoleText");
             }
         }
+        #endregion
 
+        #region 命令属性初始化
         private void ConnectCommandExecute(object parameter)
         {
             this.Btn_connect_isEnabled = false;
@@ -268,7 +314,7 @@ namespace Hegang.APP.ViewModels
 
         private void StopCommandExecute(object parameter)
         {
-            this.Btn_stop_isEnabled = true;
+            this.Btn_stop_isEnabled = false;
 
             for (int i = 0; i < channel_device_list.Count; i++)
                 da.MyGroups[i].DataChange -= new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
@@ -277,6 +323,46 @@ namespace Hegang.APP.ViewModels
             this.Btn_read_isEnabled = true;
             this.IsEnabled = true;
         }
+
+        private void D_saveCommandExecute(object parameter)
+        {
+            #region 数据库相关内容初始化
+            input = new DbServiceInput();
+            dataSaveService = new DataSaveService();
+            timeJudgeItemList = new TimeJudgeItemList();
+            this.ConsoleText += "数据库相关内容初始化完成。\n";
+            #endregion
+
+            
+        }
+
+        private void D_statCommandExecute(object parameter)
+        {
+            if (D_stat_isChecked)
+            {
+                fixedTimeTaskService.Stat_isEnabled = true;
+                fixedTimeTaskService.setTaskAtZero();
+                fixedTimeTaskService.setTaskPerHour();
+            }
+            else
+            {
+                fixedTimeTaskService.Stat_isEnabled = false;
+            }
+        }
+
+        private void D_foreCommandExecute(object parameter)
+        {
+            if (D_fore_isChecked)
+            {
+                fixedTimeTaskService.Fore_isEnabled = true;
+                fixedTimeTaskService.setTaskPerMinute();
+            }
+            else
+            {
+                fixedTimeTaskService.Stat_isEnabled = false;
+            }
+        }
+        #endregion
 
         /// <summary>
         /// 将 da.GetPLCDevices() 的返回值转换为TreeView的ItemsSource
@@ -384,24 +470,27 @@ namespace Hegang.APP.ViewModels
             //this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);
             #endregion
 
-            #region 数据存储
-            //重置时间判断列表每一项的标志位
-            timeJudgeItemList.resetFlags();
-
-            for (int i = 0; i < NumItems; i++)
+            if (D_save_isChecked)
             {
-                set_data_to_dic(channel[i], device[i], itemName[i], itemValues.GetValue(i + 1).ToString());
-                // 将故障信息存入数据库
-                if (channel[i] == "故障测试" && itemValues.GetValue(i + 1).ToString() == "True")
-                    Gz.save(dataSaveService.O,device[i], itemName[i]);
+                #region 数据存储
+                //重置时间判断列表每一项的标志位
+                timeJudgeItemList.resetFlags();
+
+                for (int i = 0; i < NumItems; i++)
+                {
+                    set_data_to_dic(channel[i], device[i], itemName[i], itemValues.GetValue(i + 1).ToString());
+                    // 将故障信息存入数据库
+                    if (channel[i] == "故障测试" && itemValues.GetValue(i + 1).ToString() == "True")
+                        Gz.save(dataSaveService.O, device[i], itemName[i]);
+                }
+
+                //重置时间判断列表每一项的时间信息
+                timeJudgeItemList.resetTimeList();
+
+                //将出故障外的PLC数据存储到数据库
+                dataSaveService.savePLCData(ref input, timeJudgeItemList);
+                #endregion
             }
-
-            //重置时间判断列表每一项的时间信息
-            timeJudgeItemList.resetTimeList();
-
-            //将出故障外的PLC数据存储到数据库
-            dataSaveService.savePLCData(ref input, timeJudgeItemList);
-            #endregion
         }
 
         /// <summary>

@@ -111,6 +111,7 @@
         </ControlTemplate>
         
         <!-- GridViewColumnHeader样式 -->
+        <!--
         <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="OverridesDefaultStyle" Value="False" />
@@ -132,6 +133,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        -->
     </Window.Resources>
 
     <!-- 背景色：#F0F2F5 -->
@@ -174,10 +176,19 @@
                     <!--<Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0" Name="btn_DBConfig" Click="btn_DBConfig_Click">数据库配置(D)</Button>
                     <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0">帮助(H)</Button>-->
                     <Menu>
-                        <MenuItem Name="db_conf" Header="数据库配置(D)" IsEnabled="{Binding IsEnabled}" Click="db_conf_Click"></MenuItem>
-                        <MenuItem Name="tp_conf" Header="测点配置(T)" IsEnabled="{Binding IsEnabled}" Click="tp_conf_Click"></MenuItem>
-                        <MenuItem Name="u_man" Header="用户管理(U)" IsEnabled="{Binding IsEnabled}" Click="u_man_Click"></MenuItem>
-                        <MenuItem Name="pi_man" Header="个人信息管理(P)" IsEnabled="{Binding IsEnabled}" Click="pi_man_Click"></MenuItem>
+                        <MenuItem Header="信息管理(I)" IsEnabled="{Binding IsEnabled}">
+                            <MenuItem Name="u_man" Header="用户管理" Click="u_man_Click"></MenuItem>
+                            <MenuItem Name="pi_man" Header="个人信息管理" Click="pi_man_Click"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="监测配置(C)" IsEnabled="{Binding IsEnabled}">
+                            <MenuItem Name="db_conf" Header="数据库配置" Click="db_conf_Click"></MenuItem>
+                            <MenuItem Name="tp_conf" Header="测点配置" Click="tp_conf_Click"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="功能设置(S)" IsEnabled="{Binding IsEnabled}">
+                            <MenuItem Name="d_save" Header="数据保存" IsCheckable="True" Command = "{Binding D_saveCommand}" IsChecked = "{Binding D_save_isChecked}"/>
+                            <MenuItem Name="d_stat" Header="数据统计" IsCheckable="True" Command = "{Binding D_statCommand}" IsChecked = "{Binding D_stat_isChecked}"/>
+                            <MenuItem Name="d_fore" Header="数据预测" IsCheckable="True" Command = "{Binding D_foreCommand}" IsChecked = "{Binding D_fore_isChecked}"/>
+                        </MenuItem>
                         <MenuItem Name="help" Header="帮助(H)" IsEnabled="{Binding IsEnabled}" Click="help_Click"></MenuItem>
                         <MenuItem Name="exit" Header="退出(E)" IsEnabled="{Binding IsEnabled}" Click="exit_Click"></MenuItem>
                     </Menu>
@@ -205,11 +216,11 @@
             <Border Grid.Row="1" BorderBrush="gray" BorderThickness="0,0.3,0,0.3" Padding="0,3,0,3">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../images/menu.ico" Height="15"></Image>
-                    <Button Name="btn_connect" Grid.Column="0" Background="Transparent" BorderThickness="0" Content="加载并连接OPC(C)" Padding="5,0,5,0" Command="{Binding ConnectCommand}" IsEnabled="{Binding Btn_connect_isEnabled}"/>
+                    <Button Name="btn_connect" Grid.Column="0" Background="Transparent" BorderThickness="0" Content="加载并连接OPC" Padding="5,0,5,0" Command="{Binding ConnectCommand}" IsEnabled="{Binding Btn_connect_isEnabled}"/>
                     <ComboBox Name="cmb_server_list" Grid.Column="1"  SelectedIndex="0" Template="{StaticResource ComboBox_template}" Margin="5,0,5,0" ItemsSource="{Binding ServerListToString}" Text="{Binding SelectedServer}"/>
                     <!--<ComboBox Name="cmb_server_list" Grid.Column="1" Height="22" SelectedIndex="0" Width="275" Margin="5,0,5,0"/>-->
-                    <Button Content="读取数据(R)" Background="Transparent" BorderThickness="0" Padding="5,0,5,0" Name="btn_read" Command="{Binding ReadCommand}" IsEnabled="{Binding Btn_read_isEnabled}"/>
-                    <Button Background="Transparent" BorderThickness="0" Content="停止(S)" Padding="5,0,5,0" Name="btn_stop" Command="{Binding StopCommand}" IsEnabled="{Binding Btn_stop_isEnabled}"/>
+                    <Button Content="读取数据" Background="Transparent" BorderThickness="0" Padding="5,0,5,0" Name="btn_read" Command="{Binding ReadCommand}" IsEnabled="{Binding Btn_read_isEnabled}"/>
+                    <Button Background="Transparent" BorderThickness="0" Content="停止" Padding="5,0,5,0" Name="btn_stop" Command="{Binding StopCommand}" IsEnabled="{Binding Btn_stop_isEnabled}"/>
                 </StackPanel>
             </Border>
 
@@ -257,10 +268,11 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="210"/>
-                            <ColumnDefinition Width="130"/>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="*" MinWidth="210"/>
+                            <ColumnDefinition Width="*" MinWidth="130"/>
+                            <ColumnDefinition Width="*" MinWidth="80"/>
+                            <ColumnDefinition Width="*" MinWidth="130"/>
+                            <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" x:Name="col1"/>
                         <Grid Grid.Column="1" x:Name="col2"/>
@@ -269,8 +281,7 @@
                     </Grid>
                     <ListView Name="listView" Grid.Row="1" BorderBrush="Gray" BorderThickness="0.5" ItemsSource="{Binding ListViewItemList, Mode=TwoWay}" ScrollViewer.ScrollChanged="listView_ScrollChanged">
                         <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource HeadStyle}">
-                                
+                            <GridView ColumnHeaderContainerStyle="{DynamicResource HeadStyle}">
                                 <GridView.Columns>
                                     <GridViewColumn  Header="测点名称" DisplayMemberBinding="{Binding Path = Item_name}" Width="{Binding ElementName=col1,Path=ActualWidth}"/>
                                     <GridViewColumn  Header="测点值" DisplayMemberBinding="{Binding Path = Item_value}" Width="{Binding ElementName=col2,Path=ActualWidth}"/>
@@ -288,9 +299,9 @@
                     <RowDefinition Height="25"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Background="Transparent" Height="25" BorderBrush="gray" BorderThickness="0,0.3,0,0">
+                <Border Grid.Row="0" Background="Transparent" Height="25" BorderBrush="Gray" BorderThickness="0,1,0,0">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../images/menu.ico" Height="15"></Image>
+                        <Image Source="../images/console.png" Height="20" Margin="5,0,0,0"></Image>
                         <TextBlock VerticalAlignment="Center" Padding="5,0,0,0">输出信息</TextBlock>
                     </StackPanel>
                 </Border>

@@ -100,4 +100,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="mi_template" TargetType="MenuItem">
+        <CheckBox Content="Nihao"></CheckBox>
+    </ControlTemplate>
 </ResourceDictionary>

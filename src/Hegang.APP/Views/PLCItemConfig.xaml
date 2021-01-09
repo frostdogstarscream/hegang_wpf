@@ -46,7 +46,7 @@
                 </Grid>
                 <ListView Grid.Row="1" Name="tp_listView" ItemsSource="{Binding TestPoints, Mode=TwoWay}">
                     <ListView.View>
-                        <GridView>
+                        <GridView ColumnHeaderContainerStyle="{DynamicResource HeadStyle}">
                             <GridView.Columns>
                                 <GridViewColumn Header="序号" Width="{Binding ElementName=col0,Path=ActualWidth}" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
                                 <GridViewColumn Header="测点名称" Width="{Binding ElementName=col1,Path=ActualWidth}" DisplayMemberBinding="{Binding Name}"></GridViewColumn>

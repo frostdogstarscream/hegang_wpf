@@ -29,6 +29,11 @@ namespace Hegang.APP
         private PerInfoManage piWindow;
         #endregion
 
+        public MainWindow()
+        {
+            InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
+        }
 
         public MainWindow(User _user,bool flag)
         {

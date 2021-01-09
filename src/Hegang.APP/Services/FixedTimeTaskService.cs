@@ -15,6 +15,31 @@ namespace Hegang.APP
     class FixedTimeTaskService
     {
         private DbObject o;
+        private bool stat_isEnabled;
+        private bool fore_isEnabled;
+
+        public bool Stat_isEnabled{
+            get
+            {
+                return stat_isEnabled;
+            }
+            set
+            {
+                stat_isEnabled = value;
+            }
+        }
+
+        public bool Fore_isEnabled
+        {
+            get
+            {
+                return fore_isEnabled;
+            }
+            set
+            {
+                fore_isEnabled = value;
+            }
+        }
 
         public FixedTimeTaskService()
         {
@@ -82,14 +107,17 @@ namespace Hegang.APP
         /// <param name="state"></param>
         private void handle_event_at_zero(object state)
         {
-            #region 执行的任务
-            task1();
-            task2();
-            task3();
-            #endregion
-            
-            // 再次设定任务执行时间
-            setTaskAtZero();
+            if (stat_isEnabled)
+            {
+                #region 执行的任务
+                task1();
+                task2();
+                task3();
+                #endregion
+
+                // 再次设定任务执行时间
+                setTaskAtZero();
+            }
         }
 
         /// <summary>
@@ -98,17 +126,20 @@ namespace Hegang.APP
         /// <param name="state"></param>
         private void handle_event_per_hour(object state)
         {
-            #region 执行的任务
-            task4();
-            task5();
-            task6();
-            task7();
-            task8();
-            task9();
-            #endregion
+            if (stat_isEnabled)
+            {
+                #region 执行的任务
+                task4();
+                task5();
+                task6();
+                task7();
+                task8();
+                task9();
+                #endregion
 
-            // 再次设定任务执行时间
-            setTaskPerHour();
+                // 再次设定任务执行时间
+                setTaskPerHour();
+            }
         }
 
         /// <summary>
@@ -117,13 +148,16 @@ namespace Hegang.APP
         /// <param name="state"></param>
         private void handle_event_per_minute(object state)
         {
-            // 执行任务
-            task10();
-            task11();
-            task12();
-            task13();
-            // 再次设定任务执行时间
-            setTaskPerMinute();
+            if (fore_isEnabled)
+            {
+                // 执行任务
+                task10();
+                task11();
+                task12();
+                task13();
+                // 再次设定任务执行时间
+                setTaskPerMinute();
+            }
         }
 
         /// <summary>

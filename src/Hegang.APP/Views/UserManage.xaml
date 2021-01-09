@@ -94,7 +94,6 @@
                                                 <Button x:Name="modify_btn" Background="#a4e2c6" Content="修改" Width="50" Click="modify_btn_Click" Margin="0,0,10,0"></Button>
                                                 <Button x:Name="delete_btn" Background="#f9906f" Content="删除" Width="50" Click="delete_btn_Click"></Button>
                                             </StackPanel>
-                                            
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
