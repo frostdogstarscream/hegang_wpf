@@ -21,8 +21,6 @@ namespace Hegang.APP
     /// </summary>
     public partial class MainWindow : Window
     {
-        private User user;
-
         #region 窗体成员
         private DataBaseConfig dbcWindow;
         private Login loginWindow;
@@ -32,6 +30,7 @@ namespace Hegang.APP
         #endregion
 
         #region 普通私有成员变量
+        private User user;
         private KEPWareDataAdapter da;
         private DbServiceInput input;
         private DataSaveService dataSaveService;
@@ -41,39 +40,43 @@ namespace Hegang.APP
         private DateTime nowTime;
         #endregion
 
-        
-
         #region 构造函数
         public MainWindow()
         {
             InitializeComponent();
-            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
-            this.color_bar_text.Text = "就绪";
-            nowTime = DateTime.Now;
-            fixedTimeTaskService = new FixedTimeTaskService();
-            //this.DataContext = new MainWindowViewModel();
+            this.initMembers();
         }
 
         public MainWindow(User _user,bool flag)
         {
             InitializeComponent();
-            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
-            this.color_bar_text.Text = "就绪";
-            nowTime = DateTime.Now;
-            fixedTimeTaskService = new FixedTimeTaskService();
-            //this.DataContext = new MainWindowViewModel();
+            this.initMembers();
 
             if (flag)
                 this.u_man.Visibility =Visibility.Collapsed;
-
-            //this.listViewScroll();
 
             this.user = _user;
             this.Title = string.Format("{0}您好！欢迎使用鸟山矿PLC监测服务程序", user.UserName);
         }
         #endregion
 
-        
+        public void initMembers()
+        {
+            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
+            this.color_bar_text.Text = "就绪";
+            nowTime = DateTime.Now;
+            fixedTimeTaskService = new FixedTimeTaskService();
+        }
+
+        public void initDbMembers()
+        {
+            if(dataSaveService==null)
+                dataSaveService = new DataSaveService(); 
+            if(timeJudgeItemList==null)
+                timeJudgeItemList = new TimeJudgeItemList();
+            if (input == null)
+                initialDic();
+        }
 
         #region 窗体控制按钮
         /// <summary>
@@ -107,6 +110,7 @@ namespace Hegang.APP
         }
         #endregion
 
+        #region 其他按钮
         /// <summary>
         /// 显示数据库配置窗体
         /// </summary>
@@ -117,14 +121,6 @@ namespace Hegang.APP
             DataBaseConfig dataBaseConfig = new DataBaseConfig();
             dataBaseConfig.Owner = this;
             dataBaseConfig.ShowDialog();
-        }
-
-        
-
-        private void listView_ScrollChanged(object sender, System.Windows.Controls.ScrollChangedEventArgs e)
-        {
-            /*if (this.listView.Items.Count != 0)
-                this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);*/
         }
 
         private void db_conf_Click(object sender, RoutedEventArgs e)
@@ -200,10 +196,6 @@ namespace Hegang.APP
 
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
-            //this.ListViewItemList = new ObservableCollection<ListViewItem>();
-            this.initialDic();
-            this.console_tb.Text += "PLC点表初始化完成。\n";
-
             channel_device_list = new List<string>();
             foreach (Node parent_node in this.chk_treeview.Items)
             {
@@ -265,25 +257,23 @@ namespace Hegang.APP
             for (int i = 0; i < channel_device_list.Count; i++)
                 da.MyGroups[i].DataChange -= new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
 
-
             da.Close();
             this.console_tb.Text += "KEPWareAdapter资源已释放。\n";
             this.console_tb.Text += "数据数据读取已停止。\n";
             this.btn_connect.IsEnabled = true;
             this.menu.IsEnabled = true;
+            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
+            this.color_bar_text.Text = "就绪";
         }
 
         private void d_save_Click(object sender, RoutedEventArgs e)
         {
-            #region 数据库相关内容初始化
-            dataSaveService = new DataSaveService();
-            timeJudgeItemList = new TimeJudgeItemList();
-            this.console_tb.Text += "数据库相关内容初始化完成。\n";
-            #endregion
+            initDbMembers();
         }
 
         private void d_stat_Click(object sender, RoutedEventArgs e)
         {
+            initDbMembers();
             if (this.d_stat.IsChecked)
             {
                 fixedTimeTaskService.Stat_isEnabled = true;
@@ -298,6 +288,7 @@ namespace Hegang.APP
 
         private void d_fore_Click(object sender, RoutedEventArgs e)
         {
+            initDbMembers();
             if (this.d_fore.IsChecked)
             {
                 fixedTimeTaskService.Fore_isEnabled = true;
@@ -307,6 +298,13 @@ namespace Hegang.APP
             {
                 fixedTimeTaskService.Stat_isEnabled = false;
             }
+        }
+        #endregion
+
+        private void listView_ScrollChanged(object sender, System.Windows.Controls.ScrollChangedEventArgs e)
+        {
+            /*if (this.listView.Items.Count != 0)
+                this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);*/
         }
 
         /// <summary>
@@ -369,6 +367,7 @@ namespace Hegang.APP
                         input.Dic.Add(channel.NodeName + "." + device.NodeName + "." + itemName, "0");
                 }
             }
+            this.console_tb.Text += "PLC点表初始化完成。\n";
         }
 
         /// <summary>
@@ -460,7 +459,5 @@ namespace Hegang.APP
             if (input.Dic.ContainsKey(key))
                 input.Dic[key] = itemValue;
         }
-
-        
     }
 }

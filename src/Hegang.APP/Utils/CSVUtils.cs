@@ -30,6 +30,33 @@ namespace Hegang.APP
         }
 
         /// <summary>
+        /// 获取所有点表的文件名
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> getAllPDs()
+        {
+            List<string> csvFiles = new List<string>();
+            string path = CSVUtils.get_csv_path();
+            string extName = ".csv";
+
+            DirectoryInfo fdir = new DirectoryInfo(path);
+            FileInfo[] file = fdir.GetFiles();
+            //FileInfo[] file = Directory.GetFiles(path); //文件列表   
+
+            if (file.Length != 0) //当前目录文件或文件夹不为空                   
+            {
+                foreach (FileInfo f in file) //显示当前目录所有文件   
+                {
+                    if (extName.ToLower().IndexOf(f.Extension.ToLower()) >= 0)
+                    {
+                        csvFiles.Add(f.Name);
+                    }
+                }
+            }
+            return csvFiles;
+        }
+
+        /// <summary>
         /// 将plc_items_table.csv解析为DataTable
         /// </summary>
         /// <returns></returns>

@@ -13,9 +13,7 @@
         mc:Ignorable="d"
         Title="鸟山矿PLC监测服务程序" Height="600" Width="800"  MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen" Icon="../images/icon.ico">
-
-
-
+    
     <!-- 在 WindowStyle="None" ResizeMode="CanResize" 的前提下，将窗体设置为 
         1.鼠标拖动窗体边缘不能改变大小
         2.窗体边缘有阴影效果
@@ -167,14 +165,10 @@
                     </StackPanel>
                 </DockPanel>
             </Border>-->
-
-
-
+            
             <Border Grid.Row="0" Padding="0,3,0,3">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../images/menu.ico" Height="15"></Image>
-                    <!--<Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0" Name="btn_DBConfig" Click="btn_DBConfig_Click">数据库配置(D)</Button>
-                    <Button BorderThickness="0" Background="Transparent" Padding="5,0,5,0">帮助(H)</Button>-->
                     <Menu x:Name="menu">
                         <MenuItem Header="信息管理(I)">
                             <MenuItem Name="u_man" Header="用户管理" Click="u_man_Click"></MenuItem>
@@ -184,17 +178,16 @@
                             <MenuItem Name="db_conf" Header="数据库配置" Click="db_conf_Click"></MenuItem>
                             <MenuItem Name="tp_conf" Header="测点配置" Click="tp_conf_Click"></MenuItem>
                         </MenuItem>
-                        <MenuItem Header="功能设置(S)">
-                            <MenuItem Name="d_save" Header="数据保存" IsCheckable="True" Click="d_save_Click"/>
-                            <MenuItem Name="d_stat" Header="数据统计" IsCheckable="True" Click="d_stat_Click"/>
-                            <MenuItem Name="d_fore" Header="数据预测" IsCheckable="True" Click="d_fore_Click"/>
+                        <MenuItem Header="功能设置(S)" >
+                            <MenuItem Name="d_save" Header="数据保存" IsCheckable="True" Click="d_save_Click" StaysOpenOnClick="True"/>
+                            <MenuItem Name="d_stat" Header="数据统计" IsCheckable="True" Click="d_stat_Click" StaysOpenOnClick="True"/>
+                            <MenuItem Name="d_fore" Header="数据预测" IsCheckable="True" Click="d_fore_Click" StaysOpenOnClick="True"/>
                         </MenuItem>
                         <MenuItem Name="help" Header="帮助(H)" Click="help_Click"></MenuItem>
                         <MenuItem Name="exit" Header="退出(E)" Click="exit_Click"></MenuItem>
                     </Menu>
                 </StackPanel>
             </Border>
-
 
             <!--
             <Grid Grid.Row="1" Margin="10,0,10,0" Height="27">
@@ -222,7 +215,6 @@
                     <Button Background="Transparent" BorderThickness="0" Content="停止" Padding="5,0,5,0" Name="btn_stop" Click="btn_stop_Click"/>
                 </StackPanel>
             </Border>
-
 
             <Grid Margin="10,10,10,0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -310,7 +302,6 @@
             <!-- 
                 不执行 #4C8DAE #177CB0 #065279
                 执行 #F36838 
-                
             -->
             <Border Name="color_bar" Grid.Row="5">
                 <DockPanel>
@@ -321,11 +312,8 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
 
                     </StackPanel>
-
                 </DockPanel>
-
             </Border>
-            
         </Grid>
     </Border>
 </Window>
