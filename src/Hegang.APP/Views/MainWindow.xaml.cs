@@ -41,31 +41,28 @@ namespace Hegang.APP
         private DateTime nowTime;
         #endregion
 
-        #region 数据属性
-        private List<string> serverListToString;
-        private string selectedServer;
-        private bool btn_connect_isEnabled;
-        private bool btn_read_isEnabled;
-        private bool btn_stop_isEnabled;
-        private bool menuIsEnabled;
-        private bool d_save_isChecked;
-        private bool d_stat_isChecked;
-        private bool d_fore_isChecked;
-        private int selectedIndex;
-        #endregion
+        
 
         #region 构造函数
         public MainWindow()
         {
             InitializeComponent();
+            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
+            this.color_bar_text.Text = "就绪";
+            nowTime = DateTime.Now;
+            fixedTimeTaskService = new FixedTimeTaskService();
             //this.DataContext = new MainWindowViewModel();
         }
 
         public MainWindow(User _user,bool flag)
         {
             InitializeComponent();
+            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
+            this.color_bar_text.Text = "就绪";
+            nowTime = DateTime.Now;
+            fixedTimeTaskService = new FixedTimeTaskService();
             //this.DataContext = new MainWindowViewModel();
-            
+
             if (flag)
                 this.u_man.Visibility =Visibility.Collapsed;
 
@@ -122,32 +119,7 @@ namespace Hegang.APP
             dataBaseConfig.ShowDialog();
         }
 
-        public void listViewScroll(){
-            DateTime now = DateTime.Now;
-            //设置任务启动时间  
-            double hour = Convert.ToDouble(DateTime.Now.Hour);
-            double minute = Convert.ToDouble(DateTime.Now.Minute);
-            double second = Convert.ToDouble(DateTime.Now.Second);
-            double millSecond= Convert.ToDouble(DateTime.Now.Millisecond+250);
-
-
-
-            DateTime startTime = DateTime.Today.AddHours(hour).AddMinutes(minute).AddSeconds(second).AddMilliseconds(millSecond);
-
-            int delay = (int)((startTime - now).TotalMilliseconds);
-            var t = new System.Threading.Timer(handle_event);
-            //设置线程参数 任务delay毫秒后启动
-            t.Change(delay, Timeout.Infinite);
-        }
-
-        private void handle_event(object state)
-        {
-            // 执行任务
-            if(this.listView.Items.Count!=0)
-                this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);
-            // 再次设定任务执行时间
-            listViewScroll();
-        }
+        
 
         private void listView_ScrollChanged(object sender, System.Windows.Controls.ScrollChangedEventArgs e)
         {
@@ -211,9 +183,9 @@ namespace Hegang.APP
             this.cmb_server_list.SelectedIndex = 0;
             this.console_tb.Text += "本地OPC服务器获取完成。\n";
 
-            if (!string.IsNullOrEmpty(this.selectedServer))
+            if (!string.IsNullOrEmpty(this.cmb_server_list.SelectedItem.ToString()))
             {
-                da.InitialConnection(this.selectedServer);
+                da.InitialConnection(this.cmb_server_list.SelectedItem.ToString());
                 this.console_tb.Text += "已连接本地OPC服务器。\n";
 
                 this.chk_treeview.ItemsSource = get_tree(da.GetPLCDevices());
@@ -257,7 +229,7 @@ namespace Hegang.APP
                 da.MyGroups[i].DataChange += new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange);
 
             #region 结果更新
-            //this.color_bar.Background = "#9C5333";
+            this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9C5333"));
             this.color_bar_text.Text = "监测服务已启动";
             this.console_tb.Text += "开始读取数据。\n";
             this.btn_stop.IsEnabled = true;
@@ -284,7 +256,9 @@ namespace Hegang.APP
         private void btn_stop_Click(object sender, RoutedEventArgs e)
         {
             this.btn_stop.IsEnabled = false;
-            this.listView.ItemsSource = null;
+
+            //不同控件的清空方式有所差异
+            this.listView.Items.Clear();
             this.cmb_server_list.ItemsSource = null;
             this.chk_treeview.ItemsSource = null;
 
@@ -434,7 +408,7 @@ namespace Hegang.APP
 
             #region 数据展示
             //ListView设置1s更新一次，如果不设置更新间隔，会出现"高度必须为非负值"错误
-            if ((DateTime.Now - nowTime).TotalMilliseconds > 1000)
+            if ((DateTime.Now - nowTime).TotalMilliseconds > 200)
             {
                 for (int i = 1; i <= NumItems; i++)
                 {
@@ -444,13 +418,14 @@ namespace Hegang.APP
                     this.listView.Items.Add(new ListViewItem(channel[i - 1] + "." + device[i - 1] + "." + itemName[i - 1], itemValues.GetValue(i).ToString(), ((int)clientHandles.GetValue(i) - 1).ToString(), time));
 
                 }
+                //滚动条自动移动到最下方
                 //this.listView.ScrollIntoView(this.listView.Items[this.listView.Items.Count - 1]);
                 nowTime = DateTime.Now;
             }
             #endregion
 
             #region 数据存储
-            if (this.d_save.IsChecked)
+            if (this.d_save.IsChecked||this.d_stat.IsChecked||this.d_fore.IsChecked)
             {
                 //重置时间判断列表每一项的标志位
                 timeJudgeItemList.resetFlags();

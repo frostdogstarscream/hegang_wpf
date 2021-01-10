@@ -241,7 +241,7 @@
                             <TextBlock Text="选择待监测PLC" Margin="5,0,0,0"/>
                         </StackPanel>
 
-                        <TreeView  Name="chk_treeview" IsTextSearchCaseSensitive="True" BorderThickness="0" Margin="5" Background="Transparent" >
+                        <TreeView  Name="chk_treeview" IsTextSearchCaseSensitive="True"  BorderThickness="0" Margin="5" Background="Transparent" >
                             <TreeView.ItemContainerStyle>
                                 <Style TargetType="TreeViewItem">
                                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"></Setter>
