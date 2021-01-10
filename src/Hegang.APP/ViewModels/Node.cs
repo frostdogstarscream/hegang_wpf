@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hegang.APP
 {
-    class Node : INotifyPropertyChanged
+    public class Node : INotifyPropertyChanged
     {
         private string nodeName;
         private Node parentNode;
