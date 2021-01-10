@@ -60,7 +60,6 @@ namespace Hegang.APP.Models.DataBase.impl
         public MySqlConnection getDBConnection()
         {
             string str = @"server=" + server + "; port=" + port + ";user=" + user + "; password=" + password + "; database=" + database + ";";
-            Console.WriteLine(str);
             MySqlConnection conn = new MySqlConnection(str);
             return conn;
         }

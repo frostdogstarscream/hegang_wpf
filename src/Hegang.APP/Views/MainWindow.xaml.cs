@@ -166,5 +166,10 @@ namespace Hegang.APP
             this.Close();
             this.loginWindow.ShowDialog();
         }
+
+        private void cmb_server_list_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
