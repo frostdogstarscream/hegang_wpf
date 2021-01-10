@@ -50,6 +50,7 @@ namespace Hegang.APP.ViewModels
         public DelegateCommand D_saveCommand { get; set; }
         public DelegateCommand D_statCommand { get; set; }
         public DelegateCommand D_foreCommand { get; set; }
+        public DelegateCommand SelectCommand { get; set; }
         #endregion
 
         public MainWindowViewModel()
@@ -79,6 +80,9 @@ namespace Hegang.APP.ViewModels
 
             this.D_foreCommand = new DelegateCommand();
             this.D_foreCommand.ExcuteAction = new Action<object>(this.D_foreCommandExecute);
+
+            this.SelectCommand = new DelegateCommand();
+            this.SelectCommand.ExcuteAction = new Action<object>(this.SelectCommandExecute);
             #endregion
 
             #region 普通私用成员变量初始化
@@ -421,6 +425,10 @@ namespace Hegang.APP.ViewModels
             {
                 fixedTimeTaskService.Stat_isEnabled = false;
             }
+        }
+        private void SelectCommandExecute(object parameter)
+        {
+            Console.WriteLine(this.SelectedServer);
         }
         #endregion
 
