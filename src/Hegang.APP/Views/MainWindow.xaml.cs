@@ -441,7 +441,7 @@ namespace Hegang.APP
                 {
                     set_data_to_dic(channel[i], device[i], itemName[i], itemValues.GetValue(i + 1).ToString());
                     // 将故障信息存入数据库
-                    if (channel[i] == "故障测试" && itemValues.GetValue(i + 1).ToString() == "True")
+                    if (channel[i] == "故障" && itemValues.GetValue(i + 1).ToString() == "True")
                         Gz.save(dataSaveService.O, device[i], itemName[i]);
                 }
 

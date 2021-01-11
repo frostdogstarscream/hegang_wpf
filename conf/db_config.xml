@@ -4,5 +4,5 @@
   <port value="3306" />
   <user value="root" />
   <password value="wlzx^^*668install" />
-  <database value="hfd_test" />
+  <database value="hfd" />
 </property>

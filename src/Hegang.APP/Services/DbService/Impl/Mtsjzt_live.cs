@@ -15,43 +15,43 @@ namespace Hegang.APP.Services.DbService.Impl
             // 主井提升机的状态位：TM,YS,JX,JJKC,XZ,GZ,RWTZ,状态位变化标记
             int[] m_flags = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-            if (input.Dic["主井测试.主提升电控.提煤方式"] == "True" && input.Dic["主井测试.主提升电控.开车信号"] == "True")
+            if (input.Dic["主井.主提升电控.提煤方式"] == "True" && input.Dic["主井.主提升电控.开车信号"] == "True")
             {
                 m_flags[0] = 1;
                 m_flags[7] = 1;
             }
 
-            if (input.Dic["主井测试.主提升电控.开车信号"] == "True" && input.Dic["主井测试.主提升电控.验绳方式"] == "True")
+            if (input.Dic["主井.主提升电控.开车信号"] == "True" && input.Dic["主井.主提升电控.验绳方式"] == "True")
             {
                 m_flags[1] = 1;
                 m_flags[7] = 1;
             }
 
-            if (input.Dic["主井测试.主提升电控.检修方式"] == "True" && input.Dic["主井测试.主提升电控.开车信号"] == "True")
+            if (input.Dic["主井.主提升电控.检修方式"] == "True" && input.Dic["主井.主提升电控.开车信号"] == "True")
             {
                 m_flags[2] = 1;
                 m_flags[7] = 1;
             }
 
-            if (input.Dic["主井测试.主提升电控.紧急开车方式"] == "True" && input.Dic["主井测试.主提升电控.开车信号"] == "True")
+            if (input.Dic["主井.主提升电控.紧急开车方式"] == "True" && input.Dic["主井.主提升电控.开车信号"] == "True")
             {
                 m_flags[3] = 1;
                 m_flags[7] = 1;
             }
 
-            if (input.Dic["主井测试.主提升电控.开车信号"] == "False" && input.Dic["主井测试.主提升电控.安全回路"] == "True")
+            if (input.Dic["主井.主提升电控.开车信号"] == "False" && input.Dic["主井.主提升电控.安全回路"] == "True")
             {
                 m_flags[4] = 1;
                 m_flags[7] = 1;
             }
 
-            if (input.Dic["主井测试.主提升电控.安全回路"] == "False" && input.Dic["主井测试.主提升电控.紧停"] == "True")
+            if (input.Dic["主井.主提升电控.安全回路"] == "False" && input.Dic["主井.主提升电控.紧停"] == "True")
             {
                 m_flags[5] = 1;
                 m_flags[7] = 1;
             }
 
-            if (input.Dic["主井测试.主提升电控.安全回路"] == "False" && input.Dic["主井测试.主提升电控.紧停"] == "False")
+            if (input.Dic["主井.主提升电控.安全回路"] == "False" && input.Dic["主井.主提升电控.紧停"] == "False")
             {
                 m_flags[6] = 1;
                 m_flags[7] = 1;
@@ -69,13 +69,13 @@ namespace Hegang.APP.Services.DbService.Impl
                 o.cmmdNoReturn(str);
 
                 #region 清空数据
-                input.Dic["主井测试.主提升电控.开车信号"] = "0";
-                input.Dic["主井测试.主提升电控.提煤方式"] = "0";
-                input.Dic["主井测试.主提升电控.检修方式"] = "0";
-                input.Dic["主井测试.主提升电控.验绳方式"] = "0";
-                input.Dic["主井测试.主提升电控.紧急开车方式"] = "0";
-                input.Dic["主井测试.主提升电控.安全回路"] = "0";
-                input.Dic["主井测试.主提升电控.紧停"] = "0";
+                input.Dic["主井.主提升电控.开车信号"] = "0";
+                input.Dic["主井.主提升电控.提煤方式"] = "0";
+                input.Dic["主井.主提升电控.检修方式"] = "0";
+                input.Dic["主井.主提升电控.验绳方式"] = "0";
+                input.Dic["主井.主提升电控.紧急开车方式"] = "0";
+                input.Dic["主井.主提升电控.安全回路"] = "0";
+                input.Dic["主井.主提升电控.紧停"] = "0";
                 #endregion
             }
         }

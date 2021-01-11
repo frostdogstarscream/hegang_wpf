@@ -19,7 +19,7 @@ namespace Hegang.APP.Services.DbService.Impl
             int row_num = Convert.ToInt32(dt.Rows[0][0]);
 
             string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string str_save = string.Format("INSERT INTO `mtsjsggy_live` (`SD`,`GD`,`GL`,`GLYS`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}');", input.Dic["主井测试.主提升电控.速度"], input.Dic["主井测试.主提升电控.高度"], input.Dic["主井测试.S7200Smart.功率"], input.Dic["主井测试.S7200Smart.功率因素"], time);
+            string str_save = string.Format("INSERT INTO `mtsjsggy_live` (`SD`,`GD`,`GL`,`GLYS`,`TimeStamp`) VALUES ( '{0}','{1}','{2}','{3}','{4}');", input.Dic["主井.主提升电控.速度"], input.Dic["主井.主提升电控.高度"], input.Dic["主井.S7200Smart.功率"], input.Dic["主井.S7200Smart.功率因素"], time);
             string str_del = "DELETE FROM mtsjsggy_live WHERE id=(SELECT MIN(id) FROM `mtsjsggy_live`);";
 
             if (row_num == 10)

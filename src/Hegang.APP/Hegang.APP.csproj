@@ -293,9 +293,6 @@
     <Resource Include="images\users.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\delete.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\users.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -308,10 +305,13 @@
     <Resource Include="images\write.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\console.png" />
+    <Resource Include="images\u_m.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\u_m.png" />
+    <Resource Include="images\modify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

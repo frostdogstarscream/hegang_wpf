@@ -292,7 +292,7 @@
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Background="Transparent" Height="25" BorderBrush="Gray" BorderThickness="0,1,0,0">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../images/console.png" Height="20" Margin="5,0,0,0"></Image>
+                        <Image Source="../images/menu.ico" Height="15" Margin="5,0,0,0"></Image>
                         <TextBlock VerticalAlignment="Center" Padding="5,0,0,0">输出信息</TextBlock>
                     </StackPanel>
                 </Border>

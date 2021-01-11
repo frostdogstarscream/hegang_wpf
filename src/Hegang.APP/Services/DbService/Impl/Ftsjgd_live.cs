@@ -27,11 +27,11 @@ namespace Hegang.APP.Services.DbService.Impl
                 doc.Save(path);
 
                 string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string GS = (int.Parse(input.Dic["副井测试.副提升电控.勾数"]) - int.Parse(input.Gs_tmpBuf[1])).ToString();
+                string GS = (int.Parse(input.Dic["副井.副提升电控.勾数"]) - int.Parse(input.Gs_tmpBuf[1])).ToString();
                 string str = string.Format("INSERT INTO `ftsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", GS, DD.ToString(), time);
                 o.cmmdNoReturn(str);
             }
-            input.Gs_tmpBuf[1] = input.Dic["副井测试.副提升电控.勾数"];
+            input.Gs_tmpBuf[1] = input.Dic["副井.副提升电控.勾数"];
         }
 
         /*public void save(DbObject o, ref DbServiceInput input)

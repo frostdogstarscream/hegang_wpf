@@ -91,8 +91,20 @@
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="modify_btn" Background="#a4e2c6" Content="修改" Width="50" Click="modify_btn_Click" Margin="0,0,10,0"></Button>
-                                                <Button x:Name="delete_btn" Background="#f9906f" Content="删除" Width="50" Click="delete_btn_Click"></Button>
+                                                <!-- #a4e2c6 -->
+                                                <Button x:Name="modify_btn" Background="Transparent" Width="20" BorderThickness="0" Margin="0,0,10,0" Click="modify_btn_Click">
+                                                    <Image Source="../images/modify.png" Height="15"></Image>
+                                                    <Button.ToolTip>
+                                                        <TextBlock Text="修改测点"></TextBlock>
+                                                    </Button.ToolTip>
+                                                </Button>
+                                                <!-- #f9906f -->
+                                                <Button x:Name="delete_btn" Background="Transparent" Width="20" BorderThickness="0" Click="delete_btn_Click">
+                                                    <Image Source="../images/delete.png" Height="15"></Image>
+                                                    <Button.ToolTip>
+                                                        <TextBlock Text="删除测点"></TextBlock>
+                                                    </Button.ToolTip>
+                                                </Button>
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>

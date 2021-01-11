@@ -13,7 +13,7 @@ namespace Hegang.APP.Services.DbService.Impl
     {
         public void save(DbObject o, ref DbServiceInput input)
         {
-            double seed = Convert.ToDouble(input.Dic["主井测试.S7200Smart.温度1"]);
+            double seed = Convert.ToDouble(input.Dic["主井.S7200Smart.温度1"]);
             Random r = new Random();
             double[] ran = new double[4];
             for (int i = 0; i < 4; i++)

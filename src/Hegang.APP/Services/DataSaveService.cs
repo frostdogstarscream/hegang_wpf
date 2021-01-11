@@ -35,13 +35,13 @@ namespace Hegang.APP
 
         private void resetZd_flag(ref DbServiceInput input)
         {
-            if ("True" == input.Dic["主井测试.主提升电控.开车信号"])
+            if ("True" == input.Dic["主井.主提升电控.开车信号"])
                 input.Zd_flag[0] = true;
-            if ("False" == input.Dic["主井测试.主提升电控.开车信号"])
+            if ("False" == input.Dic["主井.主提升电控.开车信号"])
                 input.Zd_flag[0] = false;
-            if ("True" == input.Dic["副井测试.副提升电控.开车条件"])
+            if ("True" == input.Dic["副井.副提升电控.开车条件"])
                 input.Zd_flag[1] = true;
-            if ("False" == input.Dic["副井测试.副提升电控.开车条件"])
+            if ("False" == input.Dic["副井.副提升电控.开车条件"])
                 input.Zd_flag[1] = false;
         }
 
