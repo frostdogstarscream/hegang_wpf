@@ -74,8 +74,6 @@ namespace Hegang.APP
                 dataSaveService = new DataSaveService(); 
             if(timeJudgeItemList==null)
                 timeJudgeItemList = new TimeJudgeItemList();
-            if (input == null)
-                initialDic();
         }
 
         #region 窗体控制按钮
@@ -214,6 +212,9 @@ namespace Hegang.APP
                 tip.ShowDialog();
                 return;
             }
+
+            if (input == null)
+                initialDic();
 
             da.CreateGroup(channel_device_list);
 
@@ -363,8 +364,15 @@ namespace Hegang.APP
                 foreach (Node device in channel.ChildList)
                 {
                     List<string> itemList = CSVUtils.getTpNames(device.NodeName);
-                    foreach (string itemName in itemList)
-                        input.Dic.Add(channel.NodeName + "." + device.NodeName + "." + itemName, "0");
+                    if (itemList != null)
+                    {
+                        foreach (string itemName in itemList)
+                            input.Dic.Add(channel.NodeName + "." + device.NodeName + "." + itemName, "0");
+                    }
+                    else
+                    {
+                        this.console_tb.Text += "对应点表不存在！\n";
+                    }
                 }
             }
             this.console_tb.Text += "PLC点表初始化完成。\n";

@@ -62,7 +62,12 @@ namespace Hegang.APP
         /// <returns></returns>
         public static List<string> getTpNames(string file_name)
         {
-            StreamReader streamReader = new StreamReader(get_csv_path()+file_name+".csv", System.Text.Encoding.UTF8);
+            string filePath = get_csv_path() + file_name + ".csv";
+
+            if (!File.Exists(filePath))
+                return null;
+
+            StreamReader streamReader = new StreamReader(filePath, System.Text.Encoding.UTF8);
             string line = null;
             String[] array = null;
             List<string> dataItems = new List<string>();
@@ -85,7 +90,10 @@ namespace Hegang.APP
 
         public static ObservableCollection<TestPoint> getTestPoints(string fileName)
         {
-            StreamReader streamReader = new StreamReader(get_csv_path() + fileName, System.Text.Encoding.UTF8);
+            string filePath = get_csv_path() + fileName;
+            Console.WriteLine(filePath);
+            
+            StreamReader streamReader = new StreamReader(filePath, System.Text.Encoding.UTF8);
             string line = null;
             String[] array = null;
             ObservableCollection<TestPoint> testPoints = new ObservableCollection<TestPoint>();
