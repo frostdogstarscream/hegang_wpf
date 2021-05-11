@@ -228,6 +228,7 @@ namespace Hegang.APP
             this.btn_stop.IsEnabled = true;
             this.btn_read.IsEnabled = false;
             this.menu.IsEnabled = false;
+            this.cmb_server_list.IsEnabled = false;
             #endregion
 
             #region 记录：创建线程执行任务
@@ -263,6 +264,7 @@ namespace Hegang.APP
             this.console_tb.Text += "数据数据读取已停止。\n";
             this.btn_connect.IsEnabled = true;
             this.menu.IsEnabled = true;
+            this.cmb_server_list.IsEnabled = true;
             this.color_bar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#065279"));
             this.color_bar_text.Text = "就绪";
         }
