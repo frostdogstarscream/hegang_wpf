@@ -45,12 +45,14 @@ namespace Hegang.APP
         {
             InitializeComponent();
             this.initMembers();
+            this.initDbMembers();
         }
 
         public MainWindow(User _user,bool flag)
         {
             InitializeComponent();
             this.initMembers();
+            this.initDbMembers();
 
             if (flag)
                 this.u_man.Visibility =Visibility.Collapsed;

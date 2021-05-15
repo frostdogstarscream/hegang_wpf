@@ -57,8 +57,8 @@ namespace Hegang.APP
         {
             DateTime now = DateTime.Now;
             //设置任务启动时间
-            double hour = 00.0;     //小时   
-            double minute = 00.0;   //分钟
+            double hour = 0.0;     //小时   
+            double minute = 0.0;   //分钟
             DateTime startTime = DateTime.Today.AddHours(hour).AddMinutes(minute);
             if (now > startTime)
             {
@@ -112,10 +112,10 @@ namespace Hegang.APP
             if (stat_isEnabled)
             {
                 #region 执行的任务
+                task14();
                 task1();
                 task2();
                 task3();
-                task14();
                 #endregion
 
                 // 再次设定任务执行时间
@@ -213,10 +213,22 @@ namespace Hegang.APP
         /// </summary>
         private void task2()
         {
-            string str = "SELECT SUM(GS),SUM(DD) FROM mtsjgd_live";
-            DataTable dt=o.GetDataTable(str);
-            int GS_sum = Convert.ToInt32(dt.Rows[0][0]);
-            int DD_sum = Convert.ToInt32(dt.Rows[0][1]); ;
+            int GS_sum;
+            int DD_sum;
+            string str = "SELECT COUNT(id) FROM mtsjgd_live";
+            DataTable dt = o.GetDataTable(str);
+            if(Convert.ToInt32(dt.Rows[0][0]) == 0)
+            {
+                GS_sum = 0;
+                DD_sum = 0;
+            }
+            else
+            {
+                str = "SELECT SUM(GS),SUM(DD) FROM mtsjgd_live";
+                dt = o.GetDataTable(str);
+                GS_sum = Convert.ToInt32(dt.Rows[0][0]);
+                DD_sum = Convert.ToInt32(dt.Rows[0][1]);
+            }
      
             //将统计结果存入数据库
             str = string.Format("" +
@@ -236,11 +248,22 @@ namespace Hegang.APP
         /// </summary>
         public void task3()
         {
-
-            string str = "SELECT SUM(GS),SUM(DD) FROM ftsjgd_live";
+            int GS_sum;
+            int DD_sum;
+            string str = "SELECT COUNT(id) FROM ftsjgd_live";
             DataTable dt = o.GetDataTable(str);
-            int GS_sum = Convert.ToInt32(dt.Rows[0][0]);
-            int DD_sum = Convert.ToInt32(dt.Rows[0][1]);
+            if (Convert.ToInt32(dt.Rows[0][0]) == 0)
+            {
+                GS_sum = 0;
+                DD_sum = 0;
+            }
+            else
+            {
+                str = "SELECT SUM(GS),SUM(DD) FROM ftsjgd_live";
+                dt = o.GetDataTable(str);
+                GS_sum = Convert.ToInt32(dt.Rows[0][0]);
+                DD_sum = Convert.ToInt32(dt.Rows[0][1]);
+            }
 
             //将统计结果存入数据库
             str = string.Format("" +
@@ -574,9 +597,11 @@ namespace Hegang.APP
         private void task14()
         {
             string time= DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss");
-            string str = string.Format("SELECT COUNT(id) FROM gz WHERE timeStamp>{0};",time);
+            Console.WriteLine(time);
+            string str = string.Format("SELECT COUNT(id) FROM gz WHERE timestamp>'{0}';",time);
+            Console.WriteLine(str);
             DataTable dt = o.GetDataTable(str);
-            string str_save = string.Format("INSERT INTO gz_tj(num, timestamp) VALUES('{0}','{1}');",dt.Rows[0][0], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            string str_save = string.Format("INSERT INTO gztj(num, timestamp) VALUES('{0}','{1}');",dt.Rows[0][0], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             o.cmmdNoReturn(str_save);
         }
     }

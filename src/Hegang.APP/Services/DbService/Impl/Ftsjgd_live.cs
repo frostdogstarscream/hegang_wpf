@@ -22,7 +22,7 @@ namespace Hegang.APP.Services.DbService.Impl
                 XmlElement element = (XmlElement)doc.SelectSingleNode("property/auxiliary_shaft");
                 int DD = Convert.ToInt32(element.GetAttribute("value"));*/
                 Random r = new Random();
-                int DD = r.Next(10, 20);
+                int DD = r.Next(20, 30);
                 /*element.SetAttribute("value", DD.ToString());
                 doc.Save(path);*/
 
