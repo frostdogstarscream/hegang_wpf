@@ -13,17 +13,6 @@
         mc:Ignorable="d"
         Title="鸟山矿PLC监测服务程序" Height="600" Width="800"  MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen" Icon="../images/icon.ico">
-    
-    <!-- 在 WindowStyle="None" ResizeMode="CanResize" 的前提下，将窗体设置为 
-        1.鼠标拖动窗体边缘不能改变大小
-        2.窗体边缘有阴影效果
-    -->
-    <!--
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0"  CornerRadius="0" ResizeBorderThickness="0"/>
-    </WindowChrome.WindowChrome>
-    -->
-
     <Window.Resources>
         <!-- TreeView样式 -->
         <Style TargetType="TreeViewItem">
@@ -32,106 +21,6 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White"/>
             </Style.Resources>
         </Style>
-
-        <!-- ComboBox下拉按钮样式 -->
-        <Style TargetType="ToggleButton" x:Key="ComboxStyleBtn">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <!--下拉按钮内边框-->
-                        <!--<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Path Name="PathFill" Fill="#13227a"  Width="6" Height="4" StrokeThickness="0" Data="M5,0 L10,10 L0,10 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="180"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </TextBlock>-->
-
-                        <Path Name="PathFill" Fill="#13227a"  Width="10" Height="6" StrokeThickness="0" Data="M5,0 L10,10 L0,10 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="180"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="PathFill" Property="Fill" Value="#b35c44"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- ComboBox模板 -->
-        <ControlTemplate x:Key="ComboBox_template" TargetType="{x:Type ComboBox}">
-            <Border  BorderBrush="Black" BorderThickness="1" Background="White" x:Name="comboBox_border">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition Width="25"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!--文字区域背景和边线样式-->
-
-                    <TextBlock VerticalAlignment="Center" Padding="3,0,0,0" Foreground="Black" Background="Transparent" Text="{TemplateBinding Text}"></TextBlock>
-
-                    <!--右侧下拉button设置-->
-                    <!--<ToggleButton  Style="{StaticResource ComboxStyleBtn}" BorderThickness="0" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"></ToggleButton>-->
-
-                    <ToggleButton Grid.Column="1" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press" Background="Transparent" BorderThickness="0">
-                        <Image Source="../images/down.png" Width="10"></Image>
-                    </ToggleButton>
-
-                    <!--弹出popup整体设置-->
-                    <Popup IsOpen="{TemplateBinding IsDropDownOpen}" PlacementTarget="{Binding ElementName=comboBox_border}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide" >
-                        <!--弹出popup边框-->
-                        <Border CornerRadius="1" BorderBrush="Black" BorderThickness="0.5,0,0.5,0.5" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
-                            <!--下拉幕布边界背景设置 MaxHeight="{TemplateBinding MaxDropDownHeight}"-->
-                            <ScrollViewer Margin="0,0,0,0"   SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderBrush="Black" BorderThickness="2" >
-                                <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
-                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" Background="White" />
-                            </ScrollViewer>
-                        </Border>
-                    </Popup>
-                </Grid>
-            </Border>
-        </ControlTemplate>
-        
-        <!-- GridViewColumnHeader样式 -->
-        <!--
-        <Style x:Key="HeadStyle" TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="OverridesDefaultStyle" Value="False" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                        <Grid Name="g" Background="White">
-                            <Border Name="bd" Padding="{TemplateBinding Padding}" BorderBrush="Gray" BorderThickness="0.3,0,0,0">
-                                <ContentPresenter Margin="0,3,0,3" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="#8CC7B5"/>
-                                <Setter TargetName="bd" Property="BorderThickness" Value="1"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        -->
     </Window.Resources>
 
     <!-- 背景色：#F0F2F5 -->
@@ -146,26 +35,6 @@
                 <RowDefinition Height="25"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!--<Border Grid.Row="0" Background="Transparent">
-                <DockPanel >
-                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                        <Image Source="./images/icon.ico" Height="20" UseLayoutRounding="True"/>
-                        <TextBlock Text="鸟山矿PLC监测服务程序" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="minimize_btn" Background="Transparent" BorderBrush="{x:Null}" Width="40" Height="30"  Click="minimize_btn_Click">
-                            <Image Source="./images/minimize.png" Width="20" Height="20"></Image>
-                        </Button>
-                        <Button Name="miximize_btn" Background="Transparent" BorderBrush="{x:Null}" Width="40" Height="30"  Click="minimize_btn_Click">
-                            <Image Source="./images/miximize.png" Width="20" Height="20"></Image>
-                        </Button>
-                        <Button Name="close_btn" Background="Transparent" BorderBrush="{x:Null}" Width="40" Height="30" Click="close_btn_Click">
-                            <Image Source="./images/close.png" Width="20" Height="20"></Image>
-                        </Button>
-                    </StackPanel>
-                </DockPanel>
-            </Border>-->
-            
             <Border Grid.Row="0" Padding="0,3,0,3">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../images/menu.ico" Height="15"></Image>
@@ -178,10 +47,10 @@
                             <MenuItem Name="db_conf" Header="数据库配置" Click="db_conf_Click"></MenuItem>
                             <MenuItem Name="tp_conf" Header="测点配置" Click="tp_conf_Click"></MenuItem>
                         </MenuItem>
-                        <MenuItem Header="功能设置(S)" >
-                            <MenuItem Name="d_save" Header="数据保存" IsCheckable="True" Click="d_save_Click" StaysOpenOnClick="True"/>
-                            <MenuItem Name="d_stat" Header="数据统计" IsCheckable="True" Click="d_stat_Click" StaysOpenOnClick="True"/>
-                            <MenuItem Name="d_fore" Header="数据预测" IsCheckable="True" Click="d_fore_Click" StaysOpenOnClick="True"/>
+                        <MenuItem Header="功能设置(S)">
+                            <MenuItem Name="d_save" Header="数据保存" IsCheckable="True" IsChecked="True" Click="d_save_Click" StaysOpenOnClick="True"/>
+                            <MenuItem Name="d_stat" Header="数据统计" IsCheckable="True" IsChecked="True" Click="d_stat_Click" StaysOpenOnClick="True"/>
+                            <MenuItem Name="d_fore" Header="数据预测" IsCheckable="True" IsChecked="True" Click="d_fore_Click" StaysOpenOnClick="True"/>
                         </MenuItem>
                         <MenuItem Name="help" Header="帮助(H)" Click="help_Click"></MenuItem>
                         <MenuItem Name="exit" Header="退出(E)" Click="exit_Click"></MenuItem>
@@ -189,28 +58,11 @@
                 </StackPanel>
             </Border>
 
-            <!--
-            <Grid Grid.Row="1" Margin="10,0,10,0" Height="27">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"></ColumnDefinition>
-                    <ColumnDefinition Width="9*"></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Name="btn_connect" Grid.Column="0" Background="White" Content="加载并连接OPC"  Click="btn_connect_Click" />
-                <ComboBox Name="cmb_server_list" Grid.Column="1" SelectedIndex="0" Margin="5,0,0,0" Template="{StaticResource ComboBox_template}"/>
-                <Button Grid.Column="2" Background="White" Content="读取数据" Name="btn_read" Click="btn_read_Click" Margin="5,0,0,0"/>
-                <Button Grid.Column="3" Background="White" Content="停止" Margin="5,0,0,0" Name="btn_stop" Click="btn_stop_Click"/>
-                <Button Grid.Column="4" Background="White" Content="数据库配置" Margin="5,0,0,0" Name="btn_DBConfig" Click="btn_DBConfig_Click"></Button>
-            </Grid>
-            -->
-
             <Border Grid.Row="1" BorderBrush="gray" BorderThickness="0,0.3,0,0.3" Padding="0,3,0,3">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../images/menu.ico" Height="15"></Image>
                     <Button Name="btn_connect" Grid.Column="0" Background="Transparent" BorderThickness="0" Content="加载并连接OPC" Padding="5,0,5,0" Click="btn_connect_Click"/>
-                    <ComboBox Name="cmb_server_list" Grid.Column="1" Template="{StaticResource ComboBox_template}" Margin="5,0,5,0"></ComboBox>
+                    <ComboBox Name="cmb_server_list" Grid.Column="1" Template="{DynamicResource ComboBox_template}" Width="250" Margin="5,0,5,0"></ComboBox>
                     <Button Content="读取数据" Background="Transparent" BorderThickness="0" Padding="5,0,5,0" Name="btn_read" Click="btn_read_Click"/>
                     <Button Background="Transparent" BorderThickness="0" Content="停止" Padding="5,0,5,0" Name="btn_stop" Click="btn_stop_Click"/>
                 </StackPanel>

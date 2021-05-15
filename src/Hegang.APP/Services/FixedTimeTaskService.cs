@@ -15,7 +15,9 @@ namespace Hegang.APP
     class FixedTimeTaskService
     {
         private DbObject o;
-        private bool stat_isEnabled;
+        //是否开启统计
+        private bool stat_isEnabled; 
+        //是否开启预测
         private bool fore_isEnabled;
 
         public bool Stat_isEnabled{
@@ -113,6 +115,7 @@ namespace Hegang.APP
                 task1();
                 task2();
                 task3();
+                task14();
                 #endregion
 
                 // 再次设定任务执行时间
@@ -210,26 +213,17 @@ namespace Hegang.APP
         /// </summary>
         private void task2()
         {
-            string str = "SELECT SUM(GS) FROM mtsjgd_live";
+            string str = "SELECT SUM(GS),SUM(DD) FROM mtsjgd_live";
             DataTable dt=o.GetDataTable(str);
             int GS_sum = Convert.ToInt32(dt.Rows[0][0]);
-
-            str = "SELECT DD FROM mtsjgd_live WHERE id = (SELECT MIN(id) FROM mtsjgd_live);";
-            dt = o.GetDataTable(str);
-            int min_DD = Convert.ToInt32(dt.Rows[0][0]);
-
-            str = "SELECT DD FROM mtsjgd_live WHERE id = (SELECT MAX(id) FROM mtsjgd_live);";
-            dt = o.GetDataTable(str);
-            int max_DD = Convert.ToInt32(dt.Rows[0][0]);
-
-            int DD = max_DD - min_DD;
-
+            int DD_sum = Convert.ToInt32(dt.Rows[0][1]); ;
+     
             //将统计结果存入数据库
             str = string.Format("" +
                 "INSERT INTO " +
                     "mtsjgdtj(GS, DD, TimeStamp) " +
                 "VALUES" +
-                    "('{0}', '{1}', '{2}');", GS_sum, DD, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    "('{0}', '{1}', '{2}');", GS_sum, DD_sum, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             o.cmmdNoReturn(str);
 
             //统计完后，清空mtsjgd_live
@@ -243,26 +237,17 @@ namespace Hegang.APP
         public void task3()
         {
 
-            string str = "SELECT SUM(GS) FROM ftsjgd_live";
+            string str = "SELECT SUM(GS),SUM(DD) FROM ftsjgd_live";
             DataTable dt = o.GetDataTable(str);
             int GS_sum = Convert.ToInt32(dt.Rows[0][0]);
-
-            str = "SELECT DD FROM ftsjgd_live WHERE id = (SELECT MIN(id) FROM ftsjgd_live);";
-            dt = o.GetDataTable(str);
-            int min_DD = Convert.ToInt32(dt.Rows[0][0]);
-
-            str = "SELECT DD FROM ftsjgd_live WHERE id = (SELECT MAX(id) FROM ftsjgd_live);";
-            dt = o.GetDataTable(str);
-            int max_DD = Convert.ToInt32(dt.Rows[0][0]);
-
-            int DD = max_DD - min_DD;
+            int DD_sum = Convert.ToInt32(dt.Rows[0][1]);
 
             //将统计结果存入数据库
             str = string.Format("" +
                 "INSERT INTO " +
                     "ftsjgdtj(GS, DD, TimeStamp) " +
                 "VALUES" +
-                    "('{0}', '{1}', '{2}');", GS_sum, DD, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    "('{0}', '{1}', '{2}');", GS_sum, DD_sum, System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             o.cmmdNoReturn(str);
 
             //统计完后，清空ftsjgd_live
@@ -585,6 +570,14 @@ namespace Hegang.APP
                 for (int i = 0; i < row_num - 10; i++)
                     o.cmmdNoReturn(str_del);
             }
+        }
+        private void task14()
+        {
+            string time= DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss");
+            string str = string.Format("SELECT COUNT(id) FROM gz WHERE timeStamp>{0};",time);
+            DataTable dt = o.GetDataTable(str);
+            string str_save = string.Format("INSERT INTO gz_tj(num, timestamp) VALUES('{0}','{1}');",dt.Rows[0][0], System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            o.cmmdNoReturn(str_save);
         }
     }
 }

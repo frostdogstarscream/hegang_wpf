@@ -144,3 +144,41 @@ C:\Users\Administrator\Desktop\新建文件夹 (2)\hegang-wpf\src\Hegang.APP\obj
 C:\Users\Administrator\Desktop\新建文件夹 (2)\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csproj.CopyComplete
 C:\Users\Administrator\Desktop\新建文件夹 (2)\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.exe
 C:\Users\Administrator\Desktop\新建文件夹 (2)\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.pdb
+C:\Users\zhangchi\Desktop\hegang-wpf\bin\Hegang.APP.exe.config
+C:\Users\zhangchi\Desktop\hegang-wpf\bin\Hegang.APP.exe
+C:\Users\zhangchi\Desktop\hegang-wpf\bin\Hegang.APP.pdb
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csprojAssemblyReference.cache
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\DataBaseConfig.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Login.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\MainWindow.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyTestPoint.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyUser.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\PerInfoManage.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\PLCItemConfig.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Register.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Tip.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\test.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\UserManage.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\App.g.cs
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP_MarkupCompile.cache
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP_MarkupCompile.lref
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\App.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\APPDictionary.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\DataBaseConfig.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Login.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\MainWindow.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyTestPoint.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\ModifyUser.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\PerInfoManage.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\PLCItemConfig.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Register.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\Tip.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\test.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Views\UserManage.baml
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.g.resources
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.Properties.Resources.resources
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csproj.GenerateResource.cache
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csproj.CoreCompileInputs.cache
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.csproj.CopyComplete
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.exe
+C:\Users\zhangchi\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\Hegang.APP.pdb

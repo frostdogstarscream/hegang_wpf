@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\obj\x86\Debug\
+C:\Users\zhangchi\Desktop\hegang-wpf - 副本\src\Hegang.APP\obj\x86\Debug\
 Hegang.APP
 none
 false
 DEBUG;TRACE
-C:\Users\Administrator\Desktop\hegang-wpf\src\Hegang.APP\App.xaml
+C:\Users\zhangchi\Desktop\hegang-wpf - 副本\src\Hegang.APP\App.xaml
 12-179103868
 
-511545107311
-16-1143645186
+52-212698108
+16-2069710802
 APPDictionary.xaml;Views\DataBaseConfig.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\ModifyTestPoint.xaml;Views\ModifyUser.xaml;Views\PerInfoManage.xaml;Views\PLCItemConfig.xaml;Views\Register.xaml;Views\Tip.xaml;Views\test.xaml;Views\UserManage.xaml;
 
-False
+True
 

@@ -311,6 +311,12 @@
     <Resource Include="images\modify.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\delete_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\modify_2.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="images\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

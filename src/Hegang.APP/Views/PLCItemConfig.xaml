@@ -81,8 +81,8 @@
                     </ListView.View>
                 </ListView>
             </Grid>
-            
-            <Border Name="color_bar" Background="#177CB0" Grid.Row="2">
+
+            <Border Name="color_bar" Background="#065279" Grid.Row="2">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                         <Image Source="../images/tip.ico" Height="15"></Image>

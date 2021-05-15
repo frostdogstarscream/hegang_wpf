@@ -16,15 +16,15 @@ namespace Hegang.APP.Services.DbService.Impl
         {
             if (input.Gs_tmpBuf[1] != "-1")
             {
-                string path = XMLUtils.get_elec_usage_path();
+                /*string path = XMLUtils.get_elec_usage_path();
                 XmlDocument doc = new XmlDocument();
                 doc.Load(path);
                 XmlElement element = (XmlElement)doc.SelectSingleNode("property/auxiliary_shaft");
-                int DD = Convert.ToInt32(element.GetAttribute("value"));
+                int DD = Convert.ToInt32(element.GetAttribute("value"));*/
                 Random r = new Random();
-                DD += r.Next(10, 20);
-                element.SetAttribute("value", DD.ToString());
-                doc.Save(path);
+                int DD = r.Next(10, 20);
+                /*element.SetAttribute("value", DD.ToString());
+                doc.Save(path);*/
 
                 string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 string GS = (int.Parse(input.Dic["副井.副提升电控.勾数"]) - int.Parse(input.Gs_tmpBuf[1])).ToString();
