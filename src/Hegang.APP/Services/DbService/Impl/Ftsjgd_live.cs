@@ -22,13 +22,14 @@ namespace Hegang.APP.Services.DbService.Impl
                 XmlElement element = (XmlElement)doc.SelectSingleNode("property/auxiliary_shaft");
                 int DD = Convert.ToInt32(element.GetAttribute("value"));*/
                 Random r = new Random();
-                int DD = r.Next(20, 30);
+                /*int DD = r.Next(20, 30);*/
                 /*element.SetAttribute("value", DD.ToString());
                 doc.Save(path);*/
 
                 string time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string GS = (int.Parse(input.Dic["副井.副提升电控.勾数"]) - int.Parse(input.Gs_tmpBuf[1])).ToString();
-                string str = string.Format("INSERT INTO `ftsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", GS, DD.ToString(), time);
+                int GS = int.Parse(input.Dic["副井.副提升电控.勾数"]) - int.Parse(input.Gs_tmpBuf[1]);
+                int DD = 5 * GS;
+                string str = string.Format("INSERT INTO `ftsjgd_live` (`GS`,`DD`,`TimeStamp`) VALUES ( '{0}','{1}','{2}')", GS.ToString(), DD.ToString(), time);
                 o.cmmdNoReturn(str);
             }
             input.Gs_tmpBuf[1] = input.Dic["副井.副提升电控.勾数"];
