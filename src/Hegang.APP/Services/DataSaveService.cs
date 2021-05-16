@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -35,14 +36,30 @@ namespace Hegang.APP
 
         private void resetZd_flag(ref DbServiceInput input)
         {
-            if ("True" == input.Dic["主井.主提升电控.开车信号"])
+            string str = "SELECT yl FROM fzzyl ORDER BY TIMESTAMP DESC LIMIT 1;";
+            DataTable dt=o.GetDataTable(str);
+            double fyl = Convert.ToDouble(dt.Rows[0][0]);
+            if(fyl>9)
+                input.Zd_flag[1] = true;
+            else
+                input.Zd_flag[1] = false;
+
+            str = "SELECT yl FROM mzzyl ORDER BY TIMESTAMP DESC LIMIT 1;";
+            dt = o.GetDataTable(str);
+            double myl = Convert.ToDouble(dt.Rows[0][0]);
+            if (myl > 9)
+                input.Zd_flag[0] = true;
+            else
+                input.Zd_flag[0] = false;
+
+            /*if ("True" == input.Dic["主井.主提升电控.开车信号"])
                 input.Zd_flag[0] = true;
             if ("False" == input.Dic["主井.主提升电控.开车信号"])
                 input.Zd_flag[0] = false;
             if ("True" == input.Dic["副井.副提升电控.开车条件"])
                 input.Zd_flag[1] = true;
             if ("False" == input.Dic["副井.副提升电控.开车条件"])
-                input.Zd_flag[1] = false;
+                input.Zd_flag[1] = false;*/
         }
 
         public void savePLCData(ref DbServiceInput input,TimeJudgeItemList timeJudgeItemList)
